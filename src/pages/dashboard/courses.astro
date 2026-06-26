@@ -42,7 +42,7 @@ const completedModules = DEMO_USER.completed_modules;
       const current = num === completedModules.length + 1;
       const locked  = !done && !current;
       return (
-        <div style={`background:#fff;border:1px solid ${done ? 'rgba(0,168,150,0.25)' : current ? 'rgba(201,146,42,0.35)' : '#E8E5DE'};border-radius:6px;overflow:hidden;${done ? 'border-left:4px solid #00A896;' : current ? 'border-left:4px solid #C9922A;' : 'border-left:4px solid transparent;'}position:relative;`} class={locked ? 'locked-card' : ''} data-module={num}>
+        <div style={`background:#fff;border:1px solid ${done ? 'rgba(0,168,150,0.25)' : current ? 'rgba(201,146,42,0.35)' : '#E8E5DE'};border-radius:6px;overflow:hidden;${done ? 'border-left:4px solid #00A896;' : current ? 'border-left:4px solid #C9922A;' : 'border-left:4px solid transparent;'}position:relative;${locked ? 'cursor:not-allowed;' : ''}`} class={locked ? 'locked-card' : ''} data-module={num}>
           <div style="padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem;">
 
             <!-- Status icon -->

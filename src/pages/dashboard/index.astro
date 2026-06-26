@@ -94,8 +94,9 @@ const nextSession = { date: "Tuesday, 8 July 2026", time: "4:00 PM WAT / 5:00 PM
             const locked  = !done && !current;
             return (
               <a
-                href={locked ? '#' : `/dashboard/courses/module-${i+1}`}
-                style={`display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:4px;border:1px solid ${done ? 'rgba(0,168,150,0.2)' : current ? 'rgba(201,146,42,0.3)' : '#E8E5DE'};background:${done ? 'rgba(0,168,150,0.04)' : current ? 'rgba(201,146,42,0.04)' : '#fafaf9'};text-decoration:none;transition:background 0.15s;`}
+                href={locked ? undefined : `/dashboard/courses/module-${i+1}`}
+                aria-disabled={locked ? 'true' : undefined}
+                style={`display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:4px;border:1px solid ${done ? 'rgba(0,168,150,0.2)' : current ? 'rgba(201,146,42,0.3)' : '#E8E5DE'};background:${done ? 'rgba(0,168,150,0.04)' : current ? 'rgba(201,146,42,0.04)' : '#fafaf9'};text-decoration:none;transition:background 0.15s;${locked ? 'cursor:default;pointer-events:none;' : 'cursor:pointer;'}`}
               >
                 <div style={`width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:${done ? '#00A896' : current ? '#C9922A' : '#E8E5DE'};`}>
                   {done
@@ -172,7 +173,8 @@ const nextSession = { date: "Tuesday, 8 July 2026", time: "4:00 PM WAT / 5:00 PM
 </DashboardLayout>
 
 <script>
-  document.querySelectorAll('a[href="#"]').forEach(a => {
+  // locked module rows — belt-and-suspenders prevent any navigation
+  document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
     a.addEventListener('click', (e) => { e.preventDefault(); });
   });
 </script>

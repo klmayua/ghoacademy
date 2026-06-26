@@ -86,8 +86,8 @@ const navItems = [
         <span class="page-title">{title.split('—')[0].trim()}</span>
       </div>
       <div class="top-bar-right">
-        <div class="notif"><i class="ti ti-bell"></i></div>
-        <div class="avatar">P</div>
+        <div class="notif" role="button" aria-label="Notifications" tabindex="0"><i class="ti ti-bell"></i></div>
+        <div class="avatar" role="button" aria-label="My profile" tabindex="0" onclick="window.location.href='/dashboard/profile'">AO</div>
       </div>
     </header>
     <main class="content">
@@ -95,11 +95,17 @@ const navItems = [
     </main>
   </div>
 
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:99;" aria-hidden="true"></div>
   <Toast />
   <script>
-    const btn = document.getElementById('menu-btn');
+    const btn     = document.getElementById('menu-btn');
     const sidebar = document.getElementById('sidebar');
-    btn?.addEventListener('click', () => sidebar?.classList.toggle('open'));
+    const overlay = document.getElementById('sidebar-overlay');
+    function openSidebar()  { sidebar?.classList.add('open');    if (overlay) overlay.style.display = 'block'; }
+    function closeSidebar() { sidebar?.classList.remove('open'); if (overlay) overlay.style.display = 'none';  }
+    btn?.addEventListener('click', () => sidebar?.classList.contains('open') ? closeSidebar() : openSidebar());
+    overlay?.addEventListener('click', closeSidebar);
   </script>
 </body>
 </html>
