@@ -36,9 +36,11 @@ const {
         if (window.scrollY > 80) {
           nav.style.background = 'rgba(11,28,61,0.97)';
           nav.style.backdropFilter = 'blur(8px)';
+          nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.35)';
         } else {
-          nav.style.background = '';
-          nav.style.backdropFilter = '';
+          nav.style.background = '#0B1C3D';
+          nav.style.backdropFilter = 'none';
+          nav.style.boxShadow = 'none';
         }
       });
     }
