@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/shared/Nav.astro';
+import Footer from '../components/shared/Footer.astro';
+import { SITE } from '../data/site';
+const { course, instructor } = SITE;
+---
+<BaseLayout title="Apply — GHO Academy Cohort 1" description="Apply for GHO Academy September 2026 cohort. Global Public Health Innovation, Entrepreneurship & Leadership.">
+  <Nav />
+
+  <!-- Page hero -->
+  <section style="background:#0B1C3D;padding:3.5rem 1.5rem;border-bottom:3px solid;border-image:linear-gradient(90deg,#C9922A,#00A896) 1;">
+    <div style="max-width:700px;margin:0 auto;text-align:center;">
+      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">GHO Academy · Cohort 1 · {course.dates}</p>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,6vw,58px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;margin-bottom:0.75rem;">Apply for September 2026</h1>
+      <p style="font-size:15px;color:rgba(255,255,255,0.65);">Complete your application below. We'll confirm your place and payment details within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section style="background:#F5F3EE;padding:4rem 1.5rem;">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;">
+
+      <!-- Form -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:2.5rem;">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:0.5rem;">Your Application</h2>
+        <p style="font-size:13px;color:#4A5568;margin-bottom:2rem;">All fields are required. Your information is kept confidential.</p>
+
+        <form id="registration-form" action="#" method="get" style="display:grid;gap:1.25rem;">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">First Name *</label>
+              <input type="text" name="firstName" required placeholder="Amara"
+                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Last Name *</label>
+              <input type="text" name="lastName" required placeholder="Okonkwo"
+                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Email Address *</label>
+            <input type="email" name="email" required placeholder="amara@organisation.org"
+              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Organisation *</label>
+              <input type="text" name="organisation" required placeholder="WHO / University / NGO"
+                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Job Title *</label>
+              <input type="text" name="jobTitle" required placeholder="Public Health Specialist"
+                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Country of Residence *</label>
+            <select name="country" required
+              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;background:#fff;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'">
+              <option value="">Select your country...</option>
+              {["Kenya","Nigeria","South Africa","Ghana","Uganda","Rwanda","Tanzania","Ethiopia","Cameroon","Zimbabwe","United Kingdom","United States","Canada","Netherlands","Germany","France","Australia","Other Africa","Other Europe","Other Americas","Other Asia/Pacific"].map(c => (
+                <option value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Registration Tier *</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;" id="tier-selector">
+              {[
+                { id:"early_bird", label:"Early Bird",     price:"$397", note:"First 20 seats"     },
+                { id:"standard",   label:"Standard",       price:"$597", note:"Standard rate"      },
+                { id:"institution",label:"Institutional",  price:"Custom",note:"3+ seats"          },
+              ].map((tier, i) => (
+                <label style="cursor:pointer;">
+                  <input type="radio" name="tier" value={tier.id} required style="display:none;" />
+                  <div class="tier-card" data-tier={tier.id} style={`border:2px solid ${i===0 ? '#00A896' : '#E8E5DE'};border-radius:4px;padding:0.875rem;text-align:center;transition:all 0.2s;background:${i===0 ? 'rgba(0,168,150,0.06)' : '#fff'};`}>
+                    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#4A5568;font-weight:600;">{tier.label}</div>
+                    <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#0B1C3D;line-height:1;margin:4px 0;">{tier.price}</div>
+                    <div style="font-size:11px;color:#4A5568;">{tier.note}</div>
+                  </div>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">How did you hear about GHO Academy?</label>
+            <select name="referral" style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;background:#fff;">
+              <option value="">Select...</option>
+              {["LinkedIn — Dr. Bain","LinkedIn — Global Health Otherwise","GHO Website","Career Café","Email from GHO","Colleague or peer referral","University or institution","Twitter / X","YouTube","WhatsApp","Other"].map(s => (
+                <option value={s}>{s}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Why do you want to join GHO Academy? <span style="color:#4A5568;font-weight:400;text-transform:none;">(Optional — 2–3 sentences)</span></label>
+            <textarea name="motivation" rows="3" placeholder="Tell us briefly what you hope to gain and how it connects to your work..."
+              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;resize:vertical;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'"></textarea>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <input type="checkbox" name="consent" required id="consent" style="margin-top:3px;accent-color:#00A896;" />
+            <label for="consent" style="font-size:12px;color:#4A5568;line-height:1.5;cursor:pointer;">
+              I agree to the <a href="/terms" style="color:#0B1C3D;font-weight:600;">Terms of Enrolment</a> and <a href="/privacy" style="color:#0B1C3D;font-weight:600;">Privacy Policy</a>. I understand that submitting this form initiates my application and that payment is required to confirm my seat.
+            </label>
+          </div>
+
+          <button type="submit" id="submit-btn"
+            style="width:100%;background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:15px;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s;"
+            onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'">
+            Submit Application &amp; Proceed to Payment
+          </button>
+
+          <p style="text-align:center;font-size:12px;color:#4A5568;">
+            <i class="ti ti-lock" style="font-size:13px;vertical-align:-2px;margin-right:4px;"></i>
+            Secure payment via Stripe · All cards accepted · African payments via Flutterwave
+          </p>
+        </form>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <!-- Course summary -->
+        <div style="background:#0B1C3D;border-radius:4px;padding:1.5rem;margin-bottom:1rem;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C9922A;font-weight:600;margin-bottom:0.75rem;">Your Course</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:1rem;">Global Public Health Innovation, Entrepreneurship &amp; Leadership</div>
+          {[
+            { icon:"ti-calendar",   text:course.dates           },
+            { icon:"ti-clock",      text:course.format          },
+            { icon:"ti-world",      text:course.delivery        },
+            { icon:"ti-users",      text:`Cohort 1 · Max ${course.capacity} participants` },
+            { icon:"ti-certificate",text:"Certificate of Completion" },
+          ].map(i => (
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+              <i class={`ti ${i.icon}`} style="font-size:15px;color:#00A896;flex-shrink:0;"></i>
+              <span style="font-size:13px;color:rgba(255,255,255,0.7);">{i.text}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Instructor mini -->
+        <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:1.25rem;margin-bottom:1rem;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;">
+            <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:#fff;flex-shrink:0;">LB</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:#0B1C3D;">{instructor.name}</div>
+              <div style="font-size:11px;color:#4A5568;">{instructor.credentials}</div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:#4A5568;line-height:1.5;">University of Oxford · African Academy of Sciences · EUCLID University</p>
+        </div>
+
+        <!-- Payment methods -->
+        <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:1.25rem;margin-bottom:1rem;">
+          <div style="font-size:11px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.75rem;">Accepted Payments</div>
+          {[
+            { icon:"ti-credit-card", text:"Visa, Mastercard, Amex (Stripe)"     },
+            { icon:"ti-world",       text:"African cards & mobile money (Flutterwave)" },
+            { icon:"ti-building-bank",text:"Bank transfer (institutional)"      },
+            { icon:"ti-file-invoice",text:"Purchase order (institutions)"       },
+          ].map(p => (
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <i class={`ti ${p.icon}`} style="font-size:14px;color:#C9922A;flex-shrink:0;"></i>
+              <span style="font-size:12px;color:#4A5568;">{p.text}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Contact -->
+        <div style="background:#F5F3EE;border:1px solid #E8E5DE;border-radius:4px;padding:1.25rem;">
+          <div style="font-size:11px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">Questions?</div>
+          <p style="font-size:12px;color:#4A5568;margin-bottom:0.75rem;">Our team responds within 24 hours.</p>
+          <a href={`mailto:${SITE.email}`} style="font-size:13px;color:#0B1C3D;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px;">
+            <i class="ti ti-mail" style="font-size:15px;color:#C9922A;"></i>
+            {SITE.email}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Tier card interactive selection
+  document.querySelectorAll('input[name="tier"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      document.querySelectorAll('.tier-card').forEach(card => {
+        (card as HTMLElement).style.border = '2px solid #E8E5DE';
+        (card as HTMLElement).style.background = '#fff';
+      });
+      const selected = document.querySelector(`.tier-card[data-tier="${(e.target as HTMLInputElement).value}"]`) as HTMLElement;
+      if (selected) {
+        selected.style.border = '2px solid #00A896';
+        selected.style.background = 'rgba(0,168,150,0.06)';
+      }
+    });
+  });
+
+  // Click on card triggers radio
+  document.querySelectorAll('.tier-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const tier = (card as HTMLElement).dataset.tier;
+      const radio = document.querySelector(`input[value="${tier}"]`) as HTMLInputElement;
+      if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+    });
+  });
+
+  // URL param pre-selection
+  const params = new URLSearchParams(window.location.search);
+  const tierParam = params.get('tier');
+  if (tierParam) {
+    const radio = document.querySelector(`input[value="${tierParam}"]`) as HTMLInputElement;
+    if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+  }
+
+  // Form submission — mock flow
+  document.getElementById('registration-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const tier = (form.querySelector('input[name="tier"]:checked') as HTMLInputElement)?.value;
+    if (tier === 'institution') {
+      const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+      btn.textContent = 'Submit Application & Proceed to Payment';
+      btn.disabled = false;
+      const existing = document.getElementById('inst-msg');
+      if (!existing) {
+        const msg = document.createElement('div');
+        msg.id = 'inst-msg';
+        msg.style.cssText = 'font-size:13px;color:#00A896;margin-top:6px;line-height:1.4;';
+        msg.textContent = 'Thank you. We will contact you within 24 hours with a custom quote.';
+        btn.parentNode?.insertBefore(msg, btn.nextSibling);
+      }
+      return;
+    }
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    setTimeout(() => { window.location.href = '/confirm'; }, 1200);
+  });
+</script>
+
+<style>
+  @media (max-width: 768px) {
+    section:last-of-type > div > div { grid-template-columns: 1fr !important; }
+    div[id="tier-selector"] { grid-template-columns: 1fr !important; }
+  }
+</style>

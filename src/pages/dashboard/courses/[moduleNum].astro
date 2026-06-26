@@ -1,0 +1,270 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import { MODULES, SITE } from '../../../data/site';
+import { DISCUSSION_POSTS } from '../../../data/mock';
+
+export function getStaticPaths() {
+  return MODULES.map((_, i) => ({
+    params: { moduleNum: `module-${i + 1}` },
+  }));
+}
+
+const { moduleNum } = Astro.params;
+const idx = parseInt((moduleNum as string).replace('module-', '')) - 1;
+const mod = MODULES[idx] ?? MODULES[0];
+const num = idx + 1;
+const isUnlocked = num <= 2;
+
+const resources = [
+  { icon:"ti-presentation", label:"Session Slides",    size:"PDF · 2.4 MB",        avail: isUnlocked },
+  { icon:"ti-book",          label:"Pre-Reading List",  size:"PDF · 8 articles",    avail: isUnlocked },
+  { icon:"ti-video",         label:"Session Recording", size:"1h 58m 34s",          avail: num === 1  },
+  { icon:"ti-file-text",     label:"Assignment Brief",  size:"PDF · 2 pages",       avail: isUnlocked },
+];
+---
+<DashboardLayout title={`Module ${mod.num}: ${mod.title} — GHO Academy`} activeNav="courses">
+
+  <!-- Breadcrumb -->
+  <nav style="display:flex;align-items:center;gap:6px;font-size:13px;margin-bottom:1.25rem;">
+    <a href="/dashboard" style="color:#9CA3AF;text-decoration:none;" onmouseover="this.style.color='#00A896'" onmouseout="this.style.color='#9CA3AF'">Dashboard</a>
+    <i class="ti ti-chevron-right" style="font-size:12px;color:#D1D5DB;"></i>
+    <a href="/dashboard/courses" style="color:#9CA3AF;text-decoration:none;" onmouseover="this.style.color='#00A896'" onmouseout="this.style.color='#9CA3AF'">Courses</a>
+    <i class="ti ti-chevron-right" style="font-size:12px;color:#D1D5DB;"></i>
+    <span style="color:#0B1C3D;font-weight:500;">Module {mod.num}</span>
+  </nav>
+
+  <!-- Module header -->
+  <div style="background:#0B1C3D;border-radius:8px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-30%;right:-5%;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(0,168,150,0.07),transparent 70%);pointer-events:none;"></div>
+    <div style="position:relative;z-index:1;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#C9922A;font-weight:600;margin-bottom:8px;">Module {mod.num} of {MODULES.length}</div>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(22px,4vw,34px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1.05;margin-bottom:8px;">{mod.title}</h1>
+        <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:540px;line-height:1.55;">{mod.desc}</p>
+        <div style="display:flex;gap:1.5rem;margin-top:1.25rem;flex-wrap:wrap;">
+          {[
+            {icon:"ti-clock",label:"2 hours"},
+            {icon:"ti-video",label:"Live + Recorded"},
+            {icon:"ti-file-text",label:"1 Assignment"},
+            {icon:"ti-message-circle",label:"Discussion Board"},
+          ].map(m => (
+            <span style="font-size:12px;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:5px;">
+              <i class={`ti ${m.icon}`} style="font-size:13px;color:#00A896;"></i>{m.text || m.label}
+            </span>
+          ))}
+        </div>
+      </div>
+      {mod.tag && (
+        <span style="background:rgba(0,168,150,0.15);color:#00A896;font-size:11px;font-weight:700;padding:5px 14px;border-radius:2px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(0,168,150,0.3);height:fit-content;flex-shrink:0;">{mod.tag}</span>
+      )}
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:1.5rem;">
+
+    <!-- Left column -->
+    <div style="display:grid;gap:1.5rem;">
+
+      <!-- Video player -->
+      <div style="background:#111827;border-radius:8px;overflow:hidden;">
+        <div style="aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center;">
+          {num === 1 ? (
+            <>
+              <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d1520,#0B1C3D);"></div>
+              <div style="position:relative;z-index:1;text-align:center;">
+                <button id="play-btn" style="width:72px;height:72px;border-radius:50%;background:rgba(201,146,42,0.15);border:2px solid rgba(201,146,42,0.5);display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 auto 1rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(201,146,42,0.28)'" onmouseout="this.style.background='rgba(201,146,42,0.15)'">
+                  <i class="ti ti-player-play-filled" style="font-size:28px;color:#C9922A;margin-left:3px;"></i>
+                </button>
+                <div style="font-size:16px;font-weight:600;color:#fff;margin-bottom:4px;">Module {num} Recording</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.35);">{mod.title} · 1h 58m 34s</div>
+              </div>
+            </>
+          ) : (
+            <div style="text-align:center;padding:2rem;">
+              <i class="ti ti-clock" style="font-size:48px;color:rgba(255,255,255,0.12);display:block;margin-bottom:0.75rem;"></i>
+              <div style="font-size:15px;color:rgba(255,255,255,0.35);margin-bottom:4px;">Recording Available After Live Session</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.2);">Uploaded within 24 hours of each session</div>
+            </div>
+          )}
+        </div>
+        <!-- Player controls bar -->
+        <div style="padding:0.75rem 1.25rem;background:#0d1420;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:1rem;flex-wrap:wrap;">
+          {["ti-download","ti-bookmark","ti-share","ti-message-circle"].map((icon,i) => {
+            const labels = ["Download","Bookmark","Share","Notes"];
+            return (
+              <button style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;padding:0;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+                <i class={`ti ${icon}`} style="font-size:15px;"></i>{labels[i]}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Assignment -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:8px;padding:1.5rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.75rem;">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#0B1C3D;text-transform:uppercase;">Module Assignment</h2>
+          <span style="font-size:11px;background:rgba(201,146,42,0.1);color:#C9922A;padding:3px 10px;border-radius:2px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;">Due next session</span>
+        </div>
+        <p style="font-size:14px;color:#4A5568;margin-bottom:1.25rem;line-height:1.65;">
+          Reflect on a leadership challenge you have observed or experienced in a global health setting. Apply the systems change frameworks from this module to analyse the root causes and propose a practical intervention. Submit a 500–700 word written response.
+        </p>
+        <div style="background:#F5F3EE;border:1px solid #E8E5DE;border-radius:4px;padding:1rem;margin-bottom:1.25rem;">
+          <div style="font-size:12px;font-weight:600;color:#0B1C3D;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Assessment criteria</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+            {["Systems thinking application","Root cause identification","Practical intervention design","Clarity of argument","Evidence-based reasoning","Professional reflection"].map(c => (
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#4A5568;">
+                <i class="ti ti-point-filled" style="font-size:8px;color:#C9922A;"></i>{c}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <button onclick="window.showToast('Assignment submitted! Faculty will respond within 48 hours.')" style="display:inline-flex;align-items:center;gap:6px;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:10px 18px;border:none;border-radius:3px;cursor:pointer;">
+            <i class="ti ti-upload" style="font-size:15px;"></i>Submit Assignment
+          </button>
+          <button onclick="window.showToast('Downloading Assignment Brief PDF...')" style="display:inline-flex;align-items:center;gap:6px;background:transparent;color:#0B1C3D;font-size:13px;font-weight:600;padding:9px 16px;border:1.5px solid #E8E5DE;border-radius:3px;cursor:pointer;">
+            <i class="ti ti-download" style="font-size:15px;color:#C9922A;"></i>Download Brief
+          </button>
+        </div>
+      </div>
+
+      <!-- Discussion board -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:8px;padding:1.5rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#0B1C3D;text-transform:uppercase;">Discussion</h2>
+          <span style="font-size:12px;color:#9CA3AF;">14 replies</span>
+        </div>
+
+        <!-- Comments -->
+        <div style="display:grid;gap:1.25rem;margin-bottom:1.5rem;">
+          {[
+            {i:"AO",n:"Amara O.",c:"Nigeria",t:"2h ago",   msg:"The interplay between technical expertise and leadership capacity is something I experience daily. This module gave me a framework for what I've been feeling but couldn't articulate. Particularly the distinction between working in a system and working on a system."},
+            {i:"SK",n:"Samuel K.",c:"Kenya", t:"5h ago",   msg:"The African CDC case study was a revelation. It showed how systems change requires holding multiple time horizons simultaneously — responding to the immediate crisis while reshaping the institutional architecture underneath."},
+            {i:"NM",n:"Nadia M.", c:"Rwanda",t:"Yesterday",msg:"Question for the cohort: how do we apply systems thinking when we're junior and don't control the structural levers? I find myself able to diagnose problems clearly but unable to act on what I see. Would appreciate strategies from those who've navigated this."},
+          ].map(c => (
+            <div style="display:flex;gap:12px;">
+              <div style="width:38px;height:38px;border-radius:50%;background:#0B1C3D;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#C9922A;flex-shrink:0;">{c.i}</div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:5px;flex-wrap:wrap;">
+                  <span style="font-size:13px;font-weight:600;color:#0B1C3D;">{c.n}</span>
+                  <span style="font-size:11px;color:#9CA3AF;">{c.c}</span>
+                  <span style="font-size:11px;color:#C0BDB8;margin-left:auto;">{c.t}</span>
+                </div>
+                <p style="font-size:13px;color:#4A5568;line-height:1.6;margin:0;">{c.msg}</p>
+                <button class="reply-btn" style="background:none;border:none;font-size:12px;color:#9CA3AF;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:4px;margin-top:4px;transition:color 0.15s;" onmouseover="this.style.color='#00A896'" onmouseout="this.style.color='#9CA3AF'">
+                  <i class="ti ti-corner-down-right" style="font-size:13px;"></i>Reply
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Reply box -->
+        <div style="border-top:1px solid #F5F3EE;padding-top:1.25rem;display:flex;gap:10px;">
+          <div style="width:38px;height:38px;border-radius:50%;background:#E8E5DE;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#4A5568;flex-shrink:0;">P</div>
+          <div style="flex:1;">
+            <textarea rows="2" placeholder="Share your reflection or ask the cohort a question..."
+              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:4px;font-size:13px;color:#1a1a2e;outline:none;resize:none;font-family:'Inter',sans-serif;transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'"></textarea>
+            <div style="display:flex;justify-content:flex-end;margin-top:6px;">
+              <button id="post-reply-btn" style="background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:7px 18px;border:none;border-radius:2px;cursor:pointer;">Post Reply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar -->
+    <div style="display:grid;gap:1.25rem;align-content:start;">
+
+      <!-- Resources -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:8px;padding:1.25rem;">
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1rem;">Module Resources</h3>
+        <div style="display:grid;gap:8px;">
+          {resources.map(r => (
+            <div style={`display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:4px;background:${r.avail?'#F5F3EE':'#FAFAF9'};border:1px solid ${r.avail?'#E8E5DE':'#F0EDE8'};`}>
+              <i class={`ti ${r.icon}`} style={`font-size:19px;color:${r.avail?'#C9922A':'#D1CFC9'};flex-shrink:0;`}></i>
+              <div style="flex:1;min-width:0;">
+                <div style={`font-size:13px;font-weight:500;color:${r.avail?'#0B1C3D':'#9CA3AF'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;`}>{r.label}</div>
+                <div style="font-size:11px;color:#9CA3AF;">{r.size}</div>
+              </div>
+              {r.avail
+                ? <button onclick={`window.showToast('Downloading ${r.label}...')`} style="font-size:12px;font-weight:600;color:#00A896;background:transparent;border:none;cursor:pointer;flex-shrink:0;">Get</button>
+                : <i class="ti ti-lock" style="font-size:14px;color:#D1CFC9;flex-shrink:0;"></i>
+              }
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mark complete -->
+      <div style="background:#F5F3EE;border:1px solid #E8E5DE;border-radius:8px;padding:1.25rem;text-align:center;">
+        <i class="ti ti-circle-check" style="font-size:36px;color:#D1D5DB;display:block;margin-bottom:0.75rem;"></i>
+        <div style="font-size:13px;font-weight:600;color:#0B1C3D;margin-bottom:4px;">Mark as Complete</div>
+        <div style="font-size:12px;color:#6B7280;margin-bottom:0.875rem;line-height:1.45;">Watch recording and submit assignment to mark complete.</div>
+        <button id="mark-complete-btn" style="width:100%;background:#E8E5DE;color:#9CA3AF;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:9px;border:none;border-radius:2px;cursor:not-allowed;">Mark Complete</button>
+      </div>
+
+      <!-- Module navigation -->
+      <div style="display:grid;gap:8px;">
+        {idx > 0 && (
+          <a href={`/dashboard/courses/module-${num - 1}`} style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:10px 14px;text-decoration:none;font-size:13px;color:#0B1C3D;font-weight:500;transition:border-color 0.15s;" onmouseover="this.style.borderColor='#C9922A'" onmouseout="this.style.borderColor='#E8E5DE'">
+            <i class="ti ti-arrow-left" style="font-size:15px;color:#9CA3AF;"></i>
+            <span>Module {num - 1}: {MODULES[idx - 1]?.title}</span>
+          </a>
+        )}
+        {idx < MODULES.length - 1 && (
+          <a href={`/dashboard/courses/module-${num + 1}`} style="display:flex;align-items:center;gap:8px;background:#0B1C3D;border-radius:4px;padding:10px 14px;text-decoration:none;font-size:13px;color:#fff;font-weight:500;transition:background 0.15s;" onmouseover="this.style.background='#112244'" onmouseout="this.style.background='#0B1C3D'">
+            <i class="ti ti-arrow-right" style="font-size:15px;color:#C9922A;"></i>
+            <span>Module {num + 1}: {MODULES[idx + 1]?.title}</span>
+          </a>
+        )}
+        <a href="/dashboard/courses" style="display:flex;align-items:center;gap:6px;font-size:12px;color:#9CA3AF;text-decoration:none;justify-content:center;padding:6px;" onmouseover="this.style.color='#4A5568'" onmouseout="this.style.color='#9CA3AF'">
+          <i class="ti ti-layout-list" style="font-size:14px;"></i>All modules
+        </a>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  document.getElementById('play-btn')?.addEventListener('click', () => {
+    (window as any).showToast('Loading recording...');
+  });
+  document.querySelectorAll('.reply-btn').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+      if (textarea) { textarea.focus(); textarea.placeholder = 'Replying...'; }
+    });
+  });
+  document.getElementById('post-reply-btn')?.addEventListener('click', () => {
+    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+    const text = textarea?.value.trim();
+    if (!text) return;
+    const board = document.getElementById('discussion-comments');
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;gap:12px;padding-top:1rem;opacity:0;transition:opacity 0.3s;';
+    div.innerHTML = `
+      <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0B1C3D,#00A896);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#C9922A;flex-shrink:0;">AO</div>
+      <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#0B1C3D;margin-bottom:5px;">Amara O. <span style="font-weight:400;color:#9CA3AF;font-size:11px;">Just now</span></div><p style="font-size:13px;color:#4A5568;line-height:1.6;margin:0;">${text}</p></div>
+    `;
+    const comments = document.querySelector('.discussion-comments') ?? document.querySelector('div[style*="display:grid;gap:1.25rem"]');
+    if (comments) {
+      comments.appendChild(div);
+      requestAnimationFrame(() => { (div as HTMLElement).style.opacity = '1'; });
+    }
+    textarea.value = '';
+    (window as any).showToast('Reply posted!');
+  });
+  document.getElementById('mark-complete-btn')?.addEventListener('click', () => {
+    (window as any).showToast('Complete the recording and assignment first.');
+  });
+</script>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns:1fr 300px"] { grid-template-columns: 1fr !important; }
+  }
+</style>

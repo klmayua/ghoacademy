@@ -1,0 +1,157 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { SITE } from '../../data/site';
+import { DEMO_USER } from '../../data/mock';
+---
+<DashboardLayout title="My Profile — GHO Academy" activeNav="profile">
+
+  <div style="display:grid;grid-template-columns:300px 1fr;gap:1.5rem;align-items:start;">
+
+    <!-- Left: avatar + quick info -->
+    <div>
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:2rem;text-align:center;margin-bottom:1rem;">
+        <div id="avatar-display" style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#0B1C3D,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0 auto 1rem;">{DEMO_USER.avatar_initials}</div>
+        <div id="profile-name" style="font-size:16px;font-weight:600;color:#0B1C3D;margin-bottom:4px;">{DEMO_USER.firstName} {DEMO_USER.lastName}</div>
+        <div style="font-size:13px;color:#4A5568;margin-bottom:4px;">{DEMO_USER.role}</div>
+        <div style="font-size:12px;color:#9CA3AF;margin-bottom:1rem;">{DEMO_USER.country} · {DEMO_USER.cohort}</div>
+        <input type="file" id="photo-input" accept="image/*" style="display:none;" />
+        <button id="edit-photo-btn" style="width:100%;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:9px;border:none;border-radius:3px;cursor:pointer;">Edit Profile Photo</button>
+      </div>
+
+      <!-- Certificate status -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#4A5568;font-weight:600;margin-bottom:0.75rem;">Certificate Status</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;">
+          <i class="ti ti-certificate" style="font-size:24px;color:#C9922A;"></i>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#0B1C3D;">In Progress</div>
+            <div style="font-size:11px;color:#4A5568;">30% towards 75% requirement</div>
+          </div>
+        </div>
+        <div style="height:6px;background:#E8E5DE;border-radius:9999px;overflow:hidden;">
+          <div style="height:100%;width:30%;background:linear-gradient(90deg,#00A896,#C9922A);border-radius:9999px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: edit form -->
+    <div>
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:2rem;margin-bottom:1rem;">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1.5rem;">Personal Information</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+          {[
+            { label:"First Name",    name:"firstName",   value:DEMO_USER.firstName,        type:"text"  },
+            { label:"Last Name",     name:"lastName",    value:DEMO_USER.lastName,         type:"text"  },
+            { label:"Email Address", name:"email",       value:DEMO_USER.email,            type:"email" },
+            { label:"Phone Number",  name:"phone",       value:"",                         type:"tel"   },
+          ].map(f => (
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{f.label}</label>
+              <input type={f.type} defaultValue={f.value}
+                style="width:100%;padding:9px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+          ))}
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+          {[
+            { label:"Organisation",   name:"org",     value:DEMO_USER.organisation },
+            { label:"Job Title",      name:"role",    value:DEMO_USER.role         },
+            { label:"Country",        name:"country", value:DEMO_USER.country      },
+            { label:"LinkedIn URL",   name:"linkedin",value:""                     },
+          ].map(f => (
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{f.label}</label>
+              <input type="text" defaultValue={f.value}
+                style="width:100%;padding:9px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+          ))}
+        </div>
+        <div style="margin-bottom:1.5rem;">
+          <label style="display:block;font-size:11px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">Professional Bio <span style="font-weight:400;color:#9CA3AF;text-transform:none;">(shown in cohort directory)</span></label>
+          <textarea rows="3" placeholder="Brief professional bio (2–3 sentences)..."
+            style="width:100%;padding:9px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;resize:vertical;"
+            onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'"></textarea>
+        </div>
+        <button id="save-profile-btn" onclick="window.showToast('Profile updated successfully.')" style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:11px 28px;border:none;border-radius:2px;cursor:pointer;">Save Changes</button>
+      </div>
+
+      <!-- Password -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:2rem;margin-bottom:1rem;">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1.25rem;">Change Password</h2>
+        <div style="display:grid;gap:1rem;max-width:400px;">
+          {["Current Password","New Password","Confirm New Password"].map(l => (
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:5px;">{l}</label>
+              <input type="password" placeholder="••••••••"
+                style="width:100%;padding:9px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;"
+                onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+            </div>
+          ))}
+          <button id="update-pw-btn" style="background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:11px 24px;border:none;border-radius:2px;cursor:pointer;width:fit-content;">Update Password</button>
+          <div id="pw-error" style="display:none;font-size:13px;color:#EF4444;margin-top:4px;line-height:1.4;">Passwords do not match.</div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:2rem;">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1.25rem;">Notification Preferences</h2>
+        {[
+          { label:"Session reminders (48hr, 24hr, 1hr before)",  checked:true  },
+          { label:"New discussion replies in my threads",         checked:true  },
+          { label:"Assignment feedback from faculty",             checked:true  },
+          { label:"Weekly cohort digest email",                   checked:false },
+          { label:"Alumni network updates",                       checked:false },
+        ].map(n => (
+          <label style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F5F3EE;cursor:pointer;">
+            <input type="checkbox" checked={n.checked} style="accent-color:#00A896;width:15px;height:15px;" />
+            <span style="font-size:14px;color:#1a1a2e;">{n.label}</span>
+          </label>
+        ))}
+        <button onclick="window.showToast('Notification preferences saved.')" style="margin-top:1rem;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 24px;border:none;border-radius:2px;cursor:pointer;">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  document.getElementById('edit-photo-btn')?.addEventListener('click', () => {
+    document.getElementById('photo-input')?.click();
+  });
+  document.getElementById('photo-input')?.addEventListener('change', (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const avatar = document.getElementById('avatar-display') as HTMLElement;
+      if (avatar && ev.target?.result) {
+        avatar.style.backgroundImage = `url(${ev.target.result})`;
+        avatar.style.backgroundSize = 'cover';
+        avatar.style.backgroundPosition = 'center';
+        avatar.textContent = '';
+      }
+      (window as any).showToast('Profile photo updated.');
+    };
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('update-pw-btn')?.addEventListener('click', () => {
+    const pwFields = document.querySelectorAll('input[type="password"]');
+    const newPw    = (pwFields[1] as HTMLInputElement)?.value;
+    const confirmPw = (pwFields[2] as HTMLInputElement)?.value;
+    const errEl = document.getElementById('pw-error');
+    if (newPw && confirmPw && newPw !== confirmPw) {
+      if (errEl) errEl.style.display = 'block';
+    } else {
+      if (errEl) errEl.style.display = 'none';
+      if (newPw) (window as any).showToast('Password updated successfully.');
+    }
+  });
+</script>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns:300px 1fr"] { grid-template-columns: 1fr !important; }
+    div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+</style>

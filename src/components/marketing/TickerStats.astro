@@ -1,0 +1,34 @@
+---
+import { MODULES, SITE } from '../../data/site';
+---
+
+<!-- Animated ticker -->
+<div style="background:#00A896;overflow:hidden;padding:11px 0;" aria-hidden="true">
+  <div class="ticker-track" style="display:flex;gap:0;width:max-content;">
+    {[...MODULES, ...MODULES].map(m => (
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#0B1C3D;padding:0 2rem;display:flex;align-items:center;gap:0.75rem;white-space:nowrap;">
+        {m.title}
+        <span style="width:5px;height:5px;background:#0B1C3D;border-radius:50%;opacity:0.4;display:inline-block;"></span>
+      </span>
+    ))}
+  </div>
+</div>
+
+<!-- Stats bar -->
+<div style="background:#F5F3EE;border-bottom:1px solid #E8E5DE;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid #E8E5DE;">
+    {[
+      { num: SITE.course.weeks,             unit: "Wks",  label: "Intensive Programme"      },
+      { num: MODULES.length,                unit: "",     label: "Core Themes"               },
+      { num: SITE.instructor.years + "+",   unit: "Yrs",  label: "Expert Leadership"         },
+      { num: SITE.instructor.papers + "+",  unit: "",     label: "Published Research Papers" },
+    ].map(s => (
+      <div style="padding:1.5rem 1rem;text-align:center;border-right:1px solid #E8E5DE;border-bottom:1px solid #E8E5DE;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:800;color:#0B1C3D;line-height:1;">
+          {s.num}<span style="color:#C9922A;">{s.unit}</span>
+        </div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#4A5568;margin-top:4px;">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</div>

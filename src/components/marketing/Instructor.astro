@@ -1,0 +1,80 @@
+---
+import { SITE } from '../../data/site';
+const { instructor } = SITE;
+---
+<section id="instructor" style="background:#111827;padding:5rem 1.5rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="margin-bottom:2.5rem;">
+      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">Course Lead &amp; Convener</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;">
+        {instructor.name}
+      </h2>
+      <p style="font-size:14px;color:#C9922A;font-weight:500;margin-top:4px;">{instructor.credentials}</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:3rem;align-items:start;">
+
+      <!-- Card -->
+      <div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:1.75rem;border-radius:4px;text-align:center;margin-bottom:1.25rem;">
+          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0 auto 1rem;">LB</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:4px;">Dr. Luchuo E. Bain</div>
+          <div style="font-size:12px;color:#C9922A;margin-bottom:1rem;">MD · PhD · MPH · MBA · MSc · FAAS</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
+            {["Global Health Scientist","Bioethicist","Leadership Advocate","Science Communicator"].map(tag => (
+              <span style="font-size:11px;background:rgba(0,168,150,0.12);color:#00A896;padding:3px 8px;border-radius:2px;">{tag}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Affiliations -->
+        <div style="display:grid;gap:8px;">
+          {instructor.affiliations.map(aff => {
+            const [role, org] = aff.split(' — ');
+            return (
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:0.75rem;border-radius:4px;">
+                <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:2px;">{role}</div>
+                <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.75);">{org}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div>
+        <p style="font-size:16px;color:rgba(255,255,255,0.78);line-height:1.75;margin-bottom:1.5rem;">{instructor.bio}</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;">
+          {[
+            { num: instructor.years + "+", label: "Years experience",              sub: "Across 4 continents"               },
+            { num: instructor.papers + "+",label: "Peer-reviewed publications",    sub: "Indexed research"                  },
+            { num: "4",                    label: "Institutional affiliations",    sub: "Oxford, EUCLID & beyond"           },
+          ].map(s => (
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:1.25rem;border-radius:4px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#C9922A;line-height:1;">{s.num}</div>
+              <div style="font-size:12px;font-weight:600;color:#fff;margin-top:4px;">{s.label}</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;">{s.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style="background:rgba(201,146,42,0.06);border-left:3px solid #C9922A;padding:1.25rem 1.5rem;border-radius:0 4px 4px 0;">
+          <p style="font-size:16px;color:rgba(255,255,255,0.65);line-height:1.65;font-style:italic;">
+            "A new global health — doing global health otherwise — is not merely a need but an urgent imperative."
+          </p>
+          <p style="font-size:12px;color:#C9922A;font-weight:600;margin-top:8px;">— Dr. Luchuo Engelbert Bain</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    #instructor > div > div:last-child { grid-template-columns: 1fr !important; }
+    #instructor > div > div:last-child > div:first-child { width: 100% !important; }
+    #instructor > div > div:last-child > div:last-child > div:nth-child(2) { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

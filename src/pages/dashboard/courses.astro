@@ -1,0 +1,127 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { MODULES } from '../../data/site';
+import { DEMO_USER } from '../../data/mock';
+const completedModules = DEMO_USER.completed_modules;
+---
+<DashboardLayout title="My Courses — GHO Academy" activeNav="courses">
+
+  <div style="margin-bottom:1.5rem;">
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:4px;">Course Modules</h1>
+    <p style="font-size:14px;color:#4A5568;">Global Public Health Innovation, Entrepreneurship &amp; Leadership · Cohort 1</p>
+  </div>
+
+  <!-- Progress summary bar -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#4A5568;margin-bottom:4px;">Overall Progress</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:160px;height:8px;background:#E8E5DE;border-radius:9999px;overflow:hidden;">
+          <div style="height:100%;width:10%;background:linear-gradient(90deg,#00A896,#C9922A);border-radius:9999px;"></div>
+        </div>
+        <span style="font-size:14px;font-weight:600;color:#0B1C3D;">{completedModules.length}/{MODULES.length} modules</span>
+      </div>
+    </div>
+    {[
+      { icon:"ti-circle-check", color:"#00A896", label:"Completed",  val: completedModules.length                    },
+      { icon:"ti-player-play",  color:"#C9922A", label:"Current",    val: 1                                          },
+      { icon:"ti-lock",         color:"#9CA3AF", label:"Locked",     val: MODULES.length - completedModules.length - 1 },
+    ].map(s => (
+      <div style="display:flex;align-items:center;gap:8px;">
+        <i class={`ti ${s.icon}`} style={`font-size:18px;color:${s.color};`}></i>
+        <span style="font-size:13px;color:#4A5568;"><strong style="color:#0B1C3D;">{s.val}</strong> {s.label}</span>
+      </div>
+    ))}
+  </div>
+
+  <!-- Modules list -->
+  <div style="display:grid;gap:1rem;">
+    {MODULES.map((mod, i) => {
+      const num     = i + 1;
+      const done    = completedModules.includes(num);
+      const current = num === completedModules.length + 1;
+      const locked  = !done && !current;
+      return (
+        <div style={`background:#fff;border:1px solid ${done ? 'rgba(0,168,150,0.25)' : current ? 'rgba(201,146,42,0.35)' : '#E8E5DE'};border-radius:6px;overflow:hidden;${done ? 'border-left:4px solid #00A896;' : current ? 'border-left:4px solid #C9922A;' : 'border-left:4px solid transparent;'}position:relative;`} class={locked ? 'locked-card' : ''} data-module={num}>
+          <div style="padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem;">
+
+            <!-- Status icon -->
+            <div style={`width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:${done ? '#00A896' : current ? '#C9922A' : '#E8E5DE'};`}>
+              {done
+                ? <i class="ti ti-check" style="font-size:18px;color:#fff;"></i>
+                : <span style={`font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:${current ? '#fff' : '#9CA3AF'};`}>{mod.num}</span>
+              }
+            </div>
+
+            <!-- Content -->
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
+                <h3 style={`font-size:15px;font-weight:600;color:${locked ? '#9CA3AF' : '#0B1C3D'};`}>{mod.title}</h3>
+                {mod.tag && <span style="font-size:10px;background:rgba(0,168,150,0.1);color:#00A896;padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:0.5px;">{mod.tag}</span>}
+                {current && <span style="font-size:10px;background:rgba(201,146,42,0.1);color:#C9922A;padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:0.5px;">Current</span>}
+              </div>
+              <p style={`font-size:13px;color:${locked ? '#C0BDB8' : '#4A5568'};line-height:1.4;`}>{mod.desc}</p>
+              {!locked && (
+                <div style="display:flex;gap:1rem;margin-top:8px;flex-wrap:wrap;">
+                  {[
+                    { icon:"ti-video",    label:"Recording"   },
+                    { icon:"ti-files",    label:"Materials"   },
+                    { icon:"ti-message", label:"Discussion"  },
+                  ].map(r => (
+                    <span style="font-size:12px;color:#4A5568;display:flex;align-items:center;gap:4px;">
+                      <i class={`ti ${r.icon}`} style={`font-size:13px;color:${done ? '#00A896' : '#C9922A'};`}></i>
+                      {r.label} {done ? '✓' : 'Available'}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- Action -->
+            <div style="flex-shrink:0;">
+              {done ? (
+                <a href={`/dashboard/courses/module-${num}`} style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#00A896;text-decoration:none;padding:8px 14px;border:1.5px solid rgba(0,168,150,0.3);border-radius:3px;background:rgba(0,168,150,0.05);">
+                  <i class="ti ti-eye" style="font-size:15px;"></i>Review
+                </a>
+              ) : current ? (
+                <a href={`/dashboard/courses/module-${num}`} style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#0B1C3D;text-decoration:none;padding:8px 14px;background:#C9922A;border-radius:3px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px;text-transform:uppercase;">
+                  <i class="ti ti-player-play" style="font-size:15px;"></i>Continue
+                </a>
+              ) : (
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#C0BDB8;padding:8px 14px;border:1.5px solid #E8E5DE;border-radius:3px;">
+                  <i class="ti ti-lock" style="font-size:15px;"></i>Locked
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Capstone project -->
+  <div style="margin-top:1.5rem;background:#0B1C3D;border-radius:6px;padding:1.75rem;">
+    <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#C9922A;font-weight:600;margin-bottom:6px;">Signature Assessment</div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:6px;">Stakeholder-Driven Capstone Project</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.55);max-width:500px;line-height:1.55;">Design and present a practical solution to a real global health challenge. Unlocks in Module 8.</p>
+      </div>
+      <span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,0.4);padding:8px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:3px;">
+        <i class="ti ti-lock" style="font-size:15px;"></i>Unlocks at Module 8
+      </span>
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  document.querySelectorAll('.locked-card').forEach(card => {
+    const num = (card as HTMLElement).dataset.module;
+    const tip = document.createElement('div');
+    tip.textContent = `Complete Module ${Number(num) - 1} to unlock`;
+    tip.style.cssText = 'display:none;position:absolute;top:50%;right:1.5rem;transform:translateY(-50%);background:#0B1C3D;color:rgba(255,255,255,0.85);font-size:11px;padding:5px 10px;border-radius:3px;white-space:nowrap;z-index:10;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.15);';
+    card.appendChild(tip);
+    card.addEventListener('mouseenter', () => { tip.style.display = 'block'; });
+    card.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+  });
+</script>

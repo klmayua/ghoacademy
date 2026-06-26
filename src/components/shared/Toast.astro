@@ -1,0 +1,36 @@
+<div id="gho-toast" style="
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0B1C3D;
+  color: rgba(255,255,255,0.9);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 12px 18px;
+  border-radius: 4px;
+  border-left: 3px solid #00A896;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  max-width: 320px;
+  line-height: 1.4;
+"></div>
+
+<script>
+  (window as any).showToast = function(message: string, duration: number = 3000) {
+    const toast = document.getElementById('gho-toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    clearTimeout((window as any)._toastTimer);
+    (window as any)._toastTimer = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(8px)';
+    }, duration);
+  };
+</script>

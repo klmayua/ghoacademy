@@ -1,0 +1,202 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { RECENT_REGISTRATIONS } from '../../data/mock';
+
+const participants = RECENT_REGISTRATIONS;
+---
+<AdminLayout title="Participants — GHO Academy Admin" activeNav="participants">
+
+  <!-- Toolbar -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
+    <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+      <div style="position:relative;">
+        <i class="ti ti-search" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:15px;color:#9CA3AF;pointer-events:none;"></i>
+        <input type="text" id="search-input" placeholder="Search participants..." style="padding:8px 12px 8px 34px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;width:220px;outline:none;" onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
+      </div>
+      <select id="tier-filter" style="padding:8px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;outline:none;background:#fff;">
+        <option value="">All tiers</option>
+        <option>Early Bird</option>
+        <option>Standard</option>
+        <option>Institutional</option>
+      </select>
+      <select id="country-filter" style="padding:8px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;outline:none;background:#fff;">
+        <option value="">All countries</option>
+        <option>Nigeria</option><option>Kenya</option><option>Rwanda</option><option>Ghana</option><option>India</option><option>Cameroon</option><option>Uganda</option><option>Sudan</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:0.75rem;">
+      <button id="csv-btn" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#0B1C3D;font-size:13px;font-weight:600;padding:8px 14px;border:1.5px solid #E8E5DE;border-radius:3px;cursor:pointer;">
+        <i class="ti ti-download" style="font-size:14px;color:#C9922A;"></i>Export CSV
+      </button>
+      <button onclick="window.showToast('Email composer coming in next release.')" style="display:inline-flex;align-items:center;gap:6px;background:#0B1C3D;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border:none;border-radius:3px;cursor:pointer;">
+        <i class="ti ti-mail" style="font-size:14px;"></i>Email All
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary pills -->
+  <div style="display:flex;gap:0.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+    {[
+      { label:`${participants.length} total`,              color:"#0B1C3D" },
+      { label:`${participants.filter(p=>p.tier==='Early Bird').length} early bird`, color:"#00A896" },
+      { label:`${participants.filter(p=>p.tier==='Standard').length} standard`,    color:"#C9922A" },
+      { label:`${participants.filter(p=>p.mod1).length} attended module 1`,       color:"#4A5568" },
+    ].map(p => (
+      <span style={`font-size:12px;font-weight:600;color:${p.color};background:rgba(0,0,0,0.04);padding:4px 12px;border-radius:2px;border:1px solid rgba(0,0,0,0.06);`}>{p.label}</span>
+    ))}
+  </div>
+
+  <!-- Table -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;">
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#F5F3EE;">
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">#</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">Name</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">Country · Org</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">Tier</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">Paid</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">M1 Attended</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">Enrolled</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {participants.map(p => (
+            <tr style="border-bottom:1px solid #F5F3EE;transition:background 0.1s;" onmouseover="this.style.background='#FAFAF9'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;font-size:12px;color:#9CA3AF;">{p.id}</td>
+              <td style="padding:10px 14px;">
+                <div style="font-size:13px;font-weight:600;color:#0B1C3D;">{p.name}</div>
+                <div style="font-size:11px;color:#9CA3AF;">{p.email}</div>
+              </td>
+              <td style="padding:10px 14px;">
+                <div style="font-size:13px;color:#0B1C3D;">{p.country}</div>
+                <div style="font-size:11px;color:#9CA3AF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;">{p.org}</div>
+              </td>
+              <td style="padding:10px 14px;">
+                <span style={`font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;${p.tier==='Early Bird'?'background:rgba(0,168,150,0.1);color:#00A896;':'background:rgba(201,146,42,0.1);color:#C9922A;'}`}>{p.tier}</span>
+              </td>
+              <td style="padding:10px 14px;">
+                <i class={`ti ${p.paid?'ti-circle-check':'ti-circle-x'}`} style={`font-size:18px;color:${p.paid?'#00A896':'#EF4444'};`}></i>
+              </td>
+              <td style="padding:10px 14px;">
+                <i class={`ti ${p.mod1?'ti-circle-check':'ti-minus'}`} style={`font-size:18px;color:${p.mod1?'#00A896':'#D1D5DB'};`}></i>
+              </td>
+              <td style="padding:10px 14px;font-size:12px;color:#9CA3AF;white-space:nowrap;">{p.date}</td>
+              <td style="padding:10px 14px;">
+                <div style="display:flex;gap:6px;">
+                  <button class="view-btn" data-name={p.name} data-email={p.email} data-org={p.org} data-country={p.country} data-tier={p.tier} data-date={p.date} style="font-size:11px;background:none;border:1px solid #E8E5DE;border-radius:2px;padding:4px 8px;cursor:pointer;color:#4A5568;transition:all 0.15s;" onmouseover="this.style.borderColor='#00A896';this.style.color='#00A896'" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#4A5568'">
+                    <i class="ti ti-eye" style="font-size:12px;"></i>
+                  </button>
+                  <a href={`mailto:${p.email}`} style="font-size:11px;background:none;border:1px solid #E8E5DE;border-radius:2px;padding:4px 8px;cursor:pointer;color:#4A5568;text-decoration:none;transition:all 0.15s;display:inline-flex;align-items:center;" onmouseover="this.style.borderColor='#C9922A';this.style.color='#C9922A'" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#4A5568'">
+                    <i class="ti ti-mail" style="font-size:12px;"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Slide-in detail panel -->
+  <div id="panel-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:199;opacity:0;transition:opacity 0.25s;pointer-events:none;"></div>
+  <div id="detail-panel" style="position:fixed;top:0;right:0;bottom:0;width:340px;background:#fff;border-left:1px solid #E8E5DE;box-shadow:-8px 0 24px rgba(0,0,0,0.1);z-index:200;transform:translateX(100%);transition:transform 0.25s ease;overflow-y:auto;padding:1.5rem;">
+    <button id="panel-close" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:20px;color:#9CA3AF;cursor:pointer;">✕</button>
+    <div style="margin-top:2rem;">
+      <div id="panel-avatar" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#0B1C3D,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:1rem;">?</div>
+      <div id="panel-name" style="font-size:16px;font-weight:700;color:#0B1C3D;margin-bottom:4px;"></div>
+      <div id="panel-email" style="font-size:13px;color:#4A5568;margin-bottom:1.25rem;"></div>
+      <div style="display:grid;gap:8px;">
+        <div style="background:#F5F3EE;border-radius:4px;padding:0.875rem;">
+          <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Organisation</div>
+          <div id="panel-org" style="font-size:13px;color:#0B1C3D;"></div>
+        </div>
+        <div style="background:#F5F3EE;border-radius:4px;padding:0.875rem;">
+          <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Country</div>
+          <div id="panel-country" style="font-size:13px;color:#0B1C3D;"></div>
+        </div>
+        <div style="background:#F5F3EE;border-radius:4px;padding:0.875rem;">
+          <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Tier</div>
+          <div id="panel-tier" style="font-size:13px;color:#0B1C3D;"></div>
+        </div>
+        <div style="background:#F5F3EE;border-radius:4px;padding:0.875rem;">
+          <div style="font-size:10px;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Enrolled</div>
+          <div id="panel-date" style="font-size:13px;color:#0B1C3D;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</AdminLayout>
+
+<script>
+  function filterTable() {
+    const search  = (document.getElementById('search-input')  as HTMLInputElement)?.value.toLowerCase()  ?? '';
+    const tier    = (document.getElementById('tier-filter')   as HTMLSelectElement)?.value.toLowerCase() ?? '';
+    const country = (document.getElementById('country-filter') as HTMLSelectElement)?.value.toLowerCase() ?? '';
+    document.querySelectorAll('tbody tr').forEach(row => {
+      const text = (row as HTMLElement).innerText.toLowerCase();
+      const tierOk    = !tier    || text.includes(tier);
+      const countryOk = !country || text.includes(country);
+      const searchOk  = !search  || text.includes(search);
+      (row as HTMLElement).style.display = (tierOk && countryOk && searchOk) ? '' : 'none';
+    });
+  }
+  document.getElementById('search-input')?.addEventListener('input', filterTable);
+  document.getElementById('tier-filter')?.addEventListener('change', filterTable);
+  document.getElementById('country-filter')?.addEventListener('change', filterTable);
+
+  document.getElementById('csv-btn')?.addEventListener('click', () => {
+    const rows = document.querySelectorAll('tbody tr');
+    const lines = ['Name,Email,Country,Organisation,Tier,Enrolled'];
+    rows.forEach(row => {
+      if ((row as HTMLElement).style.display === 'none') return;
+      const cells = row.querySelectorAll('td');
+      const name    = cells[1]?.querySelector('div')?.textContent?.trim() ?? '';
+      const email   = cells[1]?.querySelectorAll('div')[1]?.textContent?.trim() ?? '';
+      const country = cells[2]?.querySelector('div')?.textContent?.trim() ?? '';
+      const org     = cells[2]?.querySelectorAll('div')[1]?.textContent?.trim() ?? '';
+      const tier    = cells[3]?.querySelector('span')?.textContent?.trim() ?? '';
+      const date    = cells[6]?.textContent?.trim() ?? '';
+      lines.push(`"${name}","${email}","${country}","${org}","${tier}","${date}"`);
+    });
+    const csv  = lines.join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'gho-academy-participants.csv'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function openPanel(btn: HTMLElement) {
+    const panel   = document.getElementById('detail-panel');
+    const overlay = document.getElementById('panel-overlay');
+    const name    = btn.dataset.name    ?? '';
+    const initials = name.split(' ').map((w: string) => w[0]).join('').slice(0,2).toUpperCase();
+    const avatar  = document.getElementById('panel-avatar');
+    if (avatar) avatar.textContent = initials;
+    const el = (id: string, val: string) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    el('panel-name',    name);
+    el('panel-email',   btn.dataset.email   ?? '');
+    el('panel-org',     btn.dataset.org     ?? '');
+    el('panel-country', btn.dataset.country ?? '');
+    el('panel-tier',    btn.dataset.tier    ?? '');
+    el('panel-date',    btn.dataset.date    ?? '');
+    if (panel)   { panel.style.transform  = 'translateX(0)'; }
+    if (overlay) { overlay.style.opacity  = '1'; overlay.style.pointerEvents = 'auto'; }
+  }
+  function closePanel() {
+    const panel   = document.getElementById('detail-panel');
+    const overlay = document.getElementById('panel-overlay');
+    if (panel)   panel.style.transform   = 'translateX(100%)';
+    if (overlay) { overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none'; }
+  }
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => openPanel(btn as HTMLElement));
+  });
+  document.getElementById('panel-close')?.addEventListener('click', closePanel);
+  document.getElementById('panel-overlay')?.addEventListener('click', closePanel);
+</script>

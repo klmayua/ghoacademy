@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/shared/Nav.astro';
+import Footer from '../components/shared/Footer.astro';
+import { SITE } from '../data/site';
+const { course, instructor } = SITE;
+---
+<BaseLayout title="Application Received — GHO Academy" description="Your GHO Academy application has been received. Welcome to Cohort 1.">
+  <Nav />
+
+  <section style="min-height:60vh;background:#F5F3EE;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;">
+    <div style="max-width:600px;width:100%;text-align:center;">
+
+      <!-- Success icon -->
+      <div style="width:80px;height:80px;border-radius:50%;background:#00A896;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
+        <i class="ti ti-check" style="font-size:38px;color:#fff;"></i>
+      </div>
+
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,6vw,56px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;margin-bottom:0.75rem;">
+        Welcome to<br /><span style="color:#C9922A;">Cohort 1.</span>
+      </h1>
+
+      <p style="font-size:16px;color:#4A5568;line-height:1.65;margin-bottom:2rem;">
+        Your application has been received and your seat is confirmed. Check your inbox — a welcome email with your dashboard access link is on its way within the next few minutes.
+      </p>
+
+      <!-- What's next -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.75rem;text-align:left;margin-bottom:2rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#00A896;font-weight:600;margin-bottom:1rem;">What Happens Next</div>
+        {[
+          { step:"1", title:"Check your email",              desc:"Welcome email with dashboard access arriving within minutes."            },
+          { step:"2", title:"Set up your profile",           desc:"Log in and complete your profile to appear in the cohort directory."    },
+          { step:"3", title:"Pre-reading for Module 1",      desc:"Module 1 resources will be available in your dashboard one week before start." },
+          { step:"4", title:"First live session",            desc:`${course.dates.split('–')[0].trim()} — Join Dr. ${instructor.name.split(' ').pop()} on Zoom for Module 1.` },
+        ].map(s => (
+          <div style="display:flex;gap:14px;margin-bottom:1.25rem;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#0B1C3D;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#C9922A;flex-shrink:0;">{s.step}</div>
+            <div>
+              <div style="font-size:14px;font-weight:600;color:#0B1C3D;margin-bottom:2px;">{s.title}</div>
+              <div style="font-size:13px;color:#4A5568;line-height:1.5;">{s.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="/login" style="background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 28px;border-radius:2px;text-decoration:none;">Access My Dashboard</a>
+        <a href="/" style="background:transparent;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:12px 24px;border:1.5px solid #0B1C3D;border-radius:2px;text-decoration:none;">Back to Home</a>
+      </div>
+
+      <p style="font-size:12px;color:#9CA3AF;margin-top:1.5rem;">
+        Questions? Email <a href={`mailto:${SITE.email}`} style="color:#C9922A;text-decoration:none;font-weight:600;">{SITE.email}</a>
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

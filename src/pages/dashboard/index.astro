@@ -1,0 +1,184 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { MODULES, SITE } from '../../data/site';
+import { DEMO_USER, COHORT_STATS } from '../../data/mock';
+const { course, instructor } = SITE;
+
+const participant = DEMO_USER || { name: "Participant", firstName: "Participant", cohort: "Cohort 1", country: "Kenya", progress: 30 };
+const completedModules = [1];
+const nextSession = { date: "Tuesday, 8 July 2026", time: "4:00 PM WAT / 5:00 PM EAT / 3:00 PM GMT", module: "Module 2: Innovation & Entrepreneurship", zoomLink: "#" };
+---
+<DashboardLayout title="Dashboard — GHO Academy" activeNav="dashboard">
+
+  <!-- Welcome bar -->
+  <div style="background:#0B1C3D;border-radius:6px;padding:1.5rem 2rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Welcome back</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;text-transform:uppercase;">{participant.firstName}</h1>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;">{course.cohort} · {participant.country}</div>
+    </div>
+    <div style="display:flex;gap:1rem;">
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:0.875rem 1.25rem;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#C9922A;line-height:1;">{completedModules.length}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Complete</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:0.875rem 1.25rem;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#00A896;line-height:1;">{MODULES.length - completedModules.length}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Remaining</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:0.875rem 1.25rem;text-align:center;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1;">{participant.progress}%</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Progress</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span style="font-size:13px;font-weight:600;color:#0B1C3D;">Course Completion</span>
+      <span style="font-size:13px;color:#4A5568;">{participant.progress}% · {completedModules.length} of {MODULES.length} modules</span>
+    </div>
+    <div style="height:8px;background:#E8E5DE;border-radius:9999px;overflow:hidden;">
+      <div style={`height:100%;width:${participant.progress}%;background:linear-gradient(90deg,#00A896,#C9922A);border-radius:9999px;transition:width 0.5s;`}></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:#4A5568;">
+      <span>Started</span>
+      <span>Certificate unlocks at 75%</span>
+      <span>Complete</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 320px;gap:1.5rem;">
+
+    <!-- Left column -->
+    <div style="display:grid;gap:1.5rem;">
+
+      <!-- Next session card -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;">
+        <div style="background:#0B1C3D;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#00A896;font-weight:600;margin-bottom:4px;">Next Live Session</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#fff;">{nextSession.module}</div>
+          </div>
+          <button id="zoom-btn" onclick="window.showToast('Zoom link will be active 15 minutes before the session.')" style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 18px;border-radius:2px;border:none;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:6px;">
+            <i class="ti ti-video" style="font-size:16px;"></i>Join Zoom
+          </button>
+        </div>
+        <div style="padding:1.25rem 1.5rem;display:flex;gap:2rem;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <i class="ti ti-calendar" style="font-size:16px;color:#C9922A;"></i>
+            <span style="font-size:13px;color:#1a1a2e;">{nextSession.date}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <i class="ti ti-clock" style="font-size:16px;color:#C9922A;"></i>
+            <span style="font-size:13px;color:#1a1a2e;">{nextSession.time}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <i class="ti ti-users" style="font-size:16px;color:#C9922A;"></i>
+            <span style="font-size:13px;color:#1a1a2e;">2-hour live session · All cohort</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module progress grid -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.5rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:#0B1C3D;text-transform:uppercase;">Course Modules</h2>
+          <a href="/dashboard/courses" style="font-size:13px;color:#00A896;text-decoration:none;font-weight:500;">View all →</a>
+        </div>
+        <div style="display:grid;gap:8px;">
+          {MODULES.map((mod, i) => {
+            const done    = completedModules.includes(i + 1);
+            const current = i + 1 === completedModules.length + 1;
+            const locked  = !done && !current;
+            return (
+              <a
+                href={locked ? '#' : `/dashboard/courses/module-${i+1}`}
+                style={`display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:4px;border:1px solid ${done ? 'rgba(0,168,150,0.2)' : current ? 'rgba(201,146,42,0.3)' : '#E8E5DE'};background:${done ? 'rgba(0,168,150,0.04)' : current ? 'rgba(201,146,42,0.04)' : '#fafaf9'};text-decoration:none;transition:background 0.15s;`}
+              >
+                <div style={`width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:${done ? '#00A896' : current ? '#C9922A' : '#E8E5DE'};`}>
+                  {done
+                    ? <i class="ti ti-check" style="font-size:13px;color:#fff;"></i>
+                    : <span style={`font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:${current ? '#fff' : '#4A5568'};`}>{mod.num}</span>
+                  }
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style={`font-size:13px;font-weight:600;color:${locked ? '#9CA3AF' : '#0B1C3D'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;`}>
+                    {mod.title}
+                    {mod.tag && <span style="margin-left:6px;font-size:10px;background:rgba(0,168,150,0.12);color:#00A896;padding:2px 6px;border-radius:2px;letter-spacing:0.5px;">{mod.tag}</span>}
+                  </div>
+                </div>
+                <div style={`font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:${done ? '#00A896' : current ? '#C9922A' : '#9CA3AF'};flex-shrink:0;`}>
+                  {done ? 'Done' : current ? 'Current' : 'Locked'}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div style="display:grid;gap:1.5rem;align-content:start;">
+
+      <!-- Certificate tracker -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#4A5568;font-weight:600;margin-bottom:0.75rem;">Certificate Status</div>
+        <div style="text-align:center;padding:1rem 0;">
+          <div style="width:80px;height:80px;border-radius:50%;background:#F5F3EE;border:4px solid #E8E5DE;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;">
+            <i class="ti ti-certificate" style="font-size:32px;color:#C9922A;"></i>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:#0B1C3D;margin-bottom:4px;">In Progress</div>
+          <div style="font-size:12px;color:#4A5568;">Attend 75% of sessions &amp; complete capstone to unlock</div>
+          <div style="margin-top:0.75rem;height:6px;background:#E8E5DE;border-radius:9999px;overflow:hidden;">
+            <div style={`height:100%;width:${participant.progress}%;background:linear-gradient(90deg,#00A896,#C9922A);`}></div>
+          </div>
+          <div style="font-size:11px;color:#4A5568;margin-top:4px;">{participant.progress}% / 75% required</div>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#4A5568;font-weight:600;margin-bottom:0.75rem;">Quick Links</div>
+        {[
+          { icon:"ti-download",   label:"Download pre-reads (Module 2)",  href:"/dashboard/resources" },
+          { icon:"ti-calendar",   label:"Full session schedule",           href:"/dashboard/schedule"  },
+          { icon:"ti-users",      label:"Cohort community",               href:"/dashboard/community" },
+          { icon:"ti-user-circle",label:"Update my profile",              href:"/dashboard/profile"   },
+        ].map(l => (
+          <a href={l.href} style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #F5F3EE;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#00A896'" onmouseout="this.style.color=''">
+            <i class={`ti ${l.icon}`} style="font-size:16px;color:#C9922A;flex-shrink:0;"></i>
+            <span style="font-size:13px;color:#0B1C3D;">{l.label}</span>
+            <i class="ti ti-chevron-right" style="font-size:14px;color:#E8E5DE;margin-left:auto;"></i>
+          </a>
+        ))}
+      </div>
+
+      <!-- Instructor contact -->
+      <div style="background:#0B1C3D;border-radius:6px;padding:1.25rem;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;">
+          <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;">LB</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#fff;">{instructor.name}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);">Course Lead</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:0.75rem;">Have a course-related question? Send a message and receive a reply within 48 hours.</p>
+        <a href={`mailto:${SITE.email}?subject=GHO Academy Question — Cohort 1`} style="display:block;background:rgba(201,146,42,0.15);color:#C9922A;font-size:13px;font-weight:600;padding:9px;text-align:center;border-radius:2px;text-decoration:none;border:1px solid rgba(201,146,42,0.3);">Send a Message</a>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  document.querySelectorAll('a[href="#"]').forEach(a => {
+    a.addEventListener('click', (e) => { e.preventDefault(); });
+  });
+</script>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns:1fr 320px"] { grid-template-columns: 1fr !important; }
+  }
+</style>

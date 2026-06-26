@@ -1,0 +1,68 @@
+---
+import { MODULES } from '../../data/site';
+---
+<section id="curriculum" style="background:#0B1C3D;padding:5rem 1.5rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">What You'll Learn</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;margin-bottom:1rem;">10 Core Themes</h2>
+      <p style="font-size:15px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto;">
+        Each module is a 2-hour live session combining expert instruction, peer discussion, case analysis, and real-world application.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.05);">
+      {MODULES.map((m, i) => (
+        <div
+          style="background:#0B1C3D;padding:1.25rem 1.5rem;display:flex;align-items:flex-start;gap:1rem;transition:background 0.2s;cursor:default;"
+          onmouseover="this.style.background='rgba(0,168,150,0.07)'"
+          onmouseout="this.style.background='#0B1C3D'"
+        >
+          <span style={`font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:rgba(201,146,42,${i < 6 ? '0.2' : '0.35'});line-height:1;min-width:36px;`}>
+            {m.num}
+          </span>
+          <div style="flex:1;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;line-height:1.2;margin-bottom:4px;">
+              {m.title}
+              {m.tag && (
+                <span style="margin-left:8px;font-size:10px;background:rgba(0,168,150,0.15);color:#00A896;padding:2px 8px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;font-weight:600;vertical-align:middle;">
+                  {m.tag}
+                </span>
+              )}
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.45;">{m.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Capstone callout -->
+    <div style="margin-top:2rem;background:rgba(201,146,42,0.07);border:1px solid rgba(201,146,42,0.2);border-top:3px solid #C9922A;padding:2rem;border-radius:0 0 4px 4px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+        <div>
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C9922A;font-weight:600;margin-bottom:0.5rem;">Signature Experience</div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:0.75rem;">Stakeholder-Driven Capstone Project</h3>
+          <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;">Design and pitch a practical solution to a real global health challenge — presented to a professional audience of policymakers, funders, and implementers.</p>
+        </div>
+        <div>
+          {["Identify a pressing global health challenge","Develop an innovative, implementable solution","Receive structured faculty and peer feedback","Refine using systems thinking and implementation principles","Present to a professional stakeholder audience"].map(item => (
+            <div style="display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;">
+              <div style="width:20px;height:20px;background:#00A896;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <i class="ti ti-check" style="font-size:11px;color:#fff;"></i>
+              </div>
+              <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    #curriculum > div > div:nth-child(2) { grid-template-columns: 1fr !important; }
+    #curriculum > div > div:last-child > div { grid-template-columns: 1fr !important; }
+  }
+</style>

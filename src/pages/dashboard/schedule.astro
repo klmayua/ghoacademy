@@ -1,0 +1,122 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { MODULES } from '../../data/site';
+
+const sessions = MODULES.map((m, i) => ({
+  num:    i + 1,
+  module: m,
+  date:   `${["Tue 8 Jul","Tue 15 Jul","Tue 22 Jul","Tue 29 Jul","Tue 5 Aug","Tue 12 Aug","Tue 19 Aug","Tue 26 Aug","Tue 2 Sep","Tue 9 Sep"][i]} 2026`,
+  time:   "16:00 WAT / 17:00 EAT / 15:00 GMT / 11:00 EST",
+  status: i === 0 ? 'done' : i === 1 ? 'next' : 'upcoming',
+  zoom:   "https://zoom.us/j/placeholder",
+}));
+---
+<DashboardLayout title="Schedule — GHO Academy" activeNav="schedule">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:4px;">Session Schedule</h1>
+      <p style="font-size:14px;color:#4A5568;">Cohort 1 · September – November 2026 · Every Tuesday</p>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <a href="https://calendar.google.com/calendar/r/eventedit" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#0B1C3D;font-size:13px;font-weight:600;padding:8px 14px;border:1.5px solid #E8E5DE;border-radius:3px;text-decoration:none;">
+        <i class="ti ti-calendar-plus" style="font-size:15px;color:#C9922A;"></i>Add to Google Calendar
+      </a>
+      <button id="ics-btn" style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#0B1C3D;font-size:13px;font-weight:600;padding:8px 14px;border:1.5px solid #E8E5DE;border-radius:3px;cursor:pointer;">
+        <i class="ti ti-download" style="font-size:15px;color:#C9922A;"></i>Download .ics
+      </button>
+    </div>
+  </div>
+
+  <!-- Timezone note -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-left:4px solid #00A896;border-radius:0 4px 4px 0;padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;">
+    <i class="ti ti-world" style="font-size:18px;color:#00A896;flex-shrink:0;"></i>
+    <div>
+      <div style="font-size:13px;font-weight:600;color:#0B1C3D;">All sessions run every Tuesday, 2 hours</div>
+      <div style="font-size:12px;color:#4A5568;">Times shown: WAT (West Africa) / EAT (East Africa) / GMT (UK) / EST (US East). Sessions are recorded and available within 24 hours.</div>
+    </div>
+  </div>
+
+  <!-- Sessions list -->
+  <div style="display:grid;gap:1rem;">
+    {sessions.map(s => (
+      <div style={`background:#fff;border:1px solid ${s.status==='done' ? 'rgba(0,168,150,0.2)' : s.status==='next' ? 'rgba(201,146,42,0.35)' : '#E8E5DE'};border-radius:6px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;`}>
+
+        <!-- Number indicator -->
+        <div style={`width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:${s.status==='done' ? '#00A896' : s.status==='next' ? '#C9922A' : '#E8E5DE'};`}>
+          {s.status === 'done'
+            ? <i class="ti ti-check" style="font-size:18px;color:#fff;"></i>
+            : <span style={`font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:${s.status==='next' ? '#fff' : '#9CA3AF'};`}>{s.num}</span>
+          }
+        </div>
+
+        <!-- Info -->
+        <div style="flex:1;min-width:200px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
+            <h3 style="font-size:15px;font-weight:600;color:#0B1C3D;">{s.module.title}</h3>
+            {s.status === 'next' && <span style="font-size:10px;background:rgba(201,146,42,0.12);color:#C9922A;padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Next Session</span>}
+          </div>
+          <div style="display:flex;gap:1.25rem;flex-wrap:wrap;">
+            <span style="font-size:13px;color:#4A5568;display:flex;align-items:center;gap:5px;">
+              <i class="ti ti-calendar" style="font-size:14px;color:#C9922A;"></i>{s.date}
+            </span>
+            <span style="font-size:13px;color:#4A5568;display:flex;align-items:center;gap:5px;">
+              <i class="ti ti-clock" style="font-size:14px;color:#C9922A;"></i>{s.time}
+            </span>
+          </div>
+        </div>
+
+        <!-- Action -->
+        <div style="flex-shrink:0;">
+          {s.status === 'done' ? (
+            <a href={`/dashboard/courses/module-${s.num}`} style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:#00A896;text-decoration:none;padding:8px 14px;border:1.5px solid rgba(0,168,150,0.25);border-radius:3px;background:rgba(0,168,150,0.04);">
+              <i class="ti ti-video" style="font-size:15px;"></i>Watch Recording
+            </a>
+          ) : s.status === 'next' ? (
+            <button onclick="window.showToast('Zoom link activates 15 minutes before the session.')" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:#0B1C3D;padding:8px 16px;background:#C9922A;border-radius:3px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px;text-transform:uppercase;border:none;cursor:pointer;">
+              <i class="ti ti-video" style="font-size:15px;"></i>Join Zoom
+            </button>
+          ) : (
+            <span style="font-size:13px;color:#C0BDB8;padding:8px 14px;border:1.5px solid #E8E5DE;border-radius:3px;display:inline-flex;align-items:center;gap:5px;">
+              <i class="ti ti-calendar-event" style="font-size:15px;"></i>Upcoming
+            </span>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Capstone -->
+  <div style="margin-top:1.5rem;background:#111827;border-radius:6px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:10px;color:#C9922A;text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:4px;">Final Assessment</div>
+      <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff;text-transform:uppercase;">Capstone Presentations</h3>
+      <div style="display:flex;align-items:center;gap:5px;font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;">
+        <i class="ti ti-calendar" style="font-size:14px;color:#C9922A;"></i>Week of Tue 16 Sep 2026 · Final live session
+      </div>
+    </div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.4);padding:8px 14px;border:1.5px solid rgba(255,255,255,0.1);border-radius:3px;">Stakeholder audience · Certificate ceremony</div>
+  </div>
+</DashboardLayout>
+
+<script>
+  document.getElementById('ics-btn')?.addEventListener('click', () => {
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//GHO Academy//Cohort 1//EN',
+      'BEGIN:VEVENT',
+      'SUMMARY:GHO Academy - Module 1 - Leadership & Systems Change',
+      'DTSTART:20260708T160000Z',
+      'DTEND:20260708T180000Z',
+      'DESCRIPTION:GHO Academy Cohort 1 Live Session',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([ics], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'gho-academy-cohort1-schedule.ics'; a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>

@@ -1,0 +1,46 @@
+---
+---
+<section id="about" style="background:#F5F3EE;padding:5rem 1.5rem;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+
+    <div>
+      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">What Is GHO Academy</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;margin-bottom:1.25rem;">
+        The Leadership Education<br />Global Health Was Missing
+      </h2>
+      <p style="font-size:15px;color:#4A5568;line-height:1.75;margin-bottom:1.25rem;">
+        The global health system produces brilliant technical experts. It rarely produces bold, strategic leaders capable of navigating power, mobilizing funding, influencing policy, and driving systemic change.
+      </p>
+      <p style="font-size:15px;color:#4A5568;line-height:1.75;margin-bottom:2rem;">
+        GHO Academy fills that gap. In 8 weeks, you gain the tools, frameworks, network, and mindset that 17 years of global health leadership taught Dr. Bain — compressed into the most practical executive course in the field.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+        {["Oxford-Affiliated Faculty","African-Led","AI-Integrated","Cohort-Based Live Learning","Stakeholder Capstone Project"].map(tag => (
+          <span style="font-size:12px;background:#0B1C3D;color:#fff;padding:5px 12px;border-radius:2px;font-weight:500;">{tag}</span>
+        ))}
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      {[
+        { num: "30–50",  label: "Cohort size",                  sub: "Intentionally small for impact"        },
+        { num: "10",     label: "Live modules",                  sub: "Each 2 hours with Dr. Bain"            },
+        { num: "Global", label: "Participant network",           sub: "Africa, UK, North America & beyond"    },
+        { num: "Real",   label: "Capstone outcomes",             sub: "Pitched to policymakers & funders"     },
+      ].map(c => (
+        <div style="background:#fff;border:1px solid #E8E5DE;padding:1.25rem;border-radius:4px;border-top:3px solid #C9922A;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:#0B1C3D;line-height:1;margin-bottom:4px;">{c.num}</div>
+          <div style="font-size:13px;font-weight:600;color:#0B1C3D;margin-bottom:2px;">{c.label}</div>
+          <div style="font-size:11px;color:#4A5568;">{c.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    #about > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    #about > div > div:last-child { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

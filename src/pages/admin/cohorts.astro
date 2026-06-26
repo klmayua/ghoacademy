@@ -1,0 +1,114 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+import { MODULES, SITE } from '../../data/site';
+import { COHORT_STATS, SESSION_SCHEDULE } from '../../data/mock';
+---
+<AdminLayout title="Cohorts — GHO Academy Admin" activeNav="cohorts">
+
+  <div style="display:grid;grid-template-columns:1fr 340px;gap:1.5rem;">
+    <div>
+      <!-- Cohort 1 card -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;margin-bottom:1.25rem;">
+        <div style="background:#0B1C3D;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-size:9px;color:#00A896;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:4px;">Active Cohort</div>
+            <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;text-transform:uppercase;">{SITE.course.cohort}</h2>
+            <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:2px;">{SITE.course.dates} · {SITE.course.delivery}</div>
+          </div>
+          <span style="background:rgba(0,168,150,0.15);color:#00A896;font-size:11px;font-weight:700;padding:5px 12px;border-radius:2px;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(0,168,150,0.3);">Live</span>
+        </div>
+        <div style="padding:1.25rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0.875rem;border-bottom:1px solid #E8E5DE;">
+          {[
+            {label:"Enrolled",    val:"18"},
+            {label:"Capacity",    val:`${SITE.course.capacity}`},
+            {label:"Completion",  val:"100%"},
+            {label:"Sessions Done",val:"1"},
+          ].map(s => (
+            <div style="text-align:center;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#0B1C3D;line-height:1;">{s.val}</div>
+              <div style="font-size:11px;color:#9CA3AF;margin-top:2px;">{s.label}</div>
+            </div>
+          ))}
+        </div>
+        <!-- Session schedule mini grid -->
+        <div style="padding:1.25rem;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:#6B7280;margin-bottom:0.875rem;">Session Schedule</div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px;">
+            {MODULES.map((m,i) => {
+              const s = i===0 ? 'done' : i===1 ? 'next' : 'upcoming';
+              return (
+                <div style={`padding:0.5rem;border-radius:3px;text-align:center;border:1px solid ${s==='done'?'rgba(0,168,150,0.2)':s==='next'?'rgba(201,146,42,0.3)':'#E8E5DE'};background:${s==='done'?'rgba(0,168,150,0.05)':s==='next'?'rgba(201,146,42,0.05)':'#FAFAF9'};`}>
+                  <div style={`font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:${s==='done'?'#00A896':s==='next'?'#C9922A':'#D1D5DB'};`}>{m.num}</div>
+                  <div style="font-size:9px;color:#9CA3AF;margin-top:1px;">{s==='done'?'Done':s==='next'?'Next':'—'}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <!-- Future cohorts -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:#6B7280;margin-bottom:1rem;">Future Cohorts — Planning</div>
+        <div style="display:grid;gap:0.875rem;">
+          {[
+            {label:"Cohort 2",   dates:"Jan – Mar 2027",   status:"Planning",    target:50 },
+            {label:"Cohort 3",   dates:"May – Jul 2027",   status:"Concept",     target:75 },
+          ].map(c => (
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;background:#F5F3EE;border:1px solid #E8E5DE;border-radius:4px;flex-wrap:wrap;gap:0.75rem;">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:#0B1C3D;">{c.label}</div>
+                <div style="font-size:12px;color:#9CA3AF;">{c.dates} · Target {c.target} seats</div>
+              </div>
+              <span style="font-size:11px;font-weight:600;color:#4A5568;background:#E8E5DE;padding:3px 10px;border-radius:2px;">{c.status}</span>
+            </div>
+          ))}
+          <button onclick="window.showToast('Cohort planning workflow coming in next release.')" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:0.875rem;border:2px dashed #E8E5DE;border-radius:4px;background:transparent;cursor:pointer;font-size:13px;color:#9CA3AF;transition:border-color 0.15s;width:100%;" onmouseover="this.style.borderColor='#C9922A';this.style.color='#C9922A'" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#9CA3AF'">
+            <i class="ti ti-plus" style="font-size:16px;"></i>Plan New Cohort
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: quick actions -->
+    <div style="display:grid;gap:1rem;align-content:start;">
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:#6B7280;margin-bottom:1rem;">Quick Actions</div>
+        {[
+          {icon:"ti-mail",          label:"Send cohort announcement",  color:"#0B1C3D", toast:"Draft announcement opened in email client."  },
+          {icon:"ti-calendar-plus", label:"Add session to schedule",   color:"#0B1C3D", toast:"Session added to schedule."                   },
+          {icon:"ti-upload",        label:"Upload module materials",   color:"#0B1C3D", toast:"Upload materials panel coming in next release."},
+          {icon:"ti-certificate",   label:"Issue certificates",        color:"#C9922A", toast:"Certificates will be issued after Module 10." },
+          {icon:"ti-download",      label:"Export cohort report",      color:"#0B1C3D", toast:"Cohort report export triggered."              },
+        ].map(a => (
+          <button onclick={`window.showToast('${a.toast}')`} style="display:flex;align-items:center;gap:10px;width:100%;padding:0.875rem;background:#F5F3EE;border:1px solid #E8E5DE;border-radius:4px;cursor:pointer;font-size:13px;font-weight:500;color:#0B1C3D;margin-bottom:6px;transition:all 0.15s;" onmouseover="this.style.background='#EFF7F6';this.style.borderColor='#00A896'" onmouseout="this.style.background='#F5F3EE';this.style.borderColor='#E8E5DE'">
+            <i class={`ti ${a.icon}`} style={`font-size:17px;color:${a.color};`}></i>{a.label}
+          </button>
+        ))}
+      </div>
+
+      <div style="background:#0B1C3D;border-radius:6px;padding:1.25rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;color:#C9922A;margin-bottom:0.75rem;">GTM Status</div>
+        {[
+          {label:"LinkedIn posts scheduled",  done:true},
+          {label:"Early Bird seats allocated", done:true},
+          {label:"Email sequences live",       done:true},
+          {label:"Partner outreach sent",      done:false},
+          {label:"Paid LinkedIn campaign",     done:false},
+        ].map(t => (
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+            <i class={`ti ${t.done?'ti-circle-check':'ti-circle'}`} style={`font-size:16px;color:${t.done?'#00A896':'rgba(255,255,255,0.2)'};`}></i>
+            <span style={`font-size:12px;color:${t.done?'rgba(255,255,255,0.75)':'rgba(255,255,255,0.35)'};`}>{t.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<style>
+  @media (max-width: 1000px) {
+    div[style*="grid-template-columns:1fr 340px"] { grid-template-columns: 1fr !important; }
+    div[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>

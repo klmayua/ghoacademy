@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/shared/Nav.astro';
+import Footer from '../components/shared/Footer.astro';
+import { SITE } from '../data/site';
+---
+<BaseLayout title="Terms of Enrolment — GHO Academy">
+  <Nav />
+  <section style="background:#F5F3EE;padding:4rem 1.5rem;min-height:70vh;">
+    <div style="max-width:760px;margin:0 auto;">
+      <div style="margin-bottom:2.5rem;">
+        <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">Legal</p>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,48px);font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:0.5rem;">Terms of Enrolment</h1>
+        <p style="font-size:13px;color:#9CA3AF;">Last updated: June 2026 · GHO Academy / Global Health Otherwise</p>
+      </div>
+
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:2.5rem;line-height:1.75;">
+        {[
+          { title:"1. Enrolment & Payment",
+            body:`By completing the registration form and payment, you secure a seat in GHO Academy ${SITE.course.cohort}. Places are confirmed only upon receipt of payment in full. Early Bird pricing (US$397) is available to the first 20 registrants. Standard pricing (US$597) applies thereafter. Institutional pricing is available on request at ${SITE.email}.`
+          },
+          { title:"2. Refund Policy",
+            body:"Full refunds are available up to 14 days before the course start date. A 50% refund is available within 7 days of the course start date. No refunds are issued after the second live session. In exceptional circumstances (medical emergency, bereavement), GHO Academy will consider deferral to a future cohort at its discretion."
+          },
+          { title:"3. Attendance & Certificate",
+            body:"A Certificate of Completion is issued to participants who: (a) attend at least 75% of live sessions, or view recordings within 72 hours of sessions they miss; and (b) submit a Capstone Project. Certificates are issued digitally within 14 days of the final session."
+          },
+          { title:"4. Code of Conduct",
+            body:"Participants agree to engage respectfully with fellow cohort members, faculty, and guests. Harassment, discrimination, or disruptive behaviour will result in removal from the course without refund. All discussion content is confidential to the cohort unless explicitly designated as shareable."
+          },
+          { title:"5. Intellectual Property",
+            body:"All course materials, recordings, slides, and content remain the intellectual property of GHO Academy and Global Health Otherwise. Participants may use materials for personal learning only. Commercial reproduction, sharing, or distribution without written permission is prohibited."
+          },
+          { title:"6. Recording & Privacy",
+            body:"Sessions may be recorded for participant access only. Participants may not record sessions independently without faculty consent. Participant names and likenesses may appear in cohort recordings. See our Privacy Policy for full data handling details."
+          },
+          { title:"7. Programme Changes",
+            body:"GHO Academy reserves the right to make reasonable adjustments to session dates, times, and content with 7 days' notice. In the event of instructor unavailability, a qualified substitute will be provided. Significant programme changes will be communicated by email."
+          },
+          { title:"8. Governing Law",
+            body:`These terms are governed by the laws of the Federal Republic of Cameroon (registered home of Global Health Otherwise). Disputes shall be resolved through good-faith negotiation. Contact: ${SITE.email}`
+          },
+        ].map(section => (
+          <div style="margin-bottom:2rem;">
+            <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:0.75rem;">{section.title}</h2>
+            <p style="font-size:14px;color:#4A5568;">{section.body}</p>
+          </div>
+        ))}
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid #E8E5DE;">
+          <p style="font-size:13px;color:#9CA3AF;">Questions about these terms? Contact <a href={`mailto:${SITE.email}`} style="color:#C9922A;text-decoration:none;">{SITE.email}</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>

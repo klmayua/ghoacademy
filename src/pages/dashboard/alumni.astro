@@ -1,0 +1,67 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+---
+<DashboardLayout title="Alumni Network — GHO Academy" activeNav="alumni">
+
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#0B1C3D,#112244);border-radius:6px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-40%;right:-10%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,168,150,0.08),transparent 70%);pointer-events:none;"></div>
+    <div style="position:relative;z-index:1;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#C9922A;font-weight:600;margin-bottom:6px;">GHO Academy · Cohort 1</div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:8px;">Alumni Network</h1>
+      <p style="font-size:14px;color:rgba(255,255,255,0.6);max-width:520px;">Your certificate unlocks permanent access to the GHO Academy alumni network — a global community of global health leaders across every cohort.</p>
+      <div style="margin-top:1.25rem;padding:1rem;background:rgba(201,146,42,0.08);border:1px solid rgba(201,146,42,0.2);border-radius:4px;display:inline-flex;align-items:center;gap:10px;">
+        <i class="ti ti-lock" style="font-size:18px;color:#C9922A;"></i>
+        <div>
+          <div style="font-size:13px;color:#fff;font-weight:500;">Alumni access unlocks on certificate issuance</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.45);">Complete 75% of sessions and submit your capstone to receive your certificate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview cards -->
+  <div style="opacity:0.5;pointer-events:none;">
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1rem;">Alumni Directory Preview</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;">
+      {[
+        { initials:"AO", name:"Amara Okonkwo",   cohort:"Cohort 1",  role:"Public Health Lead",  org:"WHO Nigeria",          country:"Nigeria"  },
+        { initials:"SK", name:"Samuel Kipkoech", cohort:"Cohort 1",  role:"Research Scientist",   org:"KEMRI",                country:"Kenya"    },
+        { initials:"NM", name:"Nadia Mukasine",  cohort:"Cohort 1",  role:"Policy Advisor",       org:"Rwanda Ministry",      country:"Rwanda"   },
+      ].map(a => (
+        <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;text-align:center;">
+          <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#0B1C3D,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:#fff;margin:0 auto 0.75rem;">{a.initials}</div>
+          <div style="font-size:14px;font-weight:600;color:#0B1C3D;">{a.name}</div>
+          <div style="font-size:12px;color:#4A5568;margin-top:2px;">{a.role}</div>
+          <div style="font-size:11px;color:#9CA3AF;">{a.org} · {a.country}</div>
+          <div style="font-size:10px;background:rgba(0,168,150,0.08);color:#00A896;padding:2px 8px;border-radius:2px;display:inline-block;margin-top:6px;">{a.cohort}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Features preview -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      {[
+        { icon:"ti-search",         title:"Searchable Directory",       desc:"Find alumni by country, expertise, cohort, and organisation"         },
+        { icon:"ti-users",          title:"Cohort Reunions",            desc:"Annual virtual reunions with all GHO Academy cohorts"               },
+        { icon:"ti-book",           title:"Exclusive Content Library",  desc:"Advanced case studies, recordings, and masterclasses"               },
+        { icon:"ti-gift",           title:"Alumni Referral Programme",  desc:"Earn discount codes by referring colleagues to future cohorts"       },
+      ].map(f => (
+        <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;display:flex;gap:12px;align-items:flex-start;">
+          <i class={`ti ${f.icon}`} style="font-size:22px;color:#C9922A;flex-shrink:0;margin-top:2px;"></i>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#0B1C3D;margin-bottom:4px;">{f.title}</div>
+            <div style="font-size:13px;color:#4A5568;line-height:1.5;">{f.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</DashboardLayout>
+
+<style>
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+    div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+</style>

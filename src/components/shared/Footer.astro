@@ -1,0 +1,90 @@
+---
+import { SITE } from '../../data/site';
+---
+<footer style="background:#060f1e;">
+  <!-- Top bar -->
+  <div style="border-top:3px solid;border-image:linear-gradient(90deg,#C9922A,#00A896,#C9922A) 1;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;padding:3rem 1.5rem 2rem;">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;">
+
+      <!-- Brand -->
+      <div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:0.5px;margin-bottom:4px;">GHO Academy</div>
+        <div style="font-size:11px;color:#C9922A;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">Global Health Otherwise</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;max-width:280px;margin-bottom:1.5rem;">
+          Executive education for the next generation of global health leaders. Beyond degrees — teaching leadership, innovation, influence, and impact.
+        </p>
+        <div style="display:flex;gap:10px;">
+          {[
+            { href: SITE.social.linkedin, icon: "ti-brand-linkedin",  label: "LinkedIn" },
+            { href: SITE.social.twitter,  icon: "ti-brand-twitter",   label: "Twitter"  },
+            { href: SITE.social.youtube,  icon: "ti-brand-youtube",   label: "YouTube"  },
+            { href: SITE.social.whatsapp, icon: "ti-brand-whatsapp",  label: "WhatsApp" },
+          ].map(s => (
+            <a href={s.href} aria-label={s.label} style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.5);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(201,146,42,0.15)';this.style.color='#C9922A'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='rgba(255,255,255,0.5)'">
+              <i class={`ti ${s.icon}`} style="font-size:16px;"></i>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Course -->
+      <div>
+        <div style="font-size:11px;color:#00A896;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">The Course</div>
+        {["About the Course","Curriculum","Instructor","Capstone Project","Pricing","Apply Now"].map(l => (
+          <a href={`#${l.toLowerCase().replace(/\s+/g,'-')}`} style="display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:4px 0;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l}</a>
+        ))}
+      </div>
+
+      <!-- Ecosystem -->
+      <div>
+        <div style="font-size:11px;color:#00A896;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">Ecosystem</div>
+        {[
+          { label: "Global Health Otherwise", href: SITE.links.gho       },
+          { label: "Dr. Bain's Website",      href: SITE.links.drBain    },
+          { label: "Career Café",             href: SITE.links.careerCafe},
+          { label: "GHO Bootcamp",            href: SITE.links.gho + "/gho-reimagined-bootcamp-2/" },
+          { label: "GHO Mentorship",          href: SITE.links.gho + "/global-public-health-mentorship/" },
+        ].map(l => (
+          <a href={l.href} style="display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:4px 0;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l.label}</a>
+        ))}
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div style="font-size:11px;color:#00A896;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">Contact</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.8;">
+          <div><i class="ti ti-mail" style="font-size:14px;margin-right:6px;color:#C9922A;"></i>{SITE.email}</div>
+          <div style="margin-top:8px;"><i class="ti ti-world" style="font-size:14px;margin-right:6px;color:#C9922A;"></i>globalhealthotherwise.com</div>
+        </div>
+        <div style="margin-top:1.5rem;padding:1rem;background:rgba(201,146,42,0.08);border:1px solid rgba(201,146,42,0.2);border-radius:4px;">
+          <div style="font-size:11px;color:#C9922A;letter-spacing:1px;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Cohort 1</div>
+          <div style="font-size:13px;color:#fff;font-weight:500;">Sep – Nov 2026</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;">Applications open now</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.2);">
+        © 2026 GHO Academy · Global Health Otherwise · All rights reserved
+      </div>
+      <div style="display:flex;gap:1.5rem;">
+        {["Privacy Policy","Terms of Use","Cookie Policy"].map(l => (
+          <a href="#" style="font-size:12px;color:rgba(255,255,255,0.2);text-decoration:none;">{l}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (max-width: 768px) {
+    footer > div:last-child > div:first-child { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 480px) {
+    footer > div:last-child > div:first-child { grid-template-columns: 1fr !important; }
+  }
+</style>

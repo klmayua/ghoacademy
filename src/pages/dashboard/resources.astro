@@ -1,0 +1,94 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { MODULES } from '../../data/site';
+---
+<DashboardLayout title="Resources — GHO Academy" activeNav="resources">
+
+  <div style="margin-bottom:1.5rem;">
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:4px;">Resources Library</h1>
+    <p style="font-size:14px;color:#4A5568;">All course materials, slides, readings, and recordings in one place.</p>
+  </div>
+
+  <!-- Filters -->
+  <div id="filter-bar" style="display:flex;gap:8px;margin-bottom:1.5rem;flex-wrap:wrap;">
+    {["All","Slides","Pre-Readings","Recordings","Assignments","Templates"].map((f,i) => (
+      <button data-filter={f} style={`font-size:13px;padding:7px 14px;border-radius:3px;border:1.5px solid ${i===0?'#0B1C3D':'#E8E5DE'};background:${i===0?'#0B1C3D':'#fff'};color:${i===0?'#fff':'#4A5568'};cursor:pointer;font-weight:500;`}>
+        {f}
+      </button>
+    ))}
+  </div>
+
+  <!-- Module resources -->
+  {MODULES.slice(0,3).map((m, i) => (
+    <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;margin-bottom:1rem;">
+      <div style="background:#F5F3EE;padding:0.875rem 1.25rem;display:flex;align-items:center;gap:10px;border-bottom:1px solid #E8E5DE;">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#C9922A;">{m.num}</span>
+        <span style="font-size:14px;font-weight:600;color:#0B1C3D;">{m.title}</span>
+        {i > 0 && <span style="margin-left:auto;font-size:11px;color:#9CA3AF;"><i class="ti ti-lock" style="font-size:12px;"></i> Locked</span>}
+      </div>
+      <div style="padding:0.875rem 1.25rem;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        {[
+          { icon:"ti-presentation", label:"Slides PDF",          size:"2.4 MB",     avail: i===0 },
+          { icon:"ti-book",         label:"Reading List",         size:"8 articles", avail: i===0 },
+          { icon:"ti-video",        label:"Recording",            size:"1h 58m",     avail: i===0 },
+          { icon:"ti-file-text",    label:"Assignment Brief",     size:"PDF",        avail: i===0 },
+        ].map(r => (
+          <div style={`padding:0.875rem;border:1px solid ${r.avail?'#E8E5DE':'#F5F3EE'};border-radius:4px;background:${r.avail?'#fff':'#FAFAF9'};text-align:center;`}>
+            <i class={`ti ${r.icon}`} style={`font-size:22px;color:${r.avail?'#C9922A':'#D1CFC9'};display:block;margin-bottom:6px;`}></i>
+            <div style={`font-size:12px;font-weight:500;color:${r.avail?'#0B1C3D':'#9CA3AF'};margin-bottom:2px;`}>{r.label}</div>
+            <div style="font-size:11px;color:#9CA3AF;margin-bottom:8px;">{r.size}</div>
+            {r.avail
+              ? <button onclick={`window.showToast('Downloading ${r.label}...')`} style="font-size:11px;background:#0B1C3D;color:#fff;padding:4px 10px;border-radius:2px;border:none;cursor:pointer;display:inline-block;">Download</button>
+              : <span style="font-size:11px;color:#C0BDB8;display:inline-flex;align-items:center;gap:3px;"><i class="ti ti-lock" style="font-size:11px;"></i>Locked</span>
+            }
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+
+  <!-- Global resources -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;">
+    <div style="background:#0B1C3D;padding:0.875rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <span style="font-size:14px;font-weight:600;color:#fff;">Course-Wide Resources</span>
+    </div>
+    <div style="padding:1.25rem;display:grid;gap:8px;">
+      {[
+        { icon:"ti-file-text",  label:"Course Handbook & Syllabus",         size:"PDF · 12 pages",      avail:true  },
+        { icon:"ti-certificate",label:"Certificate Requirements Guide",      size:"PDF · 4 pages",       avail:true  },
+        { icon:"ti-users",      label:"Cohort Directory (with LinkedIn)",    size:"PDF · Updated weekly",avail:true  },
+        { icon:"ti-presentation",label:"Capstone Project Briefing Template", size:"PPTX · 8 slides",    avail:false },
+      ].map(r => (
+        <div style="display:flex;align-items:center;gap:12px;padding:0.875rem;border-radius:4px;background:#F5F3EE;border:1px solid #E8E5DE;">
+          <i class={`ti ${r.icon}`} style={`font-size:20px;color:${r.avail?'#C9922A':'#D1CFC9'};flex-shrink:0;`}></i>
+          <div style="flex:1;">
+            <div style={`font-size:13px;font-weight:500;color:${r.avail?'#0B1C3D':'#9CA3AF'};`}>{r.label}</div>
+            <div style="font-size:11px;color:#9CA3AF;">{r.size}</div>
+          </div>
+          {r.avail
+            ? <button onclick={`window.showToast('Downloading ${r.label}...')`} style="font-size:12px;font-weight:600;color:#00A896;padding:6px 12px;border:1.5px solid rgba(0,168,150,0.25);border-radius:3px;background:transparent;cursor:pointer;">Download</button>
+            : <span style="font-size:12px;color:#C0BDB8;display:flex;align-items:center;gap:3px;"><i class="ti ti-lock" style="font-size:13px;"></i>Locked</span>
+          }
+        </div>
+      ))}
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  document.getElementById('filter-bar')?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('button[data-filter]') as HTMLButtonElement;
+    if (!btn) return;
+    document.querySelectorAll('#filter-bar button').forEach((b: Element) => {
+      const el = b as HTMLButtonElement;
+      el.style.background = '#fff'; el.style.color = '#4A5568'; el.style.border = '1.5px solid #E8E5DE';
+    });
+    btn.style.background = '#0B1C3D'; btn.style.color = '#fff'; btn.style.border = '1.5px solid #0B1C3D';
+  });
+</script>
+
+<style>
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>

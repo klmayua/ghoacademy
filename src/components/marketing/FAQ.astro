@@ -1,0 +1,31 @@
+---
+import { FAQS, SITE } from '../../data/site';
+---
+<section id="faq" style="background:#0B1C3D;padding:5rem 1.5rem;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">Got Questions?</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;">Frequently Asked Questions</h2>
+    </div>
+    <div>
+      {FAQS.map((faq) => (
+        <div style="border-bottom:1px solid rgba(255,255,255,0.07);">
+          <button data-faq-btn style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;background:none;border:none;cursor:pointer;text-align:left;gap:1rem;">
+            <span style="font-size:15px;font-weight:500;color:#fff;line-height:1.4;">{faq.q}</span>
+            <i data-faq-icon class="ti ti-plus" style="font-size:18px;color:#C9922A;flex-shrink:0;transition:transform 0.25s;"></i>
+          </button>
+          <div style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;">
+            <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;padding-bottom:1.25rem;">{faq.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="margin-top:3rem;text-align:center;">
+      <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:1rem;">Still have questions?</p>
+      <a href={`mailto:${SITE.email}?subject=GHO Academy Enquiry`} style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#C9922A;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;border:1.5px solid rgba(201,146,42,0.5);border-radius:2px;text-decoration:none;">
+        <i class="ti ti-mail" style="font-size:17px;"></i>
+        Email Us
+      </a>
+    </div>
+  </div>
+</section>

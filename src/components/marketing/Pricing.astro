@@ -1,0 +1,89 @@
+---
+import { SITE } from '../../data/site';
+const { course } = SITE;
+---
+<section id="pricing" style="background:#F5F3EE;padding:5rem 1.5rem;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">Investment</p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;margin-bottom:1rem;">Course Pricing</h2>
+      <p style="font-size:15px;color:#4A5568;max-width:480px;margin:0 auto;">A fraction of the cost of comparable executive education at Oxford, Stellenbosch, or Saïd Business School — with the same calibre of instruction.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:3rem;">
+
+      <!-- Early Bird -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:2rem;position:relative;">
+        <div style="position:absolute;top:-12px;left:1.5rem;background:#00A896;color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:2px;">Limited Seats</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#4A5568;font-weight:600;margin-bottom:0.5rem;margin-top:0.5rem;">Early Bird</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#0B1C3D;line-height:1;margin-bottom:4px;">$397</div>
+        <div style="font-size:12px;color:#4A5568;margin-bottom:1.5rem;">First 20 registrations only</div>
+        {["Full 8-week course access","10 live sessions with Dr. Bain","Capstone project participation","Certificate of completion","Course materials & recordings","Alumni network access"].map(f => (
+          <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;">
+            <i class="ti ti-circle-check" style="font-size:15px;color:#00A896;flex-shrink:0;"></i>
+            <span style="font-size:13px;color:#1a1a2e;">{f}</span>
+          </div>
+        ))}
+        <a href={course.stripeLink + "?priceId=early_bird"} style="display:block;margin-top:1.5rem;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px;text-align:center;border-radius:2px;text-decoration:none;">Apply — Early Bird</a>
+      </div>
+
+      <!-- Standard -->
+      <div style="background:#0B1C3D;border:2px solid #C9922A;border-radius:4px;padding:2rem;position:relative;transform:scale(1.03);">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#C9922A;color:#0B1C3D;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 16px;border-radius:2px;white-space:nowrap;">Most Popular</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#C9922A;font-weight:600;margin-bottom:0.5rem;margin-top:0.5rem;">Standard</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#fff;line-height:1;margin-bottom:4px;">$597</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:1.5rem;">Standard registration price</div>
+        {["Full 8-week course access","10 live sessions with Dr. Bain","Capstone project participation","Certificate of completion","Course materials & recordings","Alumni network access","Priority support from faculty"].map(f => (
+          <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;">
+            <i class="ti ti-circle-check" style="font-size:15px;color:#C9922A;flex-shrink:0;"></i>
+            <span style="font-size:13px;color:rgba(255,255,255,0.82);">{f}</span>
+          </div>
+        ))}
+        <a href={course.stripeLink + "?priceId=standard"} style="display:block;margin-top:1.5rem;background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px;text-align:center;border-radius:2px;text-decoration:none;">Register Now</a>
+      </div>
+
+      <!-- Institutional -->
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:2rem;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#4A5568;font-weight:600;margin-bottom:0.5rem;">Institutional</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;color:#0B1C3D;line-height:1;margin-bottom:4px;">Custom</div>
+        <div style="font-size:12px;color:#4A5568;margin-bottom:1.5rem;">3+ seats · Invoice available</div>
+        {["Group discount (3+ participants)","Institutional invoice / PO accepted","Custom onboarding for your team","Progress reporting for managers","All standard course features","Dedicated faculty Q&A slot"].map(f => (
+          <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center;">
+            <i class="ti ti-circle-check" style="font-size:15px;color:#00A896;flex-shrink:0;"></i>
+            <span style="font-size:13px;color:#1a1a2e;">{f}</span>
+          </div>
+        ))}
+        <a href={`mailto:${SITE.email}?subject=GHO Academy Institutional Enquiry`} style="display:block;margin-top:1.5rem;background:transparent;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px;text-align:center;border-radius:2px;text-decoration:none;border:1.5px solid #0B1C3D;">Contact for Quote</a>
+      </div>
+    </div>
+
+    <!-- Guarantee -->
+    <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:1.5rem 2rem;display:flex;gap:1.5rem;align-items:center;">
+      <i class="ti ti-shield-check" style="font-size:36px;color:#00A896;flex-shrink:0;"></i>
+      <div>
+        <div style="font-weight:600;color:#0B1C3D;margin-bottom:4px;">Refund Policy</div>
+        <p style="font-size:13px;color:#4A5568;line-height:1.6;">Full refund available up to 14 days before course start. 50% refund within 7 days of course start. We stand behind the quality of this programme — if it is not what we promised, we will make it right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Registration anchor section -->
+<section id="register" style="background:#C9922A;padding:5rem 1.5rem;text-align:center;">
+  <div style="max-width:700px;margin:0 auto;">
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,7vw,70px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;margin-bottom:0.75rem;">Secure Your Place.</h2>
+    <p style="font-size:16px;color:rgba(11,28,61,0.72);margin-bottom:2rem;">{course.dates} · {course.weeks} Weeks · {course.delivery} · Certificate of Completion</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <a href={course.stripeLink + "?priceId=early_bird"} style="background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:16px 40px;border-radius:2px;text-decoration:none;display:inline-block;">Apply Now — Early Bird $397</a>
+      <a href={`mailto:${SITE.email}?subject=GHO Academy Application — September 2026`} style="background:transparent;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:15px 28px;border:2px solid rgba(11,28,61,0.4);border-radius:2px;text-decoration:none;display:inline-block;">Request Info</a>
+    </div>
+    <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(11,28,61,0.55);font-weight:600;">Cohort 1 · Limited to {course.capacity} Participants · Closes When Full</p>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 768px) {
+    #pricing > div > div:nth-child(3) { grid-template-columns: 1fr !important; }
+    #pricing > div > div:nth-child(3) > div:nth-child(2) { transform: none !important; }
+  }
+</style>

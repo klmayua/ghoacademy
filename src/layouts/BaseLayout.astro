@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "GHO Academy — Global Public Health Leadership",
+  description = "8-week executive course in Global Public Health Innovation, Entrepreneurship & Leadership. Beyond Degrees. September 2026.",
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%230B1C3D' width='32' height='32' rx='4'/><text y='24' x='4' font-size='20' font-family='sans-serif' font-weight='900' fill='%23C9922A'>G</text></svg>" />
+</head>
+<body>
+  <slot />
+  <script>
+    // Sticky nav
+    const nav = document.getElementById('main-nav');
+    if (nav) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 80) {
+          nav.style.background = 'rgba(11,28,61,0.97)';
+          nav.style.backdropFilter = 'blur(8px)';
+        } else {
+          nav.style.background = '';
+          nav.style.backdropFilter = '';
+        }
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('[data-faq-btn]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const answer = btn.nextElementSibling as HTMLElement;
+        const icon   = btn.querySelector('[data-faq-icon]') as HTMLElement;
+        const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+        answer.style.maxHeight = isOpen ? '0px' : answer.scrollHeight + 'px';
+        if (icon) icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(45deg)';
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = (link as HTMLAnchorElement).getAttribute('href')!.slice(1);
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

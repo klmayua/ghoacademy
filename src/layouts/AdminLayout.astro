@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import Toast from '../components/shared/Toast.astro';
+interface Props { title?: string; activeNav?: string; }
+const { title = "Admin — GHO Academy", activeNav = "overview" } = Astro.props;
+const navItems = [
+  { id:"overview",     label:"Overview",       icon:"ti-layout-dashboard", href:"/admin"               },
+  { id:"participants", label:"Participants",    icon:"ti-users",            href:"/admin/participants"  },
+  { id:"cohorts",      label:"Cohorts",         icon:"ti-calendar-event",   href:"/admin/cohorts"       },
+  { id:"content",      label:"Content",         icon:"ti-book",             href:"/admin/content"       },
+  { id:"payments",     label:"Revenue",         icon:"ti-credit-card",      href:"/admin/revenue"       },
+  { id:"emails",       label:"Emails",          icon:"ti-mail",             href:"/admin/emails"        },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',sans-serif; background:#F0EEE9; color:#1a1a2e; display:flex; height:100vh; overflow:hidden; }
+    .sidebar { width:220px; background:#060f1e; display:flex; flex-direction:column; flex-shrink:0; }
+    .sidebar-logo { padding:1.125rem 1.125rem 0.875rem; border-bottom:1px solid rgba(255,255,255,0.05); }
+    .logo-name { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:800; color:#fff; }
+    .logo-tag  { font-size:9px; color:#C9922A; letter-spacing:2px; text-transform:uppercase; font-weight:600; }
+    .admin-badge { font-size:9px; background:rgba(201,146,42,0.15); color:#C9922A; padding:2px 7px; border-radius:2px; font-weight:600; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-top:5px; border:1px solid rgba(201,146,42,0.2); }
+    nav a { display:flex; align-items:center; gap:9px; padding:9px 16px; font-size:13px; color:rgba(255,255,255,0.5); text-decoration:none; border-left:3px solid transparent; transition:all 0.15s; }
+    nav a:hover { color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.03); }
+    nav a.active { color:#C9922A; background:rgba(201,146,42,0.08); border-left-color:#C9922A; }
+    nav i { font-size:17px; }
+    nav { flex:1; padding:1rem 0; overflow-y:auto; }
+    .sidebar-foot { padding:0.875rem 1rem; border-top:1px solid rgba(255,255,255,0.05); }
+    .sidebar-foot a { display:flex; align-items:center; gap:7px; font-size:12px; color:rgba(255,255,255,0.3); text-decoration:none; padding:6px 8px; border-radius:3px; }
+    .sidebar-foot a:hover { color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.04); }
+    .main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+    .topbar { background:#fff; border-bottom:1px solid #E8E5DE; height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 1.5rem; flex-shrink:0; }
+    .topbar-title { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; color:#0B1C3D; text-transform:uppercase; letter-spacing:0.5px; }
+    .content { flex:1; overflow-y:auto; padding:1.5rem; }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-name">GHO Academy</div>
+      <div class="logo-tag">Global Health Otherwise</div>
+      <div class="admin-badge">Admin Panel</div>
+    </div>
+    <nav>
+      {navItems.map(item => (
+        <a href={item.href} class={activeNav === item.id ? 'active' : ''}>
+          <i class={`ti ${item.icon}`}></i>{item.label}
+        </a>
+      ))}
+    </nav>
+    <div class="sidebar-foot">
+      <a href="/dashboard"><i class="ti ti-arrow-left"></i>Student View</a>
+      <a href="/logout"><i class="ti ti-logout"></i>Sign Out</a>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <span class="topbar-title">{title.split('—')[0].trim()}</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;">A</div>
+      </div>
+    </header>
+    <main class="content"><slot /></main>
+  </div>
+  <Toast />
+</body>
+</html>
