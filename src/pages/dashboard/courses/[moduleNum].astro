@@ -74,7 +74,7 @@ const resources = [
               <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0d1520,#0B1C3D);"></div>
               <div style="position:relative;z-index:1;text-align:center;">
                 <button id="play-btn" style="width:72px;height:72px;border-radius:50%;background:rgba(201,146,42,0.15);border:2px solid rgba(201,146,42,0.5);display:flex;align-items:center;justify-content:center;cursor:pointer;margin:0 auto 1rem;transition:background 0.2s;" onmouseover="this.style.background='rgba(201,146,42,0.28)'" onmouseout="this.style.background='rgba(201,146,42,0.15)'">
-                  <i class="ti ti-player-play-filled" style="font-size:28px;color:#C9922A;margin-left:3px;"></i>
+                  <i id="play-icon" class="ti ti-player-play-filled" style="font-size:28px;color:#C9922A;margin-left:3px;"></i>
                 </button>
                 <div style="font-size:16px;font-weight:600;color:#fff;margin-bottom:4px;">Module {num} Recording</div>
                 <div style="font-size:13px;color:rgba(255,255,255,0.35);">{mod.title} · 1h 58m 34s</div>
@@ -88,16 +88,26 @@ const resources = [
             </div>
           )}
         </div>
+        <!-- Progress bar (module 1 only) -->
+        {num === 1 && (
+          <div style="height:4px;background:rgba(255,255,255,0.07);position:relative;overflow:hidden;">
+            <div id="video-progress" style="height:100%;width:0%;background:#C9922A;transition:none;"></div>
+          </div>
+        )}
         <!-- Player controls bar -->
         <div style="padding:0.75rem 1.25rem;background:#0d1420;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:1rem;flex-wrap:wrap;">
-          {["ti-download","ti-bookmark","ti-share","ti-message-circle"].map((icon,i) => {
-            const labels = ["Download","Bookmark","Share","Notes"];
-            return (
-              <button style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;padding:0;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
-                <i class={`ti ${icon}`} style="font-size:15px;"></i>{labels[i]}
-              </button>
-            );
-          })}
+          <button id="ctrl-download" style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;padding:0;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+            <i class="ti ti-download" style="font-size:15px;"></i>Download
+          </button>
+          <button id="ctrl-bookmark" style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;padding:0;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+            <i id="bookmark-icon" class="ti ti-bookmark" style="font-size:15px;"></i>Bookmark
+          </button>
+          <button id="ctrl-share" style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;padding:0;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+            <i class="ti ti-share" style="font-size:15px;"></i>Share
+          </button>
+          <button id="ctrl-notes" style="background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:12px;display:flex;align-items:center;gap:5px;padding:0;transition:color 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+            <i class="ti ti-message-circle" style="font-size:15px;"></i>Notes
+          </button>
         </div>
       </div>
 
@@ -121,12 +131,22 @@ const resources = [
           </div>
         </div>
         <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-          <button onclick="window.showToast('Assignment submitted! Faculty will respond within 48 hours.')" style="display:inline-flex;align-items:center;gap:6px;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:10px 18px;border:none;border-radius:3px;cursor:pointer;">
+          <button id="submit-assignment-btn" style="display:inline-flex;align-items:center;gap:6px;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:10px 18px;border:none;border-radius:3px;cursor:pointer;">
             <i class="ti ti-upload" style="font-size:15px;"></i>Submit Assignment
           </button>
-          <button onclick="window.showToast('Downloading Assignment Brief PDF...')" style="display:inline-flex;align-items:center;gap:6px;background:transparent;color:#0B1C3D;font-size:13px;font-weight:600;padding:9px 16px;border:1.5px solid #E8E5DE;border-radius:3px;cursor:pointer;">
+          <button onclick="window.showToast('Brief available to download after Module 2')" style="display:inline-flex;align-items:center;gap:6px;background:transparent;color:#0B1C3D;font-size:13px;font-weight:600;padding:9px 16px;border:1.5px solid #E8E5DE;border-radius:3px;cursor:pointer;">
             <i class="ti ti-download" style="font-size:15px;color:#C9922A;"></i>Download Brief
           </button>
+          <!-- Mock upload area (hidden initially) -->
+          <div id="upload-area" style="display:none;width:100%;margin-top:0.75rem;border:2px dashed rgba(201,146,42,0.4);border-radius:4px;padding:1.75rem;text-align:center;font-size:13px;color:#9CA3AF;cursor:pointer;transition:border-color 0.2s;">
+            <i class="ti ti-file-upload" style="font-size:28px;color:#C9922A;display:block;margin-bottom:0.5rem;"></i>
+            Click to select your assignment file (PDF, DOCX, max 10MB)
+            <input type="file" accept=".pdf,.docx" style="display:none;" id="assignment-file" />
+          </div>
+          <div id="upload-success" style="display:none;width:100%;margin-top:0.75rem;background:rgba(0,168,150,0.08);border:1px solid rgba(0,168,150,0.2);border-radius:4px;padding:1rem;text-align:center;">
+            <i class="ti ti-circle-check" style="font-size:28px;color:#00A896;display:block;margin-bottom:0.5rem;"></i>
+            <div style="font-size:13px;font-weight:600;color:#0B1C3D;">Assignment submitted successfully.</div>
+          </div>
         </div>
       </div>
 
@@ -204,7 +224,7 @@ const resources = [
         <i class="ti ti-circle-check" style="font-size:36px;color:#D1D5DB;display:block;margin-bottom:0.75rem;"></i>
         <div style="font-size:13px;font-weight:600;color:#0B1C3D;margin-bottom:4px;">Mark as Complete</div>
         <div style="font-size:12px;color:#6B7280;margin-bottom:0.875rem;line-height:1.45;">Watch recording and submit assignment to mark complete.</div>
-        <button id="mark-complete-btn" style="width:100%;background:#E8E5DE;color:#9CA3AF;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:9px;border:none;border-radius:2px;cursor:not-allowed;">Mark Complete</button>
+        <button id="mark-complete-btn" style={`width:100%;background:${num===1?'#E8E5DE':'#E8E5DE'};color:${num===1?'#4A5568':'#9CA3AF'};font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;padding:9px;border:none;border-radius:2px;cursor:${num===1?'pointer':'not-allowed'};opacity:${num===1?1:0.5};`} data-module={num}>Mark Complete</button>
       </div>
 
       <!-- Module navigation -->
@@ -230,38 +250,138 @@ const resources = [
 </DashboardLayout>
 
 <script>
-  document.getElementById('play-btn')?.addEventListener('click', () => {
-    (window as any).showToast('Loading recording...');
+  // --- Play / Pause + progress bar (module 1 only) ---
+  let isPlaying = false;
+  let progressInterval: ReturnType<typeof setInterval> | null = null;
+  let progress = 0;
+
+  const playBtn  = document.getElementById('play-btn');
+  const playIcon = document.getElementById('play-icon');
+  const bar      = document.getElementById('video-progress') as HTMLElement | null;
+
+  if (playBtn && playIcon) {
+    playBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playIcon.className = 'ti ti-player-pause-filled';
+        if (bar) {
+          if (progressInterval) clearInterval(progressInterval);
+          progressInterval = setInterval(() => {
+            progress = Math.min(progress + 100/10, 40);
+            bar.style.width = progress + '%';
+            if (progress >= 40) { clearInterval(progressInterval!); progressInterval = null; }
+          }, 1000);
+        }
+      } else {
+        playIcon.className = 'ti ti-player-play-filled';
+        if (progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+      }
+    });
+  } else {
+    // Non-module-1: play shows toast
+    playBtn?.addEventListener('click', () => { (window as any).showToast('Recording available after live session'); });
+  }
+
+  // --- Player control buttons ---
+  let bookmarked = false;
+  document.getElementById('ctrl-download')?.addEventListener('click', () => {
+    (window as any).showToast('Download will be available after the live session.');
   });
-  document.querySelectorAll('.reply-btn').forEach((btn, i) => {
+  document.getElementById('ctrl-bookmark')?.addEventListener('click', () => {
+    bookmarked = !bookmarked;
+    const icon = document.getElementById('bookmark-icon');
+    if (icon) icon.className = bookmarked ? 'ti ti-bookmark-filled' : 'ti ti-bookmark';
+    (window as any).showToast(bookmarked ? 'Bookmarked.' : 'Bookmark removed.');
+  });
+  document.getElementById('ctrl-share')?.addEventListener('click', () => {
+    (window as any).showToast('Timestamp link copied to clipboard.');
+  });
+  document.getElementById('ctrl-notes')?.addEventListener('click', () => {
+    (window as any).showToast('Notes coming soon.');
+  });
+
+  // --- Submit assignment inline mock upload ---
+  const submitBtn    = document.getElementById('submit-assignment-btn');
+  const uploadArea   = document.getElementById('upload-area') as HTMLElement | null;
+  const fileInput    = document.getElementById('assignment-file') as HTMLInputElement | null;
+  const uploadSucc   = document.getElementById('upload-success') as HTMLElement | null;
+
+  submitBtn?.addEventListener('click', () => {
+    if (uploadArea) uploadArea.style.display = 'block';
+    if (uploadSucc) uploadSucc.style.display = 'none';
+  });
+  uploadArea?.addEventListener('click', () => { fileInput?.click(); });
+  fileInput?.addEventListener('change', () => {
+    if (uploadArea) uploadArea.style.display = 'none';
+    setTimeout(() => {
+      if (uploadSucc) uploadSucc.style.display = 'block';
+      (window as any).showToast('Assignment submitted successfully.');
+    }, 1500);
+  });
+
+  // --- Reply buttons focus textarea ---
+  document.querySelectorAll('.reply-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
       if (textarea) { textarea.focus(); textarea.placeholder = 'Replying...'; }
     });
   });
+
+  // --- Post reply ---
   document.getElementById('post-reply-btn')?.addEventListener('click', () => {
     const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
     const text = textarea?.value.trim();
-    if (!text) return;
-    const board = document.getElementById('discussion-comments');
+    if (!text) {
+      if (textarea) {
+        textarea.style.animation = 'shake 0.3s ease';
+        setTimeout(() => { textarea.style.animation = ''; }, 350);
+      }
+      return;
+    }
+    const commentGrid = document.querySelector('div[style*="gap:1.25rem;margin-bottom:1.5rem"]');
     const div = document.createElement('div');
-    div.style.cssText = 'display:flex;gap:12px;padding-top:1rem;opacity:0;transition:opacity 0.3s;';
+    div.style.cssText = 'display:flex;gap:12px;opacity:0;transition:opacity 0.3s;';
     div.innerHTML = `
       <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0B1C3D,#00A896);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#C9922A;flex-shrink:0;">AO</div>
       <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#0B1C3D;margin-bottom:5px;">Amara O. <span style="font-weight:400;color:#9CA3AF;font-size:11px;">Just now</span></div><p style="font-size:13px;color:#4A5568;line-height:1.6;margin:0;">${text}</p></div>
     `;
-    const comments = document.querySelector('.discussion-comments') ?? document.querySelector('div[style*="display:grid;gap:1.25rem"]');
-    if (comments) {
-      comments.appendChild(div);
+    if (commentGrid) {
+      commentGrid.insertBefore(div, commentGrid.firstChild);
       requestAnimationFrame(() => { (div as HTMLElement).style.opacity = '1'; });
     }
     textarea.value = '';
     (window as any).showToast('Reply posted!');
   });
-  document.getElementById('mark-complete-btn')?.addEventListener('click', () => {
-    (window as any).showToast('Complete the recording and assignment first.');
-  });
+
+  // --- Mark Complete (module-1 only) ---
+  const mcBtn = document.getElementById('mark-complete-btn') as HTMLButtonElement | null;
+  if (mcBtn && mcBtn.dataset.module === '1') {
+    let completed = false;
+    mcBtn.addEventListener('click', () => {
+      if (completed) return;
+      completed = true;
+      mcBtn.style.background  = '#00A896';
+      mcBtn.style.color       = '#fff';
+      mcBtn.textContent       = 'Completed ✓';
+      mcBtn.style.cursor      = 'default';
+      (window as any).showToast('Module 1 marked complete. Module 2 is now unlocked.');
+    });
+  } else if (mcBtn) {
+    mcBtn.addEventListener('click', () => {
+      (window as any).showToast('Complete the recording and assignment to unlock this.');
+    });
+  }
 </script>
+
+<style>
+  @keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-6px)}
+    40%{transform:translateX(6px)}
+    60%{transform:translateX(-4px)}
+    80%{transform:translateX(4px)}
+  }
+</style>
 
 <style>
   @media (max-width: 900px) {
