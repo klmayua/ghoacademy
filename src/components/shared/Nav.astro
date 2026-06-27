@@ -46,21 +46,21 @@ const navLinks = [
   </div>
 </nav>
 
-<!-- ═══ MOBILE BOTTOM NAV BAR (≤768px) ═══ 5 tabs: About · Curriculum · Apply · FAQ · More ═══ -->
+<!-- ═══ MOBILE BOTTOM NAV BAR (≤768px) ═══ 5 tabs: Home · About · Apply · Curriculum · More ═══ -->
 <nav id="mobile-bottom-nav" aria-label="Mobile bottom navigation">
+  <a href="#hero"       class="mob-tab" id="tab-home"       aria-label="Home">       <i class="ti ti-home"></i><span>Home</span></a>
   <a href="#about"      class="mob-tab" id="tab-about"      aria-label="About">      <i class="ti ti-info-circle"></i><span>About</span></a>
-  <a href="#curriculum" class="mob-tab" id="tab-curriculum" aria-label="Curriculum"> <i class="ti ti-books"></i><span>Curriculum</span></a>
   <a href="#register"   class="mob-tab mob-tab-apply"        aria-label="Apply Now">
     <span class="mob-apply-pill"><i class="ti ti-rocket"></i><span>Apply</span></span>
   </a>
-  <a href="#faq"        class="mob-tab" id="tab-faq"        aria-label="FAQ">        <i class="ti ti-help-circle"></i><span>FAQ</span></a>
-  <button class="mob-tab mob-tab-more" id="mob-more-btn" onclick="toggleMobileMore()" aria-label="More" aria-expanded="false">
+  <a href="#curriculum" class="mob-tab" id="tab-curriculum" aria-label="Curriculum"> <i class="ti ti-books"></i><span>Curriculum</span></a>
+  <button class="mob-tab mob-tab-more" id="mob-more-btn" aria-label="More" aria-expanded="false">
     <i class="ti ti-dots"></i><span>More</span>
   </button>
 </nav>
 
 <!-- ═══ MOBILE MORE: dark overlay ═══ -->
-<div id="mob-more-overlay" onclick="closeMobileMore()"></div>
+<div id="mob-more-overlay"></div>
 
 <!-- ═══ MOBILE MORE: slide-up panel ═══ -->
 <div id="mob-more-panel" role="dialog" aria-label="More options">
@@ -68,15 +68,18 @@ const navLinks = [
 
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
     <span style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#F5F0E8;text-transform:uppercase;letter-spacing:1px;">More</span>
-    <button onclick="closeMobileMore()" style="background:rgba(255,255,255,0.07);border:none;border-radius:50%;width:32px;height:32px;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><i class="ti ti-x"></i></button>
+    <button class="mob-more-close" style="background:rgba(255,255,255,0.07);border:none;border-radius:50%;width:32px;height:32px;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><i class="ti ti-x"></i></button>
   </div>
 
   <!-- Nav links -->
   <div class="mob-more-list">
-    <a href="#instructor" onclick="closeMobileMore()" class="mob-more-row">
+    <a href="#instructor" class="mob-more-row mob-more-close">
       <span class="mob-more-icon"><i class="ti ti-user-star"></i></span><span>Instructor</span><i class="ti ti-chevron-right mob-chev"></i>
     </a>
-    <a href="#pricing" onclick="closeMobileMore()" class="mob-more-row">
+    <a href="#faq" class="mob-more-row mob-more-close">
+      <span class="mob-more-icon"><i class="ti ti-help-circle"></i></span><span>FAQ</span><i class="ti ti-chevron-right mob-chev"></i>
+    </a>
+    <a href="#pricing" class="mob-more-row mob-more-close">
       <span class="mob-more-icon"><i class="ti ti-tag"></i></span><span>Pricing</span><i class="ti ti-chevron-right mob-chev"></i>
     </a>
     <a href="/login" class="mob-more-row">
@@ -98,7 +101,7 @@ const navLinks = [
   </div>
 
   <!-- CTA inside panel -->
-  <a href="#register" onclick="closeMobileMore()" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:1.25rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:8px;text-decoration:none;">
+  <a href="#register" class="mob-more-close" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:1.25rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:8px;text-decoration:none;">
     <i class="ti ti-arrow-right" style="font-size:16px;"></i>Apply Now — Sep 2026
   </a>
 </div>
@@ -277,51 +280,58 @@ const navLinks = [
 </style>
 
 <script>
-  function toggleMobileMore() {
-    const panel   = document.getElementById('mob-more-panel');
-    const overlay = document.getElementById('mob-more-overlay');
-    const btn     = document.getElementById('mob-more-btn');
-    const isOpen  = panel?.classList.contains('open');
-    if (isOpen) {
+  // Expose functions on window so inline onclick and event listeners work
+  // regardless of Astro's module script scoping
+  (function () {
+    function closeMobileMore() {
+      const panel   = document.getElementById('mob-more-panel');
+      const overlay = document.getElementById('mob-more-overlay');
+      const btn     = document.getElementById('mob-more-btn');
       panel?.classList.remove('open');
       overlay?.classList.remove('open');
       btn?.classList.remove('open');
       btn?.setAttribute('aria-expanded', 'false');
-    } else {
-      panel?.classList.add('open');
-      overlay?.classList.add('open');
-      btn?.classList.add('open');
-      btn?.setAttribute('aria-expanded', 'true');
     }
-  }
 
-  function closeMobileMore() {
-    const panel   = document.getElementById('mob-more-panel');
-    const overlay = document.getElementById('mob-more-overlay');
-    const btn     = document.getElementById('mob-more-btn');
-    panel?.classList.remove('open');
-    overlay?.classList.remove('open');
-    btn?.classList.remove('open');
-    btn?.setAttribute('aria-expanded', 'false');
-  }
+    function toggleMobileMore() {
+      const panel = document.getElementById('mob-more-panel');
+      if (panel?.classList.contains('open')) {
+        closeMobileMore();
+      } else {
+        panel?.classList.add('open');
+        document.getElementById('mob-more-overlay')?.classList.add('open');
+        document.getElementById('mob-more-btn')?.classList.add('open');
+        document.getElementById('mob-more-btn')?.setAttribute('aria-expanded', 'true');
+      }
+    }
 
-  // Active tab highlight on scroll
-  (function () {
-    const sectionIds = ['about', 'curriculum', 'instructor', 'pricing', 'faq'];
-    const tabMap = {
-      about:      document.getElementById('tab-about'),
-      curriculum: document.getElementById('tab-curriculum'),
-      faq:        document.getElementById('tab-faq'),
-    };
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sectionIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 130) current = id;
+    // Wire up More button via addEventListener (not onclick attr)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('mob-more-btn')?.addEventListener('click', toggleMobileMore);
+      document.getElementById('mob-more-overlay')?.addEventListener('click', closeMobileMore);
+
+      // All items with mob-more-close class dismiss the panel
+      document.querySelectorAll('.mob-more-close').forEach(el => {
+        el.addEventListener('click', closeMobileMore);
       });
-      Object.entries(tabMap).forEach(([id, tab]) => {
-        tab?.classList.toggle('active', id === current);
-      });
-    }, { passive: true });
+
+      // Active tab highlight on scroll
+      const sectionIds = ['hero', 'about', 'curriculum', 'instructor', 'pricing', 'faq'];
+      const tabMap: Record<string, HTMLElement | null> = {
+        hero:       document.getElementById('tab-home'),
+        about:      document.getElementById('tab-about'),
+        curriculum: document.getElementById('tab-curriculum'),
+      };
+      window.addEventListener('scroll', () => {
+        let current = 'hero';
+        sectionIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && window.scrollY >= el.offsetTop - 130) current = id;
+        });
+        Object.entries(tabMap).forEach(([id, tab]) => {
+          tab?.classList.toggle('active', id === current);
+        });
+      }, { passive: true });
+    });
   })();
 </script>
