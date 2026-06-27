@@ -27,13 +27,13 @@
     color: #1a1a2e;
     line-height: 1.6;
     overflow-x: hidden;
-    overscroll-behavior-y: contain;
   }
   h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.05; letter-spacing: -0.02em; }
-  a, button, [role="button"], input[type="submit"], label[style*="cursor:pointer"] {
+  button, input[type="submit"] {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
   }
+  a { -webkit-tap-highlight-color: transparent; }
 }
 
 @layer utilities {
