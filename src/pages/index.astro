@@ -10,6 +10,30 @@ import Instructor from '../components/marketing/Instructor.astro';
 import Outcomes from '../components/marketing/Outcomes.astro';
 import Pricing from '../components/marketing/Pricing.astro';
 import FAQ from '../components/marketing/FAQ.astro';
+
+const testimonials = [
+  {
+    quote: "GHO Academy gave me the strategic frameworks I needed to actually move my global health project forward. It is not just theory — it is real, applicable, and transformative.",
+    name: "Dr. Amara O.",
+    title: "Public Health Specialist, WHO Nigeria",
+    initials: "AO",
+    accent: "#1CC7C9",
+  },
+  {
+    quote: "Dr. Bain's approach to leadership in global health is unlike anything I've encountered before. The cohort became a global network I still rely on today.",
+    name: "Prof. T. Mensah",
+    title: "Head of Department, University of Ghana",
+    initials: "TM",
+    accent: "#D6A43A",
+  },
+  {
+    quote: "The AI module alone was worth the investment. Understanding how to leverage responsible AI for health systems changed how my team operates.",
+    name: "Dr. Fatima A.",
+    title: "Health Innovation Lead, African Union",
+    initials: "FA",
+    accent: "#1CC7C9",
+  },
+];
 ---
 <BaseLayout
   title="GHO Academy — Global Public Health Innovation, Entrepreneurship & Leadership"
@@ -22,6 +46,38 @@ import FAQ from '../components/marketing/FAQ.astro';
   <Curriculum />
   <Instructor />
   <Outcomes />
+
+  <!-- Testimonials -->
+  <section id="testimonials" style="background:#041326;padding:7rem 2.5rem;">
+    <div style="max-width:1440px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:4rem;">
+        <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:0.875rem;display:inline-flex;align-items:center;gap:8px;">
+          <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+          Participant Stories
+          <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+        </p>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:1;">Voices of the <span style="color:#D6A43A;">Cohort</span></h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+        {testimonials.map(t => (
+          <div style={`background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-top:3px solid ${t.accent};border-radius:14px;padding:2rem;display:flex;flex-direction:column;justify-content:space-between;transition:background 0.2s,transform 0.2s;`} onmouseover="this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.transform=''">
+            <div>
+              <i class="ti ti-quote" style={`font-size:32px;color:${t.accent};opacity:0.4;display:block;margin-bottom:1rem;`}></i>
+              <p style="font-size:15px;color:rgba(248,248,248,0.78);line-height:1.75;font-style:italic;margin-bottom:1.5rem;">{t.quote}</p>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.07);">
+              <div style={`width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,${t.accent}33,${t.accent}66);border:1.5px solid ${t.accent}44;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:${t.accent};flex-shrink:0;`}>{t.initials}</div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:#fff;">{t.name}</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.4);">{t.title}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <Pricing />
   <FAQ />
   <Footer />

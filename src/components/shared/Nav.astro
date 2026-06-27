@@ -9,50 +9,51 @@ const navLinks = [
 ---
 <nav
   id="main-nav"
-  style="position:sticky;top:0;z-index:50;background:#0B1C3D;border-bottom:1px solid rgba(201,146,42,0.25);transition:background 0.3s,backdrop-filter 0.3s;"
+  style="position:sticky;top:0;z-index:50;background:#071A35;border-bottom:1px solid rgba(214,164,58,0.2);transition:background 0.3s,backdrop-filter 0.3s,box-shadow 0.3s;"
 >
-  <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between;">
+  <div style="max-width:1440px;margin:0 auto;padding:0 2.5rem;height:80px;display:flex;align-items:center;justify-content:space-between;">
     <!-- Logo -->
-    <a href="/" style="text-decoration:none;display:flex;align-items:center;gap:10px;">
+    <a href="/" style="text-decoration:none;display:flex;align-items:center;gap:10px;flex-shrink:0;">
       <div style="display:flex;flex-direction:column;line-height:1;">
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:0.5px;">GHO Academy</span>
-        <span style="font-size:9px;color:#C9922A;letter-spacing:2.5px;font-weight:600;text-transform:uppercase;">Global Health Otherwise</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#fff;letter-spacing:0.5px;">GHO Academy</span>
+        <span style="font-size:9px;color:#D6A43A;letter-spacing:3px;font-weight:700;text-transform:uppercase;">Global Health Otherwise</span>
       </div>
     </a>
 
     <!-- Desktop nav -->
-    <div class="desktop-nav" style="display:flex;align-items:center;gap:1.75rem;">
+    <div class="desktop-nav" style="display:flex;align-items:center;gap:2.25rem;">
       {navLinks.map(link => (
-        <a href={link.href} style="font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;letter-spacing:0.3px;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">{link.label}</a>
+        <a href={link.href} style="font-size:14px;color:rgba(255,255,255,0.65);text-decoration:none;font-weight:500;letter-spacing:0.5px;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">{link.label}</a>
       ))}
     </div>
 
     <!-- CTA -->
-    <div style="display:flex;align-items:center;gap:10px;">
-      <a href="/login" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;font-weight:500;display:none;" class="login-link">Sign In</a>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="/login" class="login-link" style="font-size:14px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;letter-spacing:0.3px;transition:color 0.2s;display:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Sign In</a>
       <a
         href="#register"
-        style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border-radius:2px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 0.2s;"
-        onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'"
-      >Apply — Sep 2026</a>
+        style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:11px 24px;border-radius:4px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 0.2s,transform 0.15s;"
+        onmouseover="this.style.background='#c49030';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''"
+      >Apply Now — Sep 2026</a>
       <!-- Mobile hamburger -->
-      <button id="mobile-nav-btn" style="display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:4px;">
+      <button id="mobile-nav-btn" style="display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px;">
         <i class="ti ti-menu-2"></i>
       </button>
     </div>
   </div>
 
   <!-- Mobile drawer -->
-  <div id="mobile-drawer" style="display:none;background:#0B1C3D;border-top:1px solid rgba(255,255,255,0.07);padding:1rem 1.5rem 1.5rem;">
+  <div id="mobile-drawer" style="display:none;background:#071A35;border-top:1px solid rgba(214,164,58,0.15);padding:1rem 1.5rem 1.5rem;">
     {navLinks.map(link => (
       <a href={link.href} style="display:block;padding:10px 0;color:rgba(255,255,255,0.75);text-decoration:none;font-size:15px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.05);">{link.label}</a>
     ))}
-    <a href="#register" style="display:block;margin-top:1rem;background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px;text-align:center;border-radius:2px;text-decoration:none;">Apply — September 2026</a>
+    <a href="/login" style="display:block;padding:10px 0;color:rgba(255,255,255,0.75);text-decoration:none;font-size:15px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.05);">Sign In</a>
+    <a href="#register" style="display:block;margin-top:1rem;background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:12px;text-align:center;border-radius:4px;text-decoration:none;">Apply Now — September 2026</a>
   </div>
 </nav>
 
 <style>
-  #main-nav { background: #0B1C3D !important; }
+  #main-nav { background: #071A35 !important; }
   @media (max-width: 768px) {
     .desktop-nav { display: none !important; }
     .login-link  { display: none !important; }

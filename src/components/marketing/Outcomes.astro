@@ -1,13 +1,17 @@
 ---
 ---
-<section id="outcomes" style="background:#F5F3EE;padding:5rem 1.5rem;">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:3rem;">
-      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">What You'll Walk Away With</p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;">You Will Gain</h2>
+<section id="outcomes" style="background:#041326;padding:7rem 2.5rem;">
+  <div style="max-width:1440px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:0.875rem;display:inline-flex;align-items:center;gap:8px;">
+        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+        What You'll Walk Away With
+        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+      </p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:1;">You Will <span style="color:#D6A43A;">Gain</span></h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
       {[
         { icon:"ti-bulb",         text:"Practical tools to lead, innovate, and drive change in complex health systems"              },
         { icon:"ti-brain",        text:"Critical and systems thinking skills for real-world problem solving"                       },
@@ -18,11 +22,11 @@
         { icon:"ti-presentation", text:"Experience developing stakeholder-ready solutions pitched to real audiences"               },
         { icon:"ti-rocket",       text:"Confidence and a leadership mindset to transform ideas into lasting impact"                },
       ].map(o => (
-        <div style="background:#fff;border:1px solid #E8E5DE;padding:1.25rem;border-radius:4px;display:flex;gap:12px;align-items:flex-start;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(11,28,61,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-          <div style="width:36px;height:36px;background:rgba(0,168,150,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <i class={`ti ${o.icon}`} style="font-size:17px;color:#00A896;"></i>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:1.5rem;border-radius:14px;display:flex;flex-direction:column;gap:12px;transition:background 0.2s,border-color 0.2s,transform 0.2s;" onmouseover="this.style.background='rgba(214,164,58,0.06)';this.style.borderColor='rgba(214,164,58,0.25)';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)';this.style.transform=''">
+          <div style="width:40px;height:40px;background:rgba(28,199,201,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <i class={`ti ${o.icon}`} style="font-size:20px;color:#1CC7C9;"></i>
           </div>
-          <span style="font-size:13px;color:#1a1a2e;line-height:1.55;font-weight:500;">{o.text}</span>
+          <span style="font-size:13px;color:rgba(248,248,248,0.72);line-height:1.6;font-weight:500;">{o.text}</span>
         </div>
       ))}
     </div>
@@ -30,22 +34,28 @@
 </section>
 
 <!-- Audience section -->
-<section id="audience" style="background:#0B1C3D;padding:5rem 1.5rem;">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div style="text-align:center;margin-bottom:3rem;">
-      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">Is This For You?</p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;">Who Should Attend</h2>
+<section id="audience" style="background:#071A35;padding:7rem 2.5rem;">
+  <div style="max-width:1440px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:4rem;">
+      <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:0.875rem;display:inline-flex;align-items:center;gap:8px;">
+        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+        Is This For You?
+        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+      </p>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:1;">Who Should <span style="color:#D6A43A;">Attend</span></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
       {[
-        { icon:"ti-stethoscope",  title:"Public Health Professionals",  sub:"& Healthcare Providers"       },
-        { icon:"ti-microscope",   title:"Researchers & Academics",       sub:"Seeking real-world impact"    },
-        { icon:"ti-landmark",     title:"Policymakers & Advocates",      sub:"& NGO Practitioners"          },
-        { icon:"ti-trending-up",  title:"Entrepreneurs & Innovators",    sub:"Consultants & Early-Career"   },
+        { icon:"ti-stethoscope",  title:"Public Health Professionals",  sub:"& Healthcare Providers"     },
+        { icon:"ti-microscope",   title:"Researchers & Academics",       sub:"Seeking real-world impact"  },
+        { icon:"ti-landmark",     title:"Policymakers & Advocates",      sub:"& NGO Practitioners"        },
+        { icon:"ti-trending-up",  title:"Entrepreneurs & Innovators",    sub:"Consultants & Early-Career" },
       ].map(a => (
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);padding:1.5rem;border-radius:4px;text-align:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(0,168,150,0.08)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-          <i class={`ti ${a.icon}`} style="font-size:28px;color:#C9922A;display:block;margin-bottom:0.75rem;"></i>
-          <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:4px;">{a.title}</div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:2rem 1.5rem;border-radius:14px;text-align:center;transition:background 0.2s,border-color 0.2s;" onmouseover="this.style.background='rgba(214,164,58,0.07)';this.style.borderColor='rgba(214,164,58,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.07)'">
+          <div style="width:56px;height:56px;background:rgba(214,164,58,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+            <i class={`ti ${a.icon}`} style="font-size:26px;color:#D6A43A;"></i>
+          </div>
+          <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:0.5px;">{a.title}</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.4);">{a.sub}</div>
         </div>
       ))}
@@ -59,6 +69,8 @@
     #audience > div > div:last-child { grid-template-columns: repeat(2,1fr) !important; }
   }
   @media (max-width: 480px) {
+    #outcomes { padding: 5rem 1.5rem !important; }
+    #audience { padding: 5rem 1.5rem !important; }
     #outcomes > div > div:last-child { grid-template-columns: 1fr !important; }
     #audience > div > div:last-child { grid-template-columns: 1fr 1fr !important; }
   }

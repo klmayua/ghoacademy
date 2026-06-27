@@ -4,79 +4,117 @@ const { course, instructor } = SITE;
 ---
 <section
   id="hero"
-  style="background:#0B1C3D;padding:5rem 1.5rem 4rem;padding-top:calc(5rem + 60px);position:relative;overflow:hidden;"
+  style="background:linear-gradient(135deg,#041326 0%,#071A35 100%);position:relative;overflow:hidden;min-height:calc(100vh - 116px);"
 >
-  <!-- Grid texture -->
-  <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(201,146,42,0.04) 79px,rgba(201,146,42,0.04) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(201,146,42,0.03) 79px,rgba(201,146,42,0.03) 80px);pointer-events:none;"></div>
-  <!-- Radial glow -->
-  <div style="position:absolute;top:-40%;left:-10%;width:60%;height:200%;background:radial-gradient(ellipse,rgba(0,168,150,0.07) 0%,transparent 70%);pointer-events:none;"></div>
+  <!-- Subtle grid texture -->
+  <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(214,164,58,0.03) 79px,rgba(214,164,58,0.03) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(214,164,58,0.02) 79px,rgba(214,164,58,0.02) 80px);pointer-events:none;z-index:0;"></div>
+  <!-- Teal radial glow left -->
+  <div style="position:absolute;top:0;left:-5%;width:55%;height:100%;background:radial-gradient(ellipse at 20% 50%,rgba(28,199,201,0.06) 0%,transparent 65%);pointer-events:none;z-index:0;"></div>
 
-  <div style="max-width:1200px;margin:0 auto;text-align:center;position:relative;z-index:1;">
-    <!-- Eyebrow -->
-    <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:1.2rem;">
-      Global Health Otherwise · Executive Education · {course.cohort}
-    </p>
+  <!-- HERO IMAGE — right panel, full height, with left-edge fade -->
+  <div style="position:absolute;top:0;right:0;width:55%;height:100%;z-index:0;">
+    <img
+      src="/hero-team.png"
+      alt="Global health leaders collaborating"
+      style="width:100%;height:100%;object-fit:cover;object-position:center top;"
+    />
+    <!-- Left-to-right gradient fade to merge with text side -->
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#041326 0%,rgba(4,19,38,0.7) 30%,rgba(4,19,38,0.1) 70%,transparent 100%);"></div>
+    <!-- Bottom fade -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(0deg,#041326,transparent);"></div>
+  </div>
 
-    <!-- Main headline -->
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,8vw,80px);font-weight:800;color:#fff;line-height:0.95;text-transform:uppercase;letter-spacing:-1px;margin-bottom:0.5rem;">
-      Global Public Health
-    </h1>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,8vw,80px);font-weight:800;color:#C9922A;line-height:0.95;text-transform:uppercase;letter-spacing:-1px;margin-bottom:0.5rem;">
-      Innovation, Entrepreneurship
-    </h1>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(44px,8vw,80px);font-weight:800;color:#fff;line-height:0.95;text-transform:uppercase;letter-spacing:-1px;margin-bottom:1.25rem;">
-      &amp; Leadership
-    </h1>
+  <!-- CONTENT — left 45% -->
+  <div style="position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:5rem 2.5rem 5rem;display:flex;align-items:center;min-height:calc(100vh - 116px);">
+    <div style="width:min(560px,55%);">
 
-    <!-- Subline -->
-    <p style="font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:1rem;font-weight:500;">
-      Beyond Degrees · {course.weeks} Weeks · {course.delivery} · Certificate of Completion
-    </p>
+      <!-- Eyebrow -->
+      <p style="font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px;">
+        <span style="width:24px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+        Executive Education &nbsp;·&nbsp; {course.cohort}
+      </p>
 
-    <!-- Tagline -->
-    <p style="font-size:18px;color:rgba(255,255,255,0.82);max-width:560px;margin:0 auto 2.5rem;line-height:1.6;">
-      We don't teach you to fit into global health.<br />
-      We teach you to <strong style="color:#fff;">lead, innovate, and transform it.</strong>
-    </p>
-
-    <!-- Meta badges -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap;">
-      {[
-        { icon: "ti-calendar",    label: course.dates       },
-        { icon: "ti-clock",       label: course.format      },
-        { icon: "ti-world",       label: course.delivery    },
-        { icon: "ti-certificate", label: "Certificate Included" },
-      ].map(b => (
-        <div style="border:1px solid rgba(201,146,42,0.35);padding:7px 14px;border-radius:2px;font-size:12px;color:rgba(255,255,255,0.72);display:flex;align-items:center;gap:7px;">
-          <i class={`ti ${b.icon}`} style="font-size:14px;color:#C9922A;"></i>
-          {b.label}
-        </div>
-      ))}
-    </div>
-
-    <!-- CTAs -->
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;">
-      <a
-        href="#register"
-        style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:2px;text-decoration:none;display:inline-block;"
-      >
-        Apply for September 2026
-      </a>
-      <a
-        href="#curriculum"
-        style="background:transparent;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:14px 28px;border:1px solid rgba(255,255,255,0.28);border-radius:2px;text-decoration:none;display:inline-block;"
-      >
-        Explore Curriculum
-      </a>
-    </div>
-
-    <!-- Instructor trust line -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:12px;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.07);">
-      <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;">LB</div>
-      <div style="text-align:left;">
-        <div style="font-size:13px;color:#fff;font-weight:500;">Led by {instructor.name}</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.45);">{instructor.credentials} · University of Oxford · African Academy of Sciences</div>
+      <!-- Headline -->
+      <div style="margin-bottom:1.5rem;">
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,5.5vw,82px);font-weight:800;color:#F8F8F8;line-height:0.95;text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:0.2rem;">Global Public Health</h1>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,5.5vw,82px);font-weight:800;color:#D6A43A;line-height:0.92;text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:0.2rem;">Innovation,</h1>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,5.5vw,82px);font-weight:800;color:#D6A43A;line-height:0.92;text-transform:uppercase;letter-spacing:-0.5px;">Entrepreneurship &amp; Leadership</h1>
       </div>
+
+      <!-- Body copy -->
+      <p style="font-size:16px;color:rgba(248,248,248,0.72);line-height:1.7;margin-bottom:2rem;max-width:480px;">
+        An 8-week executive program equipping leaders to solve complex global health challenges, drive innovation, and transform systems for impact.
+      </p>
+
+      <!-- Feature cards -->
+      <div style="display:flex;gap:10px;margin-bottom:2.25rem;flex-wrap:wrap;">
+        {[
+          { icon: 'ti-clock',       title: '8 Weeks',         sub: 'Live Online Every Week'   },
+          { icon: 'ti-certificate', title: 'Certificate',      sub: 'Executive Certificate'    },
+          { icon: 'ti-school',      title: 'Oxford Faculty',   sub: 'World-class Instructors'  },
+          { icon: 'ti-robot',       title: 'AI for Health',    sub: 'Integrated AI Module'     },
+        ].map(f => (
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(214,164,58,0.2);border-radius:8px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px;flex:1;min-width:120px;">
+            <i class={`ti ${f.icon}`} style="font-size:20px;color:#D6A43A;flex-shrink:0;margin-top:1px;"></i>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.5px;line-height:1.1;">{f.title}</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;line-height:1.3;">{f.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTAs -->
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:2.5rem;">
+        <a
+          href="#register"
+          style="background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:14px 30px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s,transform 0.15s;"
+          onmouseover="this.style.background='#c49030';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''"
+        >
+          Apply Now — September 2026 <i class="ti ti-arrow-right" style="font-size:16px;"></i>
+        </a>
+        <a
+          href="#curriculum"
+          style="background:transparent;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 24px;border:1.5px solid rgba(255,255,255,0.25);border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:border-color 0.2s;"
+          onmouseover="this.style.borderColor='rgba(255,255,255,0.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.25)'"
+        >
+          View Curriculum <i class="ti ti-arrow-right" style="font-size:15px;"></i>
+        </a>
+        <a
+          href="#instructor"
+          style="display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:color 0.2s;"
+          onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'"
+        >
+          <span style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);display:inline-flex;align-items:center;justify-content:center;">
+            <i class="ti ti-player-play" style="font-size:14px;color:#fff;"></i>
+          </span>
+          Watch Introduction
+        </a>
+      </div>
+
+      <!-- Instructor trust line -->
+      <div style="display:flex;align-items:center;gap:12px;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);">
+        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#D6A43A,#1CC7C9);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#041326;flex-shrink:0;">LB</div>
+        <div>
+          <div style="font-size:13px;color:#fff;font-weight:600;">Led by {instructor.name}</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);">{instructor.credentials} · University of Oxford · African Academy of Sciences</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<style>
+  @media (max-width: 900px) {
+    #hero > div:nth-child(4) { padding: 5rem 1.5rem 4rem !important; }
+    #hero > div:nth-child(4) > div { width: 100% !important; }
+    #hero > div:nth-child(3) { width: 100% !important; opacity: 0.25 !important; }
+    #hero > div:nth-child(3) > img { object-position: center center !important; }
+    #hero { min-height: auto !important; }
+  }
+  @media (max-width: 600px) {
+    #hero > div:nth-child(4) > div > div:nth-child(4) { flex-direction: column !important; }
+    #hero > div:nth-child(4) > div > div:nth-child(4) > a { width: 100% !important; justify-content: center !important; }
+  }
+</style>

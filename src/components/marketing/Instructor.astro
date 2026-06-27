@@ -2,28 +2,27 @@
 import { SITE } from '../../data/site';
 const { instructor } = SITE;
 ---
-<section id="instructor" style="background:#111827;padding:5rem 1.5rem;">
-  <div style="max-width:1200px;margin:0 auto;">
+<section id="instructor" style="background:#071A35;padding:7rem 2.5rem;position:relative;overflow:hidden;">
+  <!-- Background image subtle overlay -->
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="/instructor-bg.png" alt="" aria-hidden="true" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,26,53,0.97) 0%,rgba(7,26,53,0.92) 55%,rgba(7,26,53,0.6) 100%);"></div>
+  </div>
 
-    <div style="margin-bottom:2.5rem;">
-      <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#00A896;font-weight:600;margin-bottom:0.75rem;">Course Lead &amp; Convener</p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,52px);font-weight:800;color:#fff;text-transform:uppercase;line-height:1;">
-        {instructor.name}
-      </h2>
-      <p style="font-size:14px;color:#C9922A;font-weight:500;margin-top:4px;">{instructor.credentials}</p>
-    </div>
+  <div style="max-width:1440px;margin:0 auto;position:relative;z-index:1;">
 
-    <div style="display:grid;grid-template-columns:280px 1fr;gap:3rem;align-items:start;">
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:center;">
 
-      <!-- Card -->
+      <!-- Left: Portrait card + affiliations -->
       <div>
-        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:1.75rem;border-radius:4px;text-align:center;margin-bottom:1.25rem;">
-          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0 auto 1rem;">LB</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:4px;">Dr. Luchuo E. Bain</div>
-          <div style="font-size:12px;color:#C9922A;margin-bottom:1rem;">MD · PhD · MPH · MBA · MSc · FAAS</div>
+        <!-- Avatar + name card -->
+        <div style="background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);border:1px solid rgba(214,164,58,0.2);border-radius:14px;padding:2rem;text-align:center;margin-bottom:1.5rem;">
+          <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#D6A43A,#1CC7C9);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#041326;margin:0 auto 1rem;">LB</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:4px;">Dr. Luchuo E. Bain</div>
+          <div style="font-size:12px;color:#D6A43A;margin-bottom:1rem;letter-spacing:0.5px;">MD · PhD · MPH · MBA · MSc · FAAS</div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
             {["Global Health Scientist","Bioethicist","Leadership Advocate","Science Communicator"].map(tag => (
-              <span style="font-size:11px;background:rgba(0,168,150,0.12);color:#00A896;padding:3px 8px;border-radius:2px;">{tag}</span>
+              <span style="font-size:11px;background:rgba(28,199,201,0.1);color:#1CC7C9;border:1px solid rgba(28,199,201,0.2);padding:3px 10px;border-radius:20px;font-weight:600;">{tag}</span>
             ))}
           </div>
         </div>
@@ -33,38 +32,52 @@ const { instructor } = SITE;
           {instructor.affiliations.map(aff => {
             const [role, org] = aff.split(' — ');
             return (
-              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:0.75rem;border-radius:4px;">
-                <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:2px;">{role}</div>
-                <div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.75);">{org}</div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);padding:0.875rem 1rem;border-radius:10px;display:flex;align-items:center;gap:10px;">
+                <i class="ti ti-building" style="font-size:15px;color:rgba(214,164,58,0.5);flex-shrink:0;"></i>
+                <div>
+                  <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:1px;text-transform:uppercase;letter-spacing:1px;">{role}</div>
+                  <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.8);">{org}</div>
+                </div>
               </div>
             );
           })}
         </div>
       </div>
 
-      <!-- Bio -->
+      <!-- Right: Bio + stats + quote -->
       <div>
-        <p style="font-size:16px;color:rgba(255,255,255,0.78);line-height:1.75;margin-bottom:1.5rem;">{instructor.bio}</p>
+        <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:8px;">
+          <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+          Course Lead &amp; Convener
+        </p>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,4vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:0.95;margin-bottom:0.5rem;">
+          {instructor.name}
+        </h2>
+        <p style="font-size:14px;color:#D6A43A;font-weight:600;margin-bottom:1.75rem;letter-spacing:0.5px;">{instructor.credentials}</p>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;">
+        <p style="font-size:15px;color:rgba(248,248,248,0.68);line-height:1.8;margin-bottom:2rem;">{instructor.bio}</p>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2.5rem;">
           {[
-            { num: instructor.years + "+", label: "Years experience",              sub: "Across 4 continents"               },
-            { num: instructor.papers + "+",label: "Peer-reviewed publications",    sub: "Indexed research"                  },
-            { num: "4",                    label: "Institutional affiliations",    sub: "Oxford, EUCLID & beyond"           },
+            { num: instructor.years + "+", label: "Years experience",           sub: "Across 4 continents"    },
+            { num: instructor.papers + "+",label: "Peer-reviewed publications", sub: "Indexed research"       },
+            { num: "4",                    label: "Institutional affiliations", sub: "Oxford, EUCLID & beyond"},
           ].map(s => (
-            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:1.25rem;border-radius:4px;">
-              <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:#C9922A;line-height:1;">{s.num}</div>
+            <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(214,164,58,0.15);padding:1.25rem;border-radius:10px;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:800;color:#D6A43A;line-height:1;">{s.num}</div>
               <div style="font-size:12px;font-weight:600;color:#fff;margin-top:4px;">{s.label}</div>
               <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;">{s.sub}</div>
             </div>
           ))}
         </div>
 
-        <div style="background:rgba(201,146,42,0.06);border-left:3px solid #C9922A;padding:1.25rem 1.5rem;border-radius:0 4px 4px 0;">
-          <p style="font-size:16px;color:rgba(255,255,255,0.65);line-height:1.65;font-style:italic;">
+        <!-- Featured quote -->
+        <div style="background:rgba(214,164,58,0.07);border:1px solid rgba(214,164,58,0.2);border-left:4px solid #D6A43A;padding:1.5rem 2rem;border-radius:0 14px 14px 0;">
+          <p style="font-size:18px;color:rgba(255,255,255,0.8);line-height:1.65;font-style:italic;margin-bottom:0.75rem;">
             "A new global health — doing global health otherwise — is not merely a need but an urgent imperative."
           </p>
-          <p style="font-size:12px;color:#C9922A;font-weight:600;margin-top:8px;">— Dr. Luchuo Engelbert Bain</p>
+          <p style="font-size:12px;color:#D6A43A;font-weight:700;letter-spacing:0.5px;">— Dr. Luchuo Engelbert Bain</p>
         </div>
       </div>
     </div>
@@ -72,9 +85,12 @@ const { instructor } = SITE;
 </section>
 
 <style>
-  @media (max-width: 768px) {
-    #instructor > div > div:last-child { grid-template-columns: 1fr !important; }
-    #instructor > div > div:last-child > div:first-child { width: 100% !important; }
-    #instructor > div > div:last-child > div:last-child > div:nth-child(2) { grid-template-columns: 1fr 1fr !important; }
+  @media (max-width: 900px) {
+    #instructor > div:last-child > div { grid-template-columns: 1fr !important; gap: 3rem !important; }
+    #instructor > div:last-child > div > div:last-child > div:nth-child(4) { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 480px) {
+    #instructor { padding: 5rem 1.5rem !important; }
+    #instructor > div:last-child > div > div:last-child > div:nth-child(4) { grid-template-columns: 1fr !important; }
   }
 </style>

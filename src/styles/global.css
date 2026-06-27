@@ -75,4 +75,12 @@
 .card-hover:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(11,28,61,0.12); }
 
 /* Smooth scroll sections */
-section { scroll-margin-top: 60px; }
+section { scroll-margin-top: 80px; }
+
+/* Testimonials responsive */
+@media (max-width: 900px) {
+  #testimonials > div > div:last-child { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 480px) {
+  #testimonials { padding: 5rem 1.5rem !important; }
+}
