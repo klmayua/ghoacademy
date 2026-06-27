@@ -1,0 +1,93 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const materials = [
+  { module:"01", type:"Slides",     file:"M01-Leadership-Systems-Change.pdf",    size:"2.4 MB", status:"Published" },
+  { module:"01", type:"Recording",  file:"M01-Session-Recording-08Jul2026.mp4",  size:"1.2 GB", status:"Published" },
+  { module:"01", type:"Assignment", file:"M01-Assignment-Brief.pdf",              size:"340 KB", status:"Published" },
+  { module:"01", type:"Reading",    file:"M01-Pre-Reading-List.pdf",              size:"180 KB", status:"Published" },
+  { module:"02", type:"Slides",     file:"M02-Innovation-Entrepreneurship.pdf",  size:"3.1 MB", status:"Draft"     },
+  { module:"02", type:"Assignment", file:"M02-Assignment-Brief.pdf",              size:"290 KB", status:"Draft"     },
+  { module:"03", type:"Slides",     file:"M03-Think-Read-Write.pdf",             size:"2.8 MB", status:"Draft"     },
+];
+
+const modules = ["Module 1","Module 2","Module 3","Module 4","Module 5","Module 6","Module 7","Module 8","Module 9","Module 10"];
+const types   = ["Slides PDF","Recording","Assignment","Reading List"];
+---
+<AdminLayout title="Content — GHO Academy Admin" activeNav="content">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:3px;">Content Library</h1>
+      <p style="font-size:13px;color:#4A5568;">Manage materials for all 10 modules</p>
+    </div>
+  </div>
+
+  <!-- Upload bar -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+    <select id="mod-select" style="padding:9px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;color:#0B1C3D;background:#fff;cursor:pointer;outline:none;">
+      {modules.map(m => <option>{m}</option>)}
+    </select>
+    <select id="type-select" style="padding:9px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;color:#0B1C3D;background:#fff;cursor:pointer;outline:none;">
+      {types.map(t => <option>{t}</option>)}
+    </select>
+    <input id="file-input" type="file" style="display:none;" />
+    <button
+      id="upload-btn"
+      onclick="document.getElementById('file-input').click(); window.showToast('Upload coming soon — file storage will be wired in production.');"
+      style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.2s;"
+      onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'"
+    >
+      <i class="ti ti-upload" style="font-size:15px;"></i>Upload File
+    </button>
+    <span style="font-size:12px;color:#9CA3AF;margin-left:auto;">{materials.length} files · Last updated today</span>
+  </div>
+
+  <!-- Materials table -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;">
+    <div style="padding:1rem 1.25rem;border-bottom:1px solid #E8E5DE;display:flex;align-items:center;justify-content:space-between;">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;">Course Materials</h2>
+      <span style="font-size:12px;color:#9CA3AF;">{materials.length} files</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#F5F3EE;">
+            {["Module","Type","Filename","Size","Status","Actions"].map(h => (
+              <th style="padding:9px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {materials.map(row => (
+            <tr style="border-bottom:1px solid #F5F3EE;" onmouseover="this.style.background='#FAFAF9'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:#0B1C3D;">M{row.module}</span>
+              </td>
+              <td style="padding:10px 14px;">
+                <span style={`font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;${row.type==='Slides'?'background:rgba(11,28,61,0.07);color:#0B1C3D;':row.type==='Recording'?'background:rgba(0,168,150,0.08);color:#00A896;':row.type==='Assignment'?'background:rgba(201,146,42,0.1);color:#C9922A;':'background:rgba(107,114,128,0.1);color:#6B7280;'}`}>{row.type}</span>
+              </td>
+              <td style="padding:10px 14px;font-size:13px;color:#0B1C3D;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{row.file}</td>
+              <td style="padding:10px 14px;font-size:12px;color:#9CA3AF;white-space:nowrap;">{row.size}</td>
+              <td style="padding:10px 14px;">
+                <span style={`font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;${row.status==='Published'?'background:rgba(0,168,150,0.08);color:#00A896;':'background:rgba(107,114,128,0.1);color:#6B7280;'}`}>{row.status}</span>
+              </td>
+              <td style="padding:10px 14px;">
+                <div style="display:flex;gap:6px;">
+                  <button onclick="window.showToast('Edit coming soon.')" style="background:none;border:1px solid #E8E5DE;border-radius:3px;padding:5px 8px;cursor:pointer;color:#4A5568;font-size:13px;transition:all 0.15s;" onmouseover="this.style.borderColor='#C9922A';this.style.color='#C9922A';" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#4A5568';">
+                    <i class="ti ti-pencil"></i>
+                  </button>
+                  <button onclick="window.showToast('Delete coming soon.')" style="background:none;border:1px solid #E8E5DE;border-radius:3px;padding:5px 8px;cursor:pointer;color:#4A5568;font-size:13px;transition:all 0.15s;" onmouseover="this.style.borderColor='#EF4444';this.style.color='#EF4444';" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#4A5568';">
+                    <i class="ti ti-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</AdminLayout>

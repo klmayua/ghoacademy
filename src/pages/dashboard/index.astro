@@ -14,8 +14,8 @@ const nextSession = { date: "Tuesday, 8 July 2026", time: "4:00 PM WAT / 5:00 PM
   <div style="background:#0B1C3D;border-radius:6px;padding:1.5rem 2rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
     <div>
       <div style="font-size:12px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Welcome back</div>
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;text-transform:uppercase;">{participant.firstName}</h1>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;">{course.cohort} · {participant.country}</div>
+      <h1 data-welcome-name style="font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;color:#fff;text-transform:uppercase;">{participant.firstName}</h1>
+      <div data-welcome-sub style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:2px;">{course.cohort} · {participant.country}</div>
     </div>
     <div style="display:flex;gap:1rem;">
       <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:0.875rem 1.25rem;text-align:center;">
@@ -37,10 +37,10 @@ const nextSession = { date: "Tuesday, 8 July 2026", time: "4:00 PM WAT / 5:00 PM
   <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
       <span style="font-size:13px;font-weight:600;color:#0B1C3D;">Course Completion</span>
-      <span style="font-size:13px;color:#4A5568;">{participant.progress}% · {completedModules.length} of {MODULES.length} modules</span>
+      <span data-progress-pct style="font-size:13px;color:#4A5568;">{participant.progress}% · {completedModules.length} of {MODULES.length} modules</span>
     </div>
     <div style="height:8px;background:#E8E5DE;border-radius:9999px;overflow:hidden;">
-      <div style={`height:100%;width:${participant.progress}%;background:linear-gradient(90deg,#00A896,#C9922A);border-radius:9999px;transition:width 0.5s;`}></div>
+      <div data-progress-bar style={`height:100%;width:${participant.progress}%;background:linear-gradient(90deg,#00A896,#C9922A);border-radius:9999px;transition:width 0.5s;`}></div>
     </div>
     <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;color:#4A5568;">
       <span>Started</span>
@@ -177,6 +177,44 @@ const nextSession = { date: "Tuesday, 8 July 2026", time: "4:00 PM WAT / 5:00 PM
   document.querySelectorAll('a[aria-disabled="true"]').forEach(a => {
     a.addEventListener('click', (e) => { e.preventDefault(); });
   });
+
+  // Read sessionStorage role context set on login
+  const ssRole     = sessionStorage.getItem('gho_role')     || 'student';
+  const ssName     = sessionStorage.getItem('gho_name')     || 'Participant';
+  const ssCountry  = sessionStorage.getItem('gho_country')  || 'Kenya';
+  const ssInitials = sessionStorage.getItem('gho_initials') || 'P';
+  const ssProgress = parseInt(sessionStorage.getItem('gho_progress') || '30', 10);
+
+  const nameEl     = document.querySelector('[data-welcome-name]')  as HTMLElement | null;
+  const subEl      = document.querySelector('[data-welcome-sub]')   as HTMLElement | null;
+  const pBar       = document.querySelector('[data-progress-bar]')  as HTMLElement | null;
+  const pPct       = document.querySelector('[data-progress-pct]')  as HTMLElement | null;
+  const avatarEl   = document.querySelector('[data-avatar]')        as HTMLElement | null;
+
+  if (nameEl)   nameEl.textContent  = ssName.split(' ')[0];
+  if (subEl)    subEl.textContent   = 'Cohort 1 · ' + ssCountry;
+  if (avatarEl) avatarEl.textContent = ssInitials;
+
+  if (ssProgress !== 30) {
+    if (pBar) pBar.style.width = ssProgress + '%';
+    if (pPct) pPct.textContent = ssProgress + '% · ' + pPct.textContent?.split('·')[1]?.trim();
+  }
+
+  // For reviewer role (80% / 8 modules done) — update module status indicators
+  if (ssRole === 'reviewer') {
+    const moduleRows = document.querySelectorAll('a[href^="/dashboard/courses/module-"]');
+    moduleRows.forEach((row, i) => {
+      const el    = row as HTMLElement;
+      const dot   = el.querySelector('div:first-child') as HTMLElement | null;
+      const label = el.querySelector('div:last-child')  as HTMLElement | null;
+      if (i < 8) {
+        el.style.borderColor = 'rgba(0,168,150,0.2)';
+        el.style.background  = 'rgba(0,168,150,0.04)';
+        if (dot)   { dot.style.background = '#00A896'; dot.innerHTML = '<i class="ti ti-check" style="font-size:13px;color:#fff;"></i>'; }
+        if (label) { label.style.color = '#00A896'; label.textContent = 'Done'; }
+      }
+    });
+  }
 </script>
 
 <style>

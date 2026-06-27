@@ -1,0 +1,155 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const emailLog = [
+  { date:"Today 9:14am",  subject:"Welcome to GHO Academy — Your Dashboard is Live",        recipients:"All (18)",   sent_by:"Admin",  open_rate:"78%" },
+  { date:"25 Jun 2026",   subject:"Module 1 Pre-Reading: Get Ready for Launch",              recipients:"All (18)",   sent_by:"Admin",  open_rate:"71%" },
+  { date:"20 Jun 2026",   subject:"Your GHO Academy Registration is Confirmed",              recipients:"All (18)",   sent_by:"System", open_rate:"94%" },
+  { date:"18 Jun 2026",   subject:"Early Bird Seats: Only 6 Remaining — GHO Academy",       recipients:"Waitlist",   sent_by:"Admin",  open_rate:"62%" },
+  { date:"15 Jun 2026",   subject:"Applications Now Open — GHO Academy Cohort 1",           recipients:"List (340)", sent_by:"Admin",  open_rate:"41%" },
+];
+---
+<AdminLayout title="Emails — GHO Academy Admin" activeNav="emails">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:3px;">Email Communications</h1>
+      <p style="font-size:13px;color:#4A5568;">Sent log and compose interface · Cohort 1</p>
+    </div>
+    <button
+      id="compose-toggle-btn"
+      style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.2s;"
+      onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'"
+    >
+      <i class="ti ti-pencil" style="font-size:15px;"></i>Compose New Email
+    </button>
+  </div>
+
+  <!-- Stats row -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;">
+    {[
+      { label:"Emails Sent",  val:"54",       sub:"Total since Cohort 1 opened",    color:"#0B1C3D", icon:"ti-send"      },
+      { label:"Open Rate",    val:"68%",      sub:"Average across all campaigns",   color:"#00A896", icon:"ti-mail-opened"},
+      { label:"Last Sent",    val:"Today",    sub:"9:14 AM — Welcome email",        color:"#C9922A", icon:"ti-clock"     },
+    ].map(s => (
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;border-top:3px solid;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.75rem;">
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6B7280;font-weight:600;">{s.label}</span>
+          <i class={`ti ${s.icon}`} style={`font-size:18px;color:${s.color};`}></i>
+        </div>
+        <div style={`font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:${s.color};line-height:1;margin-bottom:4px;`}>{s.val}</div>
+        <div style="font-size:11px;color:#9CA3AF;">{s.sub}</div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Compose panel (collapsed by default) -->
+  <div id="compose-panel" style="display:none;background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.5rem;margin-bottom:1.5rem;">
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1.25rem;">New Email</h2>
+    <div style="display:grid;gap:1rem;">
+      <div>
+        <label style="display:block;font-size:11px;font-weight:600;color:#4A5568;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">To</label>
+        <select style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;color:#0B1C3D;background:#fff;outline:none;cursor:pointer;">
+          <option>All Participants (18)</option>
+          <option>Early Bird Only (14)</option>
+          <option>Standard Only (4)</option>
+          <option>Individual Participant</option>
+        </select>
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:600;color:#4A5568;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Subject</label>
+        <input type="text" placeholder="Email subject line..." style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;color:#0B1C3D;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C9922A'" onblur="this.style.borderColor='#E8E5DE'" />
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:600;color:#4A5568;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Message</label>
+        <textarea rows="5" placeholder="Write your message here..." style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:13px;color:#0B1C3D;outline:none;resize:vertical;font-family:'Inter',sans-serif;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C9922A'" onblur="this.style.borderColor='#E8E5DE'"></textarea>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button
+          onclick="window.showToast('Email queued. Mailchimp will send within 5 minutes.');"
+          style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 24px;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.2s;"
+          onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'"
+        >
+          <i class="ti ti-send" style="font-size:15px;"></i>Send Email
+        </button>
+        <button
+          id="compose-cancel-btn"
+          style="background:transparent;color:#4A5568;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:10px 20px;border:1.5px solid #E8E5DE;border-radius:2px;cursor:pointer;transition:all 0.2s;"
+          onmouseover="this.style.borderColor='#9CA3AF'" onmouseout="this.style.borderColor='#E8E5DE'"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sent email log -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;">
+    <div style="padding:1rem 1.25rem;border-bottom:1px solid #E8E5DE;display:flex;align-items:center;justify-content:space-between;">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;">Sent Log</h2>
+      <span style="font-size:12px;color:#9CA3AF;">{emailLog.length} emails</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#F5F3EE;">
+            {["Date","Subject","Recipients","Sent by","Open Rate","Actions"].map(h => (
+              <th style="padding:9px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {emailLog.map(row => (
+            <tr style="border-bottom:1px solid #F5F3EE;" onmouseover="this.style.background='#FAFAF9'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;font-size:12px;color:#9CA3AF;white-space:nowrap;">{row.date}</td>
+              <td style="padding:10px 14px;font-size:13px;font-weight:500;color:#0B1C3D;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{row.subject}</td>
+              <td style="padding:10px 14px;font-size:12px;color:#4A5568;white-space:nowrap;">{row.recipients}</td>
+              <td style="padding:10px 14px;">
+                <span style={`font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;${row.sent_by==='System'?'background:rgba(107,114,128,0.1);color:#6B7280;':'background:rgba(201,146,42,0.1);color:#C9922A;'}`}>{row.sent_by}</span>
+              </td>
+              <td style="padding:10px 14px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div style="flex:1;max-width:80px;height:5px;background:#E8E5DE;border-radius:9999px;overflow:hidden;">
+                    <div style={`height:100%;width:${row.open_rate};background:#00A896;border-radius:9999px;`}></div>
+                  </div>
+                  <span style="font-size:12px;font-weight:600;color:#0B1C3D;">{row.open_rate}</span>
+                </div>
+              </td>
+              <td style="padding:10px 14px;">
+                <div style="display:flex;gap:6px;">
+                  <button onclick="window.showToast('Email preview coming soon.');" style="background:none;border:1px solid #E8E5DE;border-radius:3px;padding:5px 8px;cursor:pointer;color:#4A5568;font-size:13px;transition:all 0.15s;" onmouseover="this.style.borderColor='#00A896';this.style.color='#00A896';" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#4A5568';">
+                    <i class="ti ti-eye"></i>
+                  </button>
+                  <button onclick="window.showToast('Resend queued.');" style="background:none;border:1px solid #E8E5DE;border-radius:3px;padding:5px 8px;cursor:pointer;color:#4A5568;font-size:13px;transition:all 0.15s;" onmouseover="this.style.borderColor='#C9922A';this.style.color='#C9922A';" onmouseout="this.style.borderColor='#E8E5DE';this.style.color='#4A5568';">
+                    <i class="ti ti-refresh"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</AdminLayout>
+
+<script>
+  const toggleBtn  = document.getElementById('compose-toggle-btn');
+  const cancelBtn  = document.getElementById('compose-cancel-btn');
+  const panel      = document.getElementById('compose-panel');
+
+  toggleBtn?.addEventListener('click', () => {
+    if (panel) panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  });
+  cancelBtn?.addEventListener('click', () => {
+    if (panel) panel.style.display = 'none';
+  });
+</script>
+
+<style>
+  @media (max-width: 900px) {
+    div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+  }
+</style>

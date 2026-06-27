@@ -3,25 +3,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const roles = [
   {
-    id:       "participant",
-    label:    "Participant",
-    sub:      "Student Dashboard",
+    id:       "student",
+    label:    "Student",
+    sub:      "Cohort 1 Participant",
     initials: "AO",
     name:     "Amara Okonkwo",
-    org:      "WHO Nigeria · Early Bird",
+    org:      "WHO Nigeria",
     email:    "amara@who.int",
     password: "demo2026",
     redirect: "/dashboard",
     accent:   "#00A896",
-    icon:     "ti-school",
+    icon:     "ti-user-graduate",
   },
   {
     id:       "admin",
-    label:    "Admin",
-    sub:      "Cohort Management",
-    initials: "LB",
-    name:     "Dr. Luchuo Bain",
-    org:      "GHO Academy · Director",
+    label:    "Administrator",
+    sub:      "Course Coordinator",
+    initials: "GB",
+    name:     "Dr. Bain Team",
+    org:      "GHO Academy",
     email:    "admin@ghoacademy.org",
     password: "admin2026",
     redirect: "/admin",
@@ -29,17 +29,17 @@ const roles = [
     icon:     "ti-settings",
   },
   {
-    id:       "faculty",
-    label:    "Faculty",
-    sub:      "Session Facilitator",
-    initials: "FK",
-    name:     "Dr. Fatima Kone",
-    org:      "GHO Academy · Lead Faculty",
-    email:    "faculty@ghoacademy.org",
-    password: "faculty2026",
+    id:       "reviewer",
+    label:    "Stakeholder",
+    sub:      "Programme Reviewer",
+    initials: "SC",
+    name:     "Prof. Sarah Chen",
+    org:      "University of Oxford",
+    email:    "reviewer@oxfordgh.org",
+    password: "review2026",
     redirect: "/dashboard",
-    accent:   "#7C3AED",
-    icon:     "ti-presentation",
+    accent:   "#C9922A",
+    icon:     "ti-eye",
   },
 ];
 ---
@@ -127,7 +127,7 @@ const roles = [
             onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'">
             Sign In
           </button>
-          <div id="login-error" style="display:none;font-size:13px;color:#EF4444;margin-top:2px;line-height:1.4;">Invalid credentials. Select a demo role above or use: amara@who.int / demo2026</div>
+          <div id="login-error" style="display:none;font-size:13px;color:#EF4444;margin-top:2px;text-align:center;line-height:1.4;">Invalid credentials. Select a demo role above.</div>
         </form>
 
         <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07);text-align:center;">
@@ -149,9 +149,9 @@ const roles = [
 
 <script>
   const ROLES = [
-    { id:"participant", email:"amara@who.int",           password:"demo2026",    redirect:"/dashboard", initials:"AO", name:"Amara Okonkwo",   org:"WHO Nigeria · Early Bird",      accent:"#00A896" },
-    { id:"admin",       email:"admin@ghoacademy.org",    password:"admin2026",   redirect:"/admin",     initials:"LB", name:"Dr. Luchuo Bain",  org:"GHO Academy · Director",        accent:"#C9922A" },
-    { id:"faculty",     email:"faculty@ghoacademy.org",  password:"faculty2026", redirect:"/dashboard", initials:"FK", name:"Dr. Fatima Kone",  org:"GHO Academy · Lead Faculty",    accent:"#7C3AED" },
+    { id:"student",  label:"Student",       email:"amara@who.int",          password:"demo2026",   redirect:"/dashboard", initials:"AO", name:"Amara Okonkwo",    country:"Nigeria",        org:"WHO Nigeria",            progress:30  },
+    { id:"admin",    label:"Administrator", email:"admin@ghoacademy.org",   password:"admin2026",  redirect:"/admin",     initials:"GB", name:"Dr. Bain Team",   country:"Global",         org:"GHO Academy",            progress:100 },
+    { id:"reviewer", label:"Stakeholder",   email:"reviewer@oxfordgh.org",  password:"review2026", redirect:"/dashboard", initials:"SC", name:"Prof. Sarah Chen", country:"United Kingdom", org:"University of Oxford",   progress:80  },
   ];
 
   let activeRole: string | null = null;
@@ -182,15 +182,19 @@ const roles = [
       const chk = document.getElementById(`role-check-${rid}`);
       if (chk) chk.style.display = 'block';
 
+      // Update Sign In button text
+      const signinBtn = document.getElementById('signin-btn');
+      if (signinBtn) signinBtn.textContent = `Sign In as ${role.label} →`;
+
       // Show preview
       const preview = document.getElementById('selected-role-preview');
       const avatar  = document.getElementById('preview-avatar');
-      const name    = document.getElementById('preview-name');
-      const org     = document.getElementById('preview-org');
+      const nameEl  = document.getElementById('preview-name');
+      const orgEl   = document.getElementById('preview-org');
       if (preview) { preview.style.opacity = '1'; preview.style.pointerEvents = 'auto'; }
       if (avatar)  { avatar.textContent = role.initials; avatar.style.background = `linear-gradient(135deg,#0B1C3D,${role.accent})`; }
-      if (name)    name.textContent  = role.name;
-      if (org)     org.textContent   = role.org;
+      if (nameEl)  nameEl.textContent = role.name;
+      if (orgEl)   orgEl.textContent  = role.org;
 
       // Clear error
       const errEl = document.getElementById('login-error');
@@ -205,18 +209,22 @@ const roles = [
     const errEl    = document.getElementById('login-error');
     const btn      = document.getElementById('signin-btn') as HTMLButtonElement;
 
-    // Match any valid role
+    // Match against the 3 demo roles
     const matched = ROLES.find(r => r.email === email && r.password === password);
-    // Also allow legacy demo credentials
-    const legacyOk = (email === 'amara@who.int' && password === 'demo2026');
 
-    if (matched || legacyOk) {
+    if (matched) {
       if (errEl) errEl.style.display = 'none';
-      btn.textContent = 'Signing in...';
+      // Save role context to sessionStorage
+      sessionStorage.setItem('gho_role',     matched.id);
+      sessionStorage.setItem('gho_name',     matched.name);
+      sessionStorage.setItem('gho_initials', matched.initials);
+      sessionStorage.setItem('gho_country',  matched.country);
+      sessionStorage.setItem('gho_org',      matched.org);
+      sessionStorage.setItem('gho_progress', String(matched.progress));
+      btn.textContent  = 'Signing in...';
       btn.style.opacity = '0.75';
       btn.disabled = true;
-      const dest = matched?.redirect ?? '/dashboard';
-      setTimeout(() => { window.location.href = dest; }, 700);
+      setTimeout(() => { window.location.href = matched.redirect; }, 700);
     } else {
       if (errEl) errEl.style.display = 'block';
     }

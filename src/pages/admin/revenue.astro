@@ -1,0 +1,144 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+const kpis = [
+  { label:"Total Revenue",          val:"$14,154", sub:"Confirmed payments received",      color:"#C9922A", icon:"ti-currency-dollar" },
+  { label:"Projected Full Cohort",  val:"$26,100", sub:"50 seats × $522 blended rate",     color:"#0B1C3D", icon:"ti-chart-line"      },
+  { label:"Avg per Seat",           val:"$786",    sub:"Across all confirmed registrations",color:"#00A896", icon:"ti-users"           },
+  { label:"Refunds",                val:"$0",      sub:"No refund requests to date",        color:"#4A5568", icon:"ti-receipt-refund"  },
+];
+
+const transactions = [
+  { date:"15 Jun 2026", name:"Amara Okonkwo",      tier:"Early Bird", amount:"$397", method:"Stripe",      status:"Confirmed" },
+  { date:"15 Jun 2026", name:"Samuel Kipkoech",    tier:"Early Bird", amount:"$397", method:"Flutterwave", status:"Confirmed" },
+  { date:"16 Jun 2026", name:"Nadia Mukasine",     tier:"Early Bird", amount:"$397", method:"Stripe",      status:"Confirmed" },
+  { date:"17 Jun 2026", name:"Priya Bhattacharya", tier:"Standard",   amount:"$597", method:"Stripe",      status:"Confirmed" },
+  { date:"18 Jun 2026", name:"Temi Adeyemi",       tier:"Early Bird", amount:"$397", method:"Flutterwave", status:"Confirmed" },
+  { date:"19 Jun 2026", name:"Chidi Lebrun",       tier:"Early Bird", amount:"$397", method:"Stripe",      status:"Confirmed" },
+  { date:"20 Jun 2026", name:"Grace Ssemakula",    tier:"Early Bird", amount:"$397", method:"Stripe",      status:"Confirmed" },
+  { date:"21 Jun 2026", name:"Mohamed Al-Hassan",  tier:"Standard",   amount:"$597", method:"Stripe",      status:"Confirmed" },
+];
+---
+<AdminLayout title="Revenue — GHO Academy Admin" activeNav="payments">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#0B1C3D;text-transform:uppercase;margin-bottom:3px;">Revenue</h1>
+      <p style="font-size:13px;color:#4A5568;">Financial overview · Cohort 1</p>
+    </div>
+    <button
+      id="export-csv-btn"
+      style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:9px 20px;border:none;border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:background 0.2s;"
+      onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'"
+    >
+      <i class="ti ti-table-export" style="font-size:15px;"></i>Export CSV
+    </button>
+  </div>
+
+  <!-- KPI cards -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+    {kpis.map(s => (
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;border-top:3px solid;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.75rem;">
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#6B7280;font-weight:600;">{s.label}</span>
+          <i class={`ti ${s.icon}`} style={`font-size:18px;color:${s.color};`}></i>
+        </div>
+        <div style={`font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:${s.color};line-height:1;margin-bottom:4px;`}>{s.val}</div>
+        <div style="font-size:11px;color:#9CA3AF;">{s.sub}</div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Revenue breakdown -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;">
+    <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1.25rem;">Revenue Breakdown</h2>
+    {[
+      { label:"Early Bird",         seats:14, price:"$397", total:"$5,558",  pct:22, color:"#00A896", dash:false },
+      { label:"Standard",           seats:4,  price:"$597", total:"$2,388",  pct:9,  color:"#C9922A", dash:false },
+      { label:"Projected Remaining",seats:32, price:"$597", total:"$19,104", pct:73, color:"#E8E5DE", dash:true  },
+    ].map(row => (
+      <div style="margin-bottom:1rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style={`width:10px;height:10px;border-radius:50%;background:${row.dash?'transparent':''+row.color};${row.dash?'border:2px dashed #9CA3AF;':''}`}></div>
+            <span style="font-size:13px;font-weight:500;color:#0B1C3D;">{row.label}</span>
+            <span style="font-size:12px;color:#9CA3AF;">{row.seats} seats × {row.price}</span>
+          </div>
+          <span style={`font-size:13px;font-weight:600;color:${row.dash?'#9CA3AF':'#0B1C3D'};`}>{row.total}</span>
+        </div>
+        <div style="height:8px;background:#F5F3EE;border-radius:9999px;overflow:hidden;">
+          <div style={`height:100%;width:${row.pct}%;background:${row.color};border-radius:9999px;${row.dash?'background:repeating-linear-gradient(90deg,#D1D5DB 0,#D1D5DB 6px,transparent 6px,transparent 12px);':''}`}></div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Transaction table -->
+  <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;overflow:hidden;">
+    <div style="padding:1rem 1.25rem;border-bottom:1px solid #E8E5DE;display:flex;align-items:center;justify-content:space-between;">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;">Transaction Log</h2>
+      <span style="font-size:12px;color:#9CA3AF;">{transactions.length} transactions</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;">
+        <thead>
+          <tr style="background:#F5F3EE;">
+            {["Date","Name","Tier","Amount","Payment Method","Status"].map(h => (
+              <th style="padding:9px 14px;text-align:left;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid #E8E5DE;">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map(t => (
+            <tr style="border-bottom:1px solid #F5F3EE;" onmouseover="this.style.background='#FAFAF9'" onmouseout="this.style.background=''">
+              <td style="padding:10px 14px;font-size:12px;color:#9CA3AF;white-space:nowrap;">{t.date}</td>
+              <td style="padding:10px 14px;font-size:13px;font-weight:500;color:#0B1C3D;">{t.name}</td>
+              <td style="padding:10px 14px;">
+                <span style={`font-size:11px;font-weight:600;padding:2px 8px;border-radius:2px;${t.tier==='Early Bird'?'background:rgba(0,168,150,0.08);color:#00A896;':'background:rgba(201,146,42,0.1);color:#C9922A;'}`}>{t.tier}</span>
+              </td>
+              <td style="padding:10px 14px;font-size:13px;font-weight:600;color:#0B1C3D;">{t.amount}</td>
+              <td style="padding:10px 14px;">
+                <span style="font-size:12px;color:#4A5568;display:flex;align-items:center;gap:5px;">
+                  <i class={`ti ${t.method==='Stripe'?'ti-credit-card':'ti-world'}`} style="font-size:13px;color:#6B7280;"></i>{t.method}
+                </span>
+              </td>
+              <td style="padding:10px 14px;">
+                <span style="font-size:11px;font-weight:600;background:rgba(0,168,150,0.08);color:#00A896;padding:2px 8px;border-radius:2px;">{t.status}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</AdminLayout>
+
+<script>
+  document.getElementById('export-csv-btn')?.addEventListener('click', () => {
+    const rows = [
+      ['Date','Name','Tier','Amount','Payment Method','Status'],
+      ['15 Jun 2026','Amara Okonkwo','Early Bird','$397','Stripe','Confirmed'],
+      ['15 Jun 2026','Samuel Kipkoech','Early Bird','$397','Flutterwave','Confirmed'],
+      ['16 Jun 2026','Nadia Mukasine','Early Bird','$397','Stripe','Confirmed'],
+      ['17 Jun 2026','Priya Bhattacharya','Standard','$597','Stripe','Confirmed'],
+      ['18 Jun 2026','Temi Adeyemi','Early Bird','$397','Flutterwave','Confirmed'],
+      ['19 Jun 2026','Chidi Lebrun','Early Bird','$397','Stripe','Confirmed'],
+      ['20 Jun 2026','Grace Ssemakula','Early Bird','$397','Stripe','Confirmed'],
+      ['21 Jun 2026','Mohamed Al-Hassan','Standard','$597','Stripe','Confirmed'],
+    ];
+    const csv  = rows.map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = 'gho-academy-revenue-cohort1.csv'; a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+<style>
+  @media (max-width: 1100px) {
+    div[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+</style>
