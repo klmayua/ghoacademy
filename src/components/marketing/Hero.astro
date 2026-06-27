@@ -2,102 +2,97 @@
 import { SITE } from '../../data/site';
 const { course, instructor } = SITE;
 ---
-<section
-  id="hero"
-  style="background:linear-gradient(135deg,#041326 0%,#071A35 100%);position:relative;overflow:hidden;min-height:calc(100vh - 116px);"
->
-  <!-- Subtle grid texture -->
-  <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(214,164,58,0.03) 79px,rgba(214,164,58,0.03) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(214,164,58,0.02) 79px,rgba(214,164,58,0.02) 80px);pointer-events:none;z-index:0;"></div>
-  <!-- Teal radial glow left -->
-  <div style="position:absolute;top:0;left:-5%;width:55%;height:100%;background:radial-gradient(ellipse at 20% 50%,rgba(28,199,201,0.06) 0%,transparent 65%);pointer-events:none;z-index:0;"></div>
+<section id="hero" style="position:relative;overflow:hidden;min-height:calc(100vh - 116px);background:#041326;">
 
-  <!-- HERO IMAGE — right panel, full height, with left-edge fade -->
-  <div style="position:absolute;top:0;right:0;width:55%;height:100%;z-index:0;">
+  <!-- FULL-BLEED CINEMATIC IMAGE — covers entire hero, merges into content via gradient scrims -->
+  <div style="position:absolute;inset:0;z-index:0;">
     <img
       src="/hero-team.png"
-      alt="Global health leaders collaborating"
+      alt="Global health leaders collaborating around a digital world map"
       style="width:100%;height:100%;object-fit:cover;object-position:center top;"
     />
-    <!-- Left-to-right gradient fade to merge with text side -->
-    <div style="position:absolute;inset:0;background:linear-gradient(90deg,#041326 0%,rgba(4,19,38,0.7) 30%,rgba(4,19,38,0.1) 70%,transparent 100%);"></div>
-    <!-- Bottom fade -->
-    <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(0deg,#041326,transparent);"></div>
+    <!-- Strong left scrim: text is legible, image shows through on right -->
+    <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(4,19,38,0.97) 0%,rgba(4,19,38,0.88) 35%,rgba(4,19,38,0.55) 58%,rgba(4,19,38,0.12) 80%,transparent 100%);"></div>
+    <!-- Bottom fade to next section -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(0deg,#041326 0%,transparent 100%);"></div>
+    <!-- Top fade -->
+    <div style="position:absolute;top:0;left:0;right:0;height:15%;background:linear-gradient(180deg,rgba(4,19,38,0.5) 0%,transparent 100%);"></div>
   </div>
 
-  <!-- CONTENT — left 45% -->
+  <!-- CONTENT OVERLAY -->
   <div style="position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:5rem 2.5rem 5rem;display:flex;align-items:center;min-height:calc(100vh - 116px);">
-    <div style="width:min(560px,55%);">
+    <div style="width:min(560px,52%);">
 
       <!-- Eyebrow -->
-      <p style="font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:1.5rem;display:flex;align-items:center;gap:8px;">
-        <span style="width:24px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+      <p style="font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;">
+        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
         Executive Education &nbsp;·&nbsp; {course.cohort}
       </p>
 
-      <!-- Headline -->
-      <div style="margin-bottom:1.5rem;">
-        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,5.5vw,82px);font-weight:800;color:#F8F8F8;line-height:0.95;text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:0.2rem;">Global Public Health</h1>
-        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,5.5vw,82px);font-weight:800;color:#D6A43A;line-height:0.92;text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:0.2rem;">Innovation,</h1>
-        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,5.5vw,82px);font-weight:800;color:#D6A43A;line-height:0.92;text-transform:uppercase;letter-spacing:-0.5px;">Entrepreneurship &amp; Leadership</h1>
+      <!-- Headline — sized to match reference -->
+      <div style="margin-bottom:1.25rem;">
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,3.8vw,58px);font-weight:800;color:#F8F8F8;line-height:1;text-transform:uppercase;letter-spacing:-0.5px;margin:0;">Global Public Health</h1>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,3.8vw,58px);font-weight:800;color:#D6A43A;line-height:1;text-transform:uppercase;letter-spacing:-0.5px;margin:0;">Innovation,</h1>
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,3.8vw,58px);font-weight:800;color:#D6A43A;line-height:1;text-transform:uppercase;letter-spacing:-0.5px;margin:0;">Entrepreneurship &amp; Leadership</h1>
       </div>
 
       <!-- Body copy -->
-      <p style="font-size:16px;color:rgba(248,248,248,0.72);line-height:1.7;margin-bottom:2rem;max-width:480px;">
+      <p style="font-size:14px;color:rgba(248,248,248,0.72);line-height:1.7;margin-bottom:1.75rem;max-width:420px;">
         An 8-week executive program equipping leaders to solve complex global health challenges, drive innovation, and transform systems for impact.
       </p>
 
-      <!-- Feature cards -->
-      <div style="display:flex;gap:10px;margin-bottom:2.25rem;flex-wrap:wrap;">
+      <!-- Feature chips — compact, tight, no card boxes -->
+      <div style="display:flex;gap:8px;margin-bottom:1.75rem;flex-wrap:wrap;">
         {[
-          { icon: 'ti-clock',       title: '8 Weeks',         sub: 'Live Online Every Week'   },
-          { icon: 'ti-certificate', title: 'Certificate',      sub: 'Executive Certificate'    },
-          { icon: 'ti-school',      title: 'Oxford Faculty',   sub: 'World-class Instructors'  },
-          { icon: 'ti-robot',       title: 'AI for Health',    sub: 'Integrated AI Module'     },
+          { icon: 'ti-clock',       title: '8 Weeks',       sub: 'Live Online Every Week'  },
+          { icon: 'ti-certificate', title: 'Certificate',    sub: 'Executive Certificate'   },
+          { icon: 'ti-school',      title: 'Oxford Faculty', sub: 'World-class Instructors' },
+          { icon: 'ti-robot',       title: 'AI for Health',  sub: 'Integrated AI Module'    },
         ].map(f => (
-          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(214,164,58,0.2);border-radius:8px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px;flex:1;min-width:120px;">
-            <i class={`ti ${f.icon}`} style="font-size:20px;color:#D6A43A;flex-shrink:0;margin-top:1px;"></i>
+          <div style="background:rgba(4,19,38,0.55);backdrop-filter:blur(6px);border:1px solid rgba(214,164,58,0.18);border-radius:6px;padding:8px 12px;display:flex;align-items:flex-start;gap:9px;flex:1;min-width:110px;">
+            <i class={`ti ${f.icon}`} style="font-size:16px;color:#D6A43A;flex-shrink:0;margin-top:1px;"></i>
             <div>
-              <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.5px;line-height:1.1;">{f.title}</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:2px;line-height:1.3;">{f.sub}</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:0.5px;line-height:1.1;">{f.title}</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.42);margin-top:1px;line-height:1.3;">{f.sub}</div>
             </div>
           </div>
         ))}
       </div>
 
       <!-- CTAs -->
-      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:2.5rem;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:2rem;">
         <a
           href="#register"
-          style="background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:14px 30px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s,transform 0.15s;"
+          style="background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 26px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s,transform 0.15s;"
           onmouseover="this.style.background='#c49030';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''"
         >
-          Apply Now — September 2026 <i class="ti ti-arrow-right" style="font-size:16px;"></i>
+          Apply Now — September 2026 <i class="ti ti-arrow-right" style="font-size:14px;"></i>
         </a>
         <a
           href="#curriculum"
-          style="background:transparent;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 24px;border:1.5px solid rgba(255,255,255,0.25);border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:border-color 0.2s;"
-          onmouseover="this.style.borderColor='rgba(255,255,255,0.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.25)'"
+          style="background:rgba(255,255,255,0.08);backdrop-filter:blur(4px);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:11px 22px;border:1px solid rgba(255,255,255,0.22);border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:border-color 0.2s,background 0.2s;"
+          onmouseover="this.style.borderColor='rgba(255,255,255,0.5)';this.style.background='rgba(255,255,255,0.13)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.22)';this.style.background='rgba(255,255,255,0.08)'"
         >
-          View Curriculum <i class="ti ti-arrow-right" style="font-size:15px;"></i>
+          View Curriculum <i class="ti ti-arrow-right" style="font-size:14px;"></i>
         </a>
         <a
           href="#instructor"
-          style="display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:color 0.2s;"
+          style="display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,0.55);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:color 0.2s;"
           onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.55)'"
         >
-          <span style="width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);display:inline-flex;align-items:center;justify-content:center;">
-            <i class="ti ti-player-play" style="font-size:14px;color:#fff;"></i>
+          <span style="width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.25);display:inline-flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+            <i class="ti ti-player-play" style="font-size:12px;color:#fff;"></i>
           </span>
           Watch Introduction
         </a>
       </div>
 
       <!-- Instructor trust line -->
-      <div style="display:flex;align-items:center;gap:12px;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);">
-        <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#D6A43A,#1CC7C9);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#041326;flex-shrink:0;">LB</div>
+      <div style="display:flex;align-items:center;gap:12px;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07);">
+        <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#D6A43A,#1CC7C9);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#041326;flex-shrink:0;">LB</div>
         <div>
           <div style="font-size:13px;color:#fff;font-weight:600;">Led by {instructor.name}</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.4);">{instructor.credentials} · University of Oxford · African Academy of Sciences</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.38);">{instructor.credentials} · University of Oxford · African Academy of Sciences</div>
         </div>
       </div>
 
@@ -107,14 +102,16 @@ const { course, instructor } = SITE;
 
 <style>
   @media (max-width: 900px) {
-    #hero > div:nth-child(4) { padding: 5rem 1.5rem 4rem !important; }
-    #hero > div:nth-child(4) > div { width: 100% !important; }
-    #hero > div:nth-child(3) { width: 100% !important; opacity: 0.25 !important; }
-    #hero > div:nth-child(3) > img { object-position: center center !important; }
-    #hero { min-height: auto !important; }
+    #hero > div:last-child { padding: 4rem 1.5rem 3.5rem !important; }
+    #hero > div:last-child > div { width: 100% !important; }
+    #hero > div:first-child > img { object-position: 70% center !important; }
+    #hero > div:first-child > div:first-of-type {
+      background: linear-gradient(105deg, rgba(4,19,38,0.97) 0%, rgba(4,19,38,0.92) 50%, rgba(4,19,38,0.75) 100%) !important;
+    }
+    #hero { min-height: 90vh !important; }
   }
   @media (max-width: 600px) {
-    #hero > div:nth-child(4) > div > div:nth-child(4) { flex-direction: column !important; }
-    #hero > div:nth-child(4) > div > div:nth-child(4) > a { width: 100% !important; justify-content: center !important; }
+    #hero > div:last-child > div > div:nth-child(5) { flex-direction: column !important; }
+    #hero > div:last-child > div > div:nth-child(5) > a:first-child { width: 100% !important; justify-content: center !important; }
   }
 </style>
