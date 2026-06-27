@@ -18,7 +18,7 @@
   </div>
 
   <!-- CONTENT — floats over image, left-aligned -->
-  <div style="max-width:1440px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+  <div class="content-grid" style="max-width:1440px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
 
     <!-- Left: headline + copy + tags -->
     <div>
@@ -53,7 +53,7 @@
     </div>
 
     <!-- Right: stat cards -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <div class="stats-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
       {[
         { num: "30–50",  label: "Cohort size",        sub: "Intentionally small for impact"     },
         { num: "10",     label: "Live modules",        sub: "Each 2 hours with Dr. Bain"         },
@@ -71,22 +71,21 @@
   </div>
 
   <!-- Wave divider: About (dark) → Outcomes (light #F5F0E8) -->
-  <div style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0;z-index:2;">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:80px;">
-      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,10 1440,40 L1440,80 L0,80 Z" fill="#F5F0E8"/>
+  <div class="wave-divider" style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0;z-index:2;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:60px;">
+      <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,8 1440,30 L1440,60 L0,60 Z" fill="#F5F0E8"/>
     </svg>
   </div>
 </section>
 
 <style>
   @media (max-width: 900px) {
-    #about > div:last-child { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-    #about > div:first-child > div:first-of-type {
-      background: linear-gradient(100deg, rgba(14,34,55,0.98) 0%, rgba(14,34,55,0.95) 100%) !important;
-    }
-    #about { padding: 6rem 1.5rem !important; }
+    #about .content-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+    #about { padding: 5rem 1.5rem 7rem !important; }
   }
-  @media (max-width: 480px) {
-    #about > div:last-child > div:last-child { grid-template-columns: 1fr 1fr !important; }
+  @media (max-width: 768px) {
+    #about .content-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+    #about .stats-grid   { grid-template-columns: 1fr 1fr !important; gap: 0.75rem !important; }
+    #about { padding: 4rem 1.25rem 6rem !important; }
   }
 </style>

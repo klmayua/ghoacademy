@@ -14,7 +14,7 @@ const { course } = SITE;
       <p style="font-size:15px;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto;">A fraction of the cost of comparable executive education at Oxford, Stellenbosch, or Saïd Business School — with the same calibre of instruction.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:2rem;">
+    <div class="pricing-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:2rem;">
 
       <!-- Early Bird -->
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:2rem;position:relative;">
@@ -32,7 +32,7 @@ const { course } = SITE;
       </div>
 
       <!-- Standard (featured) -->
-      <div style="background:rgba(214,164,58,0.08);border:2px solid #D6A43A;border-radius:14px;padding:2rem;position:relative;transform:scale(1.03);">
+      <div class="pricing-featured" style="background:rgba(214,164,58,0.08);border:2px solid #D6A43A;border-radius:14px;padding:2rem;position:relative;transform:scale(1.03);">
         <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#D6A43A;color:#041326;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 16px;border-radius:20px;white-space:nowrap;">Most Popular</div>
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#D6A43A;font-weight:700;margin-bottom:0.5rem;margin-top:0.5rem;">Standard</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:800;color:#F5F0E8;line-height:1;margin-bottom:4px;">$597</div>
@@ -88,13 +88,11 @@ const { course } = SITE;
 
 <style>
   @media (max-width: 900px) {
-    #pricing > div > div:nth-child(3) { grid-template-columns: 1fr !important; }
-    #pricing > div > div:nth-child(3) > div:nth-child(2) { transform: none !important; }
+    .pricing-grid { grid-template-columns: 1fr !important; }
+    .pricing-featured { transform: none !important; }
   }
-  @media (max-width: 480px) {
-    #pricing { padding: 5rem 1.5rem !important; }
-    #register { padding: 5rem 1.5rem !important; }
-    #register > div > div:nth-child(3) { flex-direction: column !important; }
-    #register > div > div:nth-child(3) > a { width: 100% !important; justify-content: center !important; }
+  @media (max-width: 768px) {
+    #pricing { padding: 3.5rem 1.25rem !important; }
+    #register { padding: 4rem 1.25rem !important; }
   }
 </style>

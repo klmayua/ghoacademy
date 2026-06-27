@@ -16,7 +16,7 @@ import { MODULES } from '../../data/site';
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div class="curriculum-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
       {MODULES.map((m, i) => (
         <a
           href={`/modules/${m.slug}`}
@@ -55,7 +55,7 @@ import { MODULES } from '../../data/site';
 
     <!-- Capstone callout -->
     <div style="margin-top:2rem;background:#071A35;border:none;border-top:3px solid #D6A43A;padding:2.5rem;border-radius:14px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+      <div class="capstone-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
         <div>
           <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#D6A43A;font-weight:700;margin-bottom:0.75rem;">Signature Experience</div>
           <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:0.875rem;line-height:1;">Stakeholder-Driven Capstone Project</h3>
@@ -80,19 +80,21 @@ import { MODULES } from '../../data/site';
   </div>
 
   <!-- Wave divider: Curriculum (parchment) → Testimonials (dark #0D2040) -->
-  <div style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0;z-index:2;">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:80px;">
-      <path d="M0,45 C300,8 600,52 900,22 C1100,4 1300,42 1440,45 L1440,60 L0,60 Z" fill="#0D2040"/>
+  <div class="wave-divider" style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0;z-index:2;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:60px;">
+      <path d="M0,35 C300,6 600,42 900,18 C1100,3 1300,32 1440,35 L1440,60 L0,60 Z" fill="#0D2040"/>
     </svg>
   </div>
 </section>
 
 <style>
   @media (max-width: 900px) {
-    #curriculum > div > div:nth-child(3) { grid-template-columns: 1fr !important; }
-    #curriculum > div > div:last-child > div { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+    #curriculum .curriculum-grid { grid-template-columns: 1fr !important; }
+    #curriculum .capstone-grid   { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
   }
-  @media (max-width: 480px) {
-    #curriculum { padding: 5rem 1.5rem !important; }
+  @media (max-width: 768px) {
+    #curriculum { padding: 3.5rem 1.25rem 6rem !important; }
+    #curriculum .curriculum-grid { grid-template-columns: 1fr !important; }
+    #curriculum .capstone-grid   { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
   }
 </style>

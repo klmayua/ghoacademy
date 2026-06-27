@@ -11,7 +11,7 @@
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#071A35;text-transform:uppercase;line-height:1;">You Will <span style="color:#B8862A;">Gain</span></h2>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+    <div class="outcomes-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
       {[
         { icon:"ti-bulb",         text:"Practical tools to lead, innovate, and drive change in complex health systems"              },
         { icon:"ti-brain",        text:"Critical and systems thinking skills for real-world problem solving"                       },
@@ -41,7 +41,7 @@
 </section>
 
 <!-- Audience section -->
-<section id="audience" style="background:#071F3A;padding:4.5rem 2.5rem 9rem;position:relative;">
+<section id="audience" style="background:#071F3A;padding:4.5rem 2.5rem 7rem;position:relative;">
   <div style="max-width:1440px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:4rem;">
       <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:0.875rem;display:inline-flex;align-items:center;gap:8px;">
@@ -51,7 +51,7 @@
       </p>
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:1;">Who Should <span style="color:#D6A43A;">Attend</span></h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+    <div class="audience-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
       {[
         { icon:"ti-stethoscope",  title:"Public Health Professionals",  sub:"& Healthcare Providers"     },
         { icon:"ti-microscope",   title:"Researchers & Academics",       sub:"Seeking real-world impact"  },
@@ -77,22 +77,26 @@
   </div>
 
   <!-- Wave divider: Audience (dark) → Curriculum (parchment #EDE7D5) -->
-  <div style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0;z-index:2;">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:80px;">
-      <path d="M0,20 C360,60 720,0 1080,40 C1260,58 1380,22 1440,20 L1440,60 L0,60 Z" fill="#EDE7D5"/>
+  <div class="wave-divider" style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0;z-index:2;">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:60px;">
+      <path d="M0,15 C360,50 720,0 1080,30 C1260,45 1380,16 1440,15 L1440,60 L0,60 Z" fill="#EDE7D5"/>
     </svg>
   </div>
 </section>
 
 <style>
   @media (max-width: 960px) {
-    #outcomes > div > div:last-child { grid-template-columns: repeat(2,1fr) !important; }
-    #audience > div > div:last-child { grid-template-columns: repeat(2,1fr) !important; }
+    #outcomes .outcomes-grid { grid-template-columns: repeat(2,1fr) !important; }
+    #audience .audience-grid { grid-template-columns: repeat(2,1fr) !important; }
   }
-  @media (max-width: 480px) {
-    #outcomes { padding: 5rem 1.5rem !important; }
-    #audience { padding: 5rem 1.5rem !important; }
-    #outcomes > div > div:last-child { grid-template-columns: 1fr !important; }
-    #audience > div > div:last-child { grid-template-columns: 1fr 1fr !important; }
+  @media (max-width: 768px) {
+    #outcomes { padding: 3.5rem 1.25rem 5rem !important; }
+    #audience { padding: 3.5rem 1.25rem 6rem !important; }
+    #outcomes .outcomes-grid { grid-template-columns: 1fr 1fr !important; }
+    #audience .audience-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+  @media (max-width: 400px) {
+    #outcomes .outcomes-grid { grid-template-columns: 1fr !important; }
+    #audience .audience-grid { grid-template-columns: 1fr !important; }
   }
 </style>

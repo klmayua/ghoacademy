@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 <!-- ═══ TOP NAV ═══ Desktop: full | Mobile: Logo left + CTA right only ═══ -->
-<nav id="main-nav" style="position:sticky;top:36px;z-index:50;background:#071A35;border-bottom:1px solid rgba(214,164,58,0.2);transition:background 0.3s,box-shadow 0.3s;">
+<nav id="main-nav" style="position:relative;z-index:50;background:#071A35;border-bottom:1px solid rgba(214,164,58,0.2);transition:background 0.3s,box-shadow 0.3s;">
   <div style="max-width:1440px;margin:0 auto;padding:0 2.5rem;height:80px;display:flex;align-items:center;justify-content:space-between;">
 
     <!-- Logo -->
@@ -110,8 +110,12 @@ const navLinks = [
   .desktop-cta     { display: flex; }
   .mobile-top-cta  { display: none !important; }
   #mobile-bottom-nav { display: none !important; }
-  #mob-more-panel  { display: none; }
-  #mob-more-overlay{ display: none; }
+
+  /* Hide mobile-only elements above 768px */
+  @media (min-width: 769px) {
+    #mob-more-panel   { display: none !important; }
+    #mob-more-overlay { display: none !important; }
+  }
 
   /* ── Mobile (≤768px) ──────────────────────────────────── */
   @media (max-width: 768px) {
@@ -188,7 +192,7 @@ const navLinks = [
     /* More button active state */
     .mob-tab-more.open { color: #D6A43A; }
 
-    /* Overlay */
+    /* Overlay — hidden initially via opacity/pointer-events, not display:none */
     #mob-more-overlay {
       position: fixed;
       inset: 0;
@@ -196,6 +200,13 @@ const navLinks = [
       z-index: 98;
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    #mob-more-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     /* Slide-up More panel */
@@ -273,12 +284,12 @@ const navLinks = [
     const isOpen  = panel?.classList.contains('open');
     if (isOpen) {
       panel?.classList.remove('open');
-      if (overlay) overlay.style.display = 'none';
+      overlay?.classList.remove('open');
       btn?.classList.remove('open');
       btn?.setAttribute('aria-expanded', 'false');
     } else {
       panel?.classList.add('open');
-      if (overlay) overlay.style.display = 'block';
+      overlay?.classList.add('open');
       btn?.classList.add('open');
       btn?.setAttribute('aria-expanded', 'true');
     }
@@ -289,7 +300,7 @@ const navLinks = [
     const overlay = document.getElementById('mob-more-overlay');
     const btn     = document.getElementById('mob-more-btn');
     panel?.classList.remove('open');
-    if (overlay) overlay.style.display = 'none';
+    overlay?.classList.remove('open');
     btn?.classList.remove('open');
     btn?.setAttribute('aria-expanded', 'false');
   }

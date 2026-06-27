@@ -65,5 +65,11 @@ const {
       });
     });
   </script>
+  <style>
+    /* Scroll offset for anchor links — sticky header is 36px + 80px = 116px desktop, 36px + 60px = 96px mobile */
+    @media (max-width: 768px) {
+      section { scroll-margin-top: 96px !important; }
+    }
+  </style>
 </body>
 </html>
