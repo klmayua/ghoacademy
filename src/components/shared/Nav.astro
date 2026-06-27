@@ -1,10 +1,10 @@
 ---
 const navLinks = [
-  { label: "About",      href: "#about"      },
-  { label: "Curriculum", href: "#curriculum" },
-  { label: "Instructor", href: "#instructor" },
-  { label: "Pricing",    href: "#pricing"    },
-  { label: "FAQ",        href: "#faq"        },
+  { label: "About",      href: "/#about"      },
+  { label: "Curriculum", href: "/#curriculum" },
+  { label: "Instructor", href: "/#instructor" },
+  { label: "Pricing",    href: "/#pricing"    },
+  { label: "FAQ",        href: "/#faq"        },
 ];
 ---
 <!-- ═══ TOP NAV ═══ Desktop: full | Mobile: Logo left + CTA right only ═══ -->
@@ -31,14 +31,14 @@ const navLinks = [
       <a href="/login" style="font-size:14px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;letter-spacing:0.3px;transition:color 0.2s;display:inline-flex;align-items:center;gap:5px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
         <i class="ti ti-login" style="font-size:15px;"></i>Sign In
       </a>
-      <a href="#register" style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:11px 24px;border-radius:4px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.background='#c49030';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''">
+      <a href="/apply" style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:11px 24px;border-radius:4px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.background='#c49030';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''">
         <i class="ti ti-arrow-right" style="font-size:15px;"></i>Apply Now — Sep 2026
       </a>
     </div>
 
     <!-- Mobile top-bar: CTA only (no hamburger) -->
     <div class="mobile-top-cta" style="display:none;align-items:center;">
-      <a href="#register" style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:10px 16px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;">
+      <a href="/apply" style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:10px 16px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;">
         <i class="ti ti-arrow-right" style="font-size:14px;"></i>Apply Now
       </a>
     </div>
@@ -48,12 +48,12 @@ const navLinks = [
 
 <!-- ═══ MOBILE BOTTOM NAV BAR (≤768px) ═══ 5 tabs: Home · About · Apply · Curriculum · More ═══ -->
 <nav id="mobile-bottom-nav" aria-label="Mobile bottom navigation">
-  <a href="#hero"       class="mob-tab" id="tab-home"       aria-label="Home">       <i class="ti ti-home"></i><span>Home</span></a>
-  <a href="#about"      class="mob-tab" id="tab-about"      aria-label="About">      <i class="ti ti-info-circle"></i><span>About</span></a>
-  <a href="#register"   class="mob-tab mob-tab-apply"        aria-label="Apply Now">
+  <a href="/#hero"       class="mob-tab" id="tab-home"       aria-label="Home">       <i class="ti ti-home"></i><span>Home</span></a>
+  <a href="/#about"      class="mob-tab" id="tab-about"      aria-label="About">      <i class="ti ti-info-circle"></i><span>About</span></a>
+  <a href="/apply"      class="mob-tab mob-tab-apply"        aria-label="Apply Now">
     <span class="mob-apply-pill"><i class="ti ti-rocket"></i><span>Apply</span></span>
   </a>
-  <a href="#curriculum" class="mob-tab" id="tab-curriculum" aria-label="Curriculum"> <i class="ti ti-books"></i><span>Curriculum</span></a>
+  <a href="/#curriculum" class="mob-tab" id="tab-curriculum" aria-label="Curriculum"> <i class="ti ti-books"></i><span>Curriculum</span></a>
   <button class="mob-tab mob-tab-more" id="mob-more-btn" aria-label="More" aria-expanded="false">
     <i class="ti ti-dots"></i><span>More</span>
   </button>
@@ -73,13 +73,13 @@ const navLinks = [
 
   <!-- Nav links -->
   <div class="mob-more-list">
-    <a href="#instructor" class="mob-more-row mob-more-close">
+    <a href="/#instructor" class="mob-more-row mob-more-close">
       <span class="mob-more-icon"><i class="ti ti-user-star"></i></span><span>Instructor</span><i class="ti ti-chevron-right mob-chev"></i>
     </a>
-    <a href="#faq" class="mob-more-row mob-more-close">
+    <a href="/#faq" class="mob-more-row mob-more-close">
       <span class="mob-more-icon"><i class="ti ti-help-circle"></i></span><span>FAQ</span><i class="ti ti-chevron-right mob-chev"></i>
     </a>
-    <a href="#pricing" class="mob-more-row mob-more-close">
+    <a href="/#pricing" class="mob-more-row mob-more-close">
       <span class="mob-more-icon"><i class="ti ti-tag"></i></span><span>Pricing</span><i class="ti ti-chevron-right mob-chev"></i>
     </a>
     <a href="/login" class="mob-more-row">
@@ -101,7 +101,7 @@ const navLinks = [
   </div>
 
   <!-- CTA inside panel -->
-  <a href="#register" class="mob-more-close" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:1.25rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:8px;text-decoration:none;">
+  <a href="/apply" class="mob-more-close" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:1.25rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:8px;text-decoration:none;">
     <i class="ti ti-arrow-right" style="font-size:16px;"></i>Apply Now — Sep 2026
   </a>
 </div>

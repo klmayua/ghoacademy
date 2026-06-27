@@ -32,8 +32,15 @@ import { SITE } from '../../data/site';
       <!-- Course -->
       <div>
         <div style="font-size:11px;color:#1CC7C9;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">The Course</div>
-        {["About the Course","Curriculum","Instructor","Capstone Project","Pricing","Apply Now"].map(l => (
-          <a href={`#${l.toLowerCase().replace(/\s+/g,'-')}`} style="display:flex;align-items:center;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:8px 0;min-height:44px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l}</a>
+        {[
+          { label: "About the Course", href: "/#about"      },
+          { label: "Curriculum",       href: "/#curriculum" },
+          { label: "Instructor",       href: "/#instructor" },
+          { label: "Pricing",          href: "/#pricing"    },
+          { label: "FAQ",              href: "/#faq"        },
+          { label: "Apply Now",        href: "/apply"       },
+        ].map(l => (
+          <a href={l.href} style="display:flex;align-items:center;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:8px 0;min-height:44px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l.label}</a>
         ))}
       </div>
 
@@ -72,8 +79,12 @@ import { SITE } from '../../data/site';
         © 2026 GHO Academy · Global Health Otherwise · All rights reserved
       </div>
       <div style="display:flex;gap:1.5rem;">
-        {["Privacy Policy","Terms of Use","Cookie Policy"].map(l => (
-          <a href="#" style="font-size:12px;color:rgba(255,255,255,0.2);text-decoration:none;">{l}</a>
+        {[
+          { label: "Privacy Policy", href: "/privacy" },
+          { label: "Terms of Use",   href: "/terms"   },
+          { label: "Cookie Policy",  href: "/privacy" },
+        ].map(l => (
+          <a href={l.href} style="font-size:12px;color:rgba(255,255,255,0.2);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.5)'" onmouseout="this.style.color='rgba(255,255,255,0.2)'">{l.label}</a>
         ))}
       </div>
     </div>
