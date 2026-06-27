@@ -231,11 +231,17 @@ const { course, instructor } = SITE;
     if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
   }
 
-  // Form submission — mock flow
+  // Form submission — simulated registration flow
   document.getElementById('registration-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const tier = (form.querySelector('input[name="tier"]:checked') as HTMLInputElement)?.value;
+    const form      = e.target as HTMLFormElement;
+    const tier      = (form.querySelector('input[name="tier"]:checked') as HTMLInputElement)?.value;
+    const firstName = (form.querySelector('input[name="firstName"]')   as HTMLInputElement)?.value.trim()  || '';
+    const lastName  = (form.querySelector('input[name="lastName"]')    as HTMLInputElement)?.value.trim()  || '';
+    const email     = (form.querySelector('input[name="email"]')       as HTMLInputElement)?.value.trim()  || '';
+    const org       = (form.querySelector('input[name="organisation"]') as HTMLInputElement)?.value.trim() || '';
+    const country   = (form.querySelector('select[name="country"]')   as HTMLSelectElement)?.value        || 'Global';
+
     if (tier === 'institution') {
       const btn = document.getElementById('submit-btn') as HTMLButtonElement;
       btn.textContent = 'Submit Application & Proceed to Payment';
@@ -250,6 +256,19 @@ const { course, instructor } = SITE;
       }
       return;
     }
+
+    // Persist applicant identity for the dashboard session
+    const fullName = `${firstName} ${lastName}`.trim() || 'New Participant';
+    const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase() || 'NP';
+    sessionStorage.setItem('gho_role',     'student');
+    sessionStorage.setItem('gho_name',     fullName);
+    sessionStorage.setItem('gho_initials', initials);
+    sessionStorage.setItem('gho_country',  country);
+    sessionStorage.setItem('gho_org',      org);
+    sessionStorage.setItem('gho_email',    email);
+    sessionStorage.setItem('gho_tier',     tier || 'standard');
+    sessionStorage.setItem('gho_progress', '10');
+
     const btn = document.getElementById('submit-btn') as HTMLButtonElement;
     btn.textContent = 'Processing...';
     btn.disabled = true;

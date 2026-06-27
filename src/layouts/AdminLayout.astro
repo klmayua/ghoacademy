@@ -25,27 +25,80 @@ const navItems = [
   <style>
     * { box-sizing:border-box; margin:0; padding:0; }
     body { font-family:'Inter',sans-serif; background:#F0EEE9; color:#1a1a2e; display:flex; height:100vh; overflow:hidden; }
+
+    /* ── Sidebar ─────────────────────────────────── */
     .sidebar { width:220px; background:#060f1e; display:flex; flex-direction:column; flex-shrink:0; }
     .sidebar-logo { padding:1.125rem 1.125rem 0.875rem; border-bottom:1px solid rgba(255,255,255,0.05); }
-    .logo-name { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:800; color:#fff; }
-    .logo-tag  { font-size:9px; color:#C9922A; letter-spacing:2px; text-transform:uppercase; font-weight:600; }
+    .logo-name  { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:800; color:#fff; }
+    .logo-tag   { font-size:9px; color:#C9922A; letter-spacing:2px; text-transform:uppercase; font-weight:600; }
     .admin-badge { font-size:9px; background:rgba(201,146,42,0.15); color:#C9922A; padding:2px 7px; border-radius:2px; font-weight:600; letter-spacing:1px; text-transform:uppercase; display:inline-block; margin-top:5px; border:1px solid rgba(201,146,42,0.2); }
-    nav a { display:flex; align-items:center; gap:9px; padding:9px 16px; font-size:13px; color:rgba(255,255,255,0.5); text-decoration:none; border-left:3px solid transparent; transition:all 0.15s; }
+    nav { flex:1; padding:1rem 0; overflow-y:auto; }
+    nav a { display:flex; align-items:center; gap:9px; padding:11px 16px; font-size:13px; color:rgba(255,255,255,0.5); text-decoration:none; border-left:3px solid transparent; transition:all 0.15s; min-height:44px; }
     nav a:hover { color:rgba(255,255,255,0.85); background:rgba(255,255,255,0.03); }
     nav a.active { color:#C9922A; background:rgba(201,146,42,0.08); border-left-color:#C9922A; }
     nav i { font-size:17px; }
-    nav { flex:1; padding:1rem 0; overflow-y:auto; }
     .sidebar-foot { padding:0.875rem 1rem; border-top:1px solid rgba(255,255,255,0.05); }
-    .sidebar-foot a { display:flex; align-items:center; gap:7px; font-size:12px; color:rgba(255,255,255,0.3); text-decoration:none; padding:6px 8px; border-radius:3px; }
+    .sidebar-foot a { display:flex; align-items:center; gap:7px; font-size:12px; color:rgba(255,255,255,0.3); text-decoration:none; padding:8px; border-radius:3px; min-height:44px; }
     .sidebar-foot a:hover { color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.04); }
-    .main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
-    .topbar { background:#fff; border-bottom:1px solid #E8E5DE; height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 1.5rem; flex-shrink:0; }
-    .topbar-title { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; color:#0B1C3D; text-transform:uppercase; letter-spacing:0.5px; }
+
+    /* ── Main area ───────────────────────────────── */
+    .main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-width:0; }
+    .topbar { background:#fff; border-bottom:1px solid #E8E5DE; height:52px; display:flex; align-items:center; justify-content:space-between; padding:0 1.5rem; flex-shrink:0; gap:10px; }
+    .topbar-left { display:flex; align-items:center; gap:10px; min-width:0; }
+    .topbar-title { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:700; color:#0B1C3D; text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .content { flex:1; overflow-y:auto; padding:1.5rem; }
+
+    /* ── Hamburger button (hidden on desktop) ────── */
+    .admin-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid #E8E5DE;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #0B1C3D;
+      flex-shrink: 0;
+    }
+
+    /* ── Overlay (hidden on desktop) ────────────── */
+    .admin-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4,19,38,0.6);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 99;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .admin-overlay.open { opacity: 1; pointer-events: auto; }
+
+    /* ── Mobile breakpoint ───────────────────────── */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: -220px;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+        transition: left 0.28s cubic-bezier(0.32,0.72,0,1);
+      }
+      .sidebar.open { left: 0; }
+      .admin-overlay { display: block; pointer-events: none; }
+      .admin-menu-btn { display: flex; }
+      .main { width: 100%; }
+      .topbar { padding: 0 1rem; height: 52px; }
+      .content { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <aside class="sidebar">
+  <aside class="sidebar" id="admin-sidebar">
     <div class="sidebar-logo">
       <div class="logo-name">GHO Academy</div>
       <div class="logo-tag">Global Health Otherwise</div>
@@ -63,15 +116,57 @@ const navItems = [
       <a href="/logout"><i class="ti ti-logout"></i>Sign Out</a>
     </div>
   </aside>
+
+  <!-- Mobile overlay -->
+  <div class="admin-overlay" id="admin-overlay" aria-hidden="true"></div>
+
   <div class="main">
     <header class="topbar">
-      <span class="topbar-title">{title.split('—')[0].trim()}</span>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;">A</div>
+      <div class="topbar-left">
+        <button class="admin-menu-btn" id="admin-menu-btn" aria-label="Open navigation" aria-expanded="false">
+          <i class="ti ti-menu-2"></i>
+        </button>
+        <span class="topbar-title">{title.split('—')[0].trim()}</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+        <div data-admin-avatar style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#C9922A,#00A896);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;cursor:pointer;" title="Admin">A</div>
       </div>
     </header>
     <main class="content"><slot /></main>
   </div>
+
   <Toast />
+
+  <script>
+    const menuBtn  = document.getElementById('admin-menu-btn');
+    const sidebar  = document.getElementById('admin-sidebar');
+    const overlay  = document.getElementById('admin-overlay');
+
+    function openMenu() {
+      sidebar?.classList.add('open');
+      overlay?.classList.add('open');
+      menuBtn?.setAttribute('aria-expanded', 'true');
+    }
+    function closeMenu() {
+      sidebar?.classList.remove('open');
+      overlay?.classList.remove('open');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+    }
+
+    menuBtn?.addEventListener('click', () => {
+      sidebar?.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    overlay?.addEventListener('click', closeMenu);
+
+    // Close on nav link tap (mobile)
+    sidebar?.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Populate avatar initials from sessionStorage
+    const initials = sessionStorage.getItem('gho_initials');
+    const avatarEl = document.querySelector('[data-admin-avatar]') as HTMLElement | null;
+    if (initials && avatarEl) avatarEl.textContent = initials;
+  </script>
 </body>
 </html>

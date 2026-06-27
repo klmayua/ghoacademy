@@ -17,7 +17,7 @@ const recentApps = RECENT_REGISTRATIONS.slice(0, 5).map(r => ({
 <AdminLayout title="Overview — GHO Academy Admin" activeNav="overview">
 
   <!-- KPI cards row -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+  <div class="kpi-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
     {[
       { label:"Enrolled",         val:`${stats.enrolled}`,            sub:`of ${stats.capacity} seats · ${Math.round(stats.enrolled/stats.capacity*100)}% full`,  color:"#0B1C3D", icon:"ti-users"          },
       { label:"Revenue (USD)",    val:`$${stats.revenue.toLocaleString()}`, sub:`Target $${stats.target.toLocaleString()} · ${Math.round(stats.revenue/stats.target*100)}% reached`, color:"#C9922A", icon:"ti-currency-dollar" },
@@ -36,7 +36,7 @@ const recentApps = RECENT_REGISTRATIONS.slice(0, 5).map(r => ({
   </div>
 
   <!-- Progress bars -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+  <div class="progress-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
     <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
       <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
         <span style="font-size:13px;font-weight:600;color:#0B1C3D;">Enrolment Progress</span>
@@ -104,7 +104,7 @@ const recentApps = RECENT_REGISTRATIONS.slice(0, 5).map(r => ({
   <!-- Session status -->
   <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.25rem;">
     <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;color:#0B1C3D;text-transform:uppercase;margin-bottom:1rem;">Session Status</h2>
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
+    <div class="sessions-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
       {MODULES.map((m, i) => {
         const status = i === 0 ? 'done' : i === 1 ? 'next' : 'upcoming';
         return (
@@ -120,7 +120,18 @@ const recentApps = RECENT_REGISTRATIONS.slice(0, 5).map(r => ({
 
 <style>
   @media (max-width: 1100px) {
-    div[style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
-    div[style*="grid-template-columns:repeat(5,1fr)"] { grid-template-columns: repeat(5,1fr) !important; }
+    .kpi-grid      { grid-template-columns: repeat(2,1fr) !important; }
+    .sessions-grid { grid-template-columns: repeat(5,1fr) !important; }
+  }
+  @media (max-width: 768px) {
+    .kpi-grid      { grid-template-columns: 1fr 1fr !important; gap: 0.75rem !important; }
+    .progress-grid { grid-template-columns: 1fr !important; gap: 0.75rem !important; }
+    .sessions-grid { grid-template-columns: repeat(5,1fr) !important; gap: 4px !important; }
+    /* KPI card numbers smaller on tiny screens */
+    .kpi-grid div[style*="font-size:38px"] { font-size: 28px !important; }
+  }
+  @media (max-width: 480px) {
+    .kpi-grid { grid-template-columns: 1fr 1fr !important; }
+    .sessions-grid { grid-template-columns: repeat(5,1fr) !important; }
   }
 </style>

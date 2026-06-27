@@ -9,28 +9,32 @@ const { course, instructor } = SITE;
   <Nav />
 
   <section style="min-height:60vh;background:#F5F3EE;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;">
-    <div style="max-width:600px;width:100%;text-align:center;">
+    <div style="max-width:600px;width:100%;">
 
       <!-- Success icon -->
-      <div style="width:80px;height:80px;border-radius:50%;background:#00A896;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
-        <i class="ti ti-check" style="font-size:38px;color:#fff;"></i>
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <div style="width:80px;height:80px;border-radius:50%;background:#00A896;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+          <i class="ti ti-check" style="font-size:38px;color:#fff;"></i>
+        </div>
+
+        <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,6vw,52px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;margin-bottom:0.5rem;">
+          Welcome, <span data-confirm-name style="color:#C9922A;">Participant.</span>
+        </h1>
+
+        <div data-tier-badge style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,168,150,0.1);color:#00A896;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;border:1px solid rgba(0,168,150,0.25);margin-bottom:1rem;"></div>
+
+        <p style="font-size:15px;color:#4A5568;line-height:1.65;max-width:480px;margin:0 auto;">
+          Your application for <strong>Cohort 1</strong> has been received and your seat is reserved. A confirmation email is on its way.
+        </p>
       </div>
 
-      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,6vw,56px);font-weight:800;color:#0B1C3D;text-transform:uppercase;line-height:1;margin-bottom:0.75rem;">
-        Welcome to<br /><span style="color:#C9922A;">Cohort 1.</span>
-      </h1>
-
-      <p style="font-size:16px;color:#4A5568;line-height:1.65;margin-bottom:2rem;">
-        Your application has been received and your seat is confirmed. Check your inbox — a welcome email with your dashboard access link is on its way within the next few minutes.
-      </p>
-
       <!-- What's next -->
-      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.75rem;text-align:left;margin-bottom:2rem;">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#00A896;font-weight:600;margin-bottom:1rem;">What Happens Next</div>
+      <div style="background:#fff;border:1px solid #E8E5DE;border-radius:6px;padding:1.75rem;margin-bottom:1.5rem;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#00A896;font-weight:600;margin-bottom:1.25rem;">What Happens Next</div>
         {[
-          { step:"1", title:"Check your email",              desc:"Welcome email with dashboard access arriving within minutes."            },
-          { step:"2", title:"Set up your profile",           desc:"Log in and complete your profile to appear in the cohort directory."    },
-          { step:"3", title:"Pre-reading for Module 1",      desc:"Module 1 resources will be available in your dashboard one week before start." },
+          { step:"1", title:"Confirmation email sent",       desc:"Check your inbox — payment instructions and your access link are on their way."       },
+          { step:"2", title:"Set up your profile",           desc:"Log in and complete your profile to appear in the cohort directory."                  },
+          { step:"3", title:"Pre-reading for Module 1",      desc:"Resources go live in your dashboard one week before the programme starts."            },
           { step:"4", title:"First live session",            desc:`${course.dates.split('–')[0].trim()} — Join Dr. ${instructor.name.split(' ').pop()} on Zoom for Module 1.` },
         ].map(s => (
           <div style="display:flex;gap:14px;margin-bottom:1.25rem;align-items:flex-start;">
@@ -43,12 +47,29 @@ const { course, instructor } = SITE;
         ))}
       </div>
 
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-        <a href="/login" style="background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 28px;border-radius:2px;text-decoration:none;cursor:pointer;transition:background 0.2s;display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.background='#1a2d57'" onmouseout="this.style.background='#0B1C3D'"><i class="ti ti-layout-dashboard" style="font-size:16px;"></i>Access My Dashboard</a>
-        <a href="/" style="background:transparent;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:12px 24px;border:1.5px solid #0B1C3D;border-radius:2px;text-decoration:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;" onmouseover="this.style.background='#0B1C3D';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#0B1C3D'"><i class="ti ti-home" style="font-size:16px;"></i>Back to Home</a>
+      <!-- Demo dashboard prompt -->
+      <div style="background:#0B1C3D;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <i class="ti ti-device-laptop" style="font-size:28px;color:#C9922A;flex-shrink:0;"></i>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:2px;">Explore your demo dashboard</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.4;">Preview what your learning portal will look like — modules, schedule, community and certificate tracker.</div>
+        </div>
+        <a id="dashboard-link" href="/dashboard" style="background:#C9922A;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:11px 20px;border-radius:4px;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:background 0.2s;" onmouseover="this.style.background='#B07820'" onmouseout="this.style.background='#C9922A'">
+          <i class="ti ti-layout-dashboard" style="font-size:15px;"></i>Open Dashboard
+        </a>
       </div>
 
-      <p style="font-size:12px;color:#9CA3AF;margin-top:1.5rem;">
+      <!-- CTAs -->
+      <div style="display:flex;gap:0.875rem;flex-wrap:wrap;">
+        <a id="apply-btn" href="/dashboard" style="flex:1;min-width:160px;background:#0B1C3D;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 20px;border-radius:4px;text-decoration:none;cursor:pointer;transition:background 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;" onmouseover="this.style.background='#1a2d57'" onmouseout="this.style.background='#0B1C3D'">
+          <i class="ti ti-layout-dashboard" style="font-size:16px;"></i>Access My Dashboard
+        </a>
+        <a href="/" style="flex:1;min-width:140px;background:transparent;color:#0B1C3D;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:12px 20px;border:1.5px solid #0B1C3D;border-radius:4px;text-decoration:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;" onmouseover="this.style.background='#0B1C3D';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#0B1C3D'">
+          <i class="ti ti-home" style="font-size:16px;"></i>Back to Home
+        </a>
+      </div>
+
+      <p style="font-size:12px;color:#9CA3AF;margin-top:1.25rem;text-align:center;">
         Questions? Email <a href={`mailto:${SITE.email}`} style="color:#C9922A;text-decoration:none;font-weight:600;">{SITE.email}</a>
       </p>
     </div>
@@ -56,3 +77,28 @@ const { course, instructor } = SITE;
 
   <Footer />
 </BaseLayout>
+
+<script>
+  // Personalise page from sessionStorage set during apply form submission
+  const name     = sessionStorage.getItem('gho_name')     || '';
+  const tier     = sessionStorage.getItem('gho_tier')     || '';
+
+  // Update greeting name
+  const nameEl = document.querySelector('[data-confirm-name]') as HTMLElement | null;
+  if (nameEl && name) {
+    nameEl.textContent = name.split(' ')[0] + '.';
+  }
+
+  // Tier badge
+  const tierBadge = document.querySelector('[data-tier-badge]') as HTMLElement | null;
+  if (tierBadge) {
+    const tierLabels: Record<string, string> = {
+      early_bird:  '🎯 Early Bird — $397',
+      standard:    'Standard — $597',
+      institution: 'Institutional',
+    };
+    const label = tierLabels[tier] || 'Cohort 1 Participant';
+    tierBadge.textContent = `✓ ${label} · Cohort 1`;
+    tierBadge.style.display = 'inline-flex';
+  }
+</script>
