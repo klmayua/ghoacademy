@@ -6,7 +6,7 @@ import { SITE } from '../../data/site';
   <div style="height:3px;background:linear-gradient(90deg,#D6A43A,#1CC7C9,#D6A43A);"></div>
 
   <div style="max-width:1440px;margin:0 auto;padding:3rem 2.5rem 2rem;">
-    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;">
+    <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;">
 
       <!-- Brand -->
       <div>
@@ -33,7 +33,7 @@ import { SITE } from '../../data/site';
       <div>
         <div style="font-size:11px;color:#1CC7C9;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;">The Course</div>
         {["About the Course","Curriculum","Instructor","Capstone Project","Pricing","Apply Now"].map(l => (
-          <a href={`#${l.toLowerCase().replace(/\s+/g,'-')}`} style="display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:4px 0;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l}</a>
+          <a href={`#${l.toLowerCase().replace(/\s+/g,'-')}`} style="display:flex;align-items:center;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:8px 0;min-height:44px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l}</a>
         ))}
       </div>
 
@@ -47,7 +47,7 @@ import { SITE } from '../../data/site';
           { label: "GHO Bootcamp",            href: SITE.links.gho + "/gho-reimagined-bootcamp-2/" },
           { label: "GHO Mentorship",          href: SITE.links.gho + "/global-public-health-mentorship/" },
         ].map(l => (
-          <a href={l.href} style="display:block;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:4px 0;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l.label}</a>
+          <a href={l.href} style="display:flex;align-items:center;font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;padding:8px 0;min-height:44px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">{l.label}</a>
         ))}
       </div>
 
@@ -82,9 +82,15 @@ import { SITE } from '../../data/site';
 
 <style>
   @media (max-width: 768px) {
-    footer > div:last-child > div:first-child { grid-template-columns: 1fr 1fr !important; }
+    footer { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
+    footer div[style*="display:flex"][style*="gap:1.5rem"] { gap: 1rem !important; }
   }
   @media (max-width: 480px) {
-    footer > div:last-child > div:first-child { grid-template-columns: 1fr !important; }
+    .footer-grid { grid-template-columns: 1fr !important; }
+  }
+  /* Ensure social icons are 44px touch targets on mobile */
+  @media (max-width: 768px) {
+    footer a[aria-label] { width: 44px !important; height: 44px !important; }
   }
 </style>

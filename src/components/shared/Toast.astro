@@ -20,6 +20,17 @@
   line-height: 1.4;
 "></div>
 
+<style>
+  @media (max-width: 768px) {
+    #gho-toast {
+      bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+      left: 1rem !important;
+      right: 1rem !important;
+      max-width: calc(100vw - 2rem) !important;
+    }
+  }
+</style>
+
 <script>
   (window as any).showToast = function(message: string, duration: number = 3000) {
     const toast = document.getElementById('gho-toast');

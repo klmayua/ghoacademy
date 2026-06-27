@@ -19,7 +19,7 @@ const { course, instructor } = SITE;
 
   <!-- Main content -->
   <section style="background:#F5F3EE;padding:4rem 1.5rem;">
-    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;">
+    <div class="apply-layout" style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 380px;gap:3rem;align-items:start;">
 
       <!-- Form -->
       <div style="background:#fff;border:1px solid #E8E5DE;border-radius:4px;padding:2.5rem;">
@@ -28,17 +28,17 @@ const { course, instructor } = SITE;
 
         <form id="registration-form" action="#" method="get" style="display:grid;gap:1.25rem;">
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="name-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">First Name *</label>
               <input type="text" name="firstName" required placeholder="Amara"
-                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
             </div>
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Last Name *</label>
               <input type="text" name="lastName" required placeholder="Okonkwo"
-                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
             </div>
           </div>
@@ -46,21 +46,21 @@ const { course, instructor } = SITE;
           <div>
             <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Email Address *</label>
             <input type="email" name="email" required placeholder="amara@organisation.org"
-              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+              style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
               onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
           </div>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="name-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Organisation *</label>
               <input type="text" name="organisation" required placeholder="WHO / University / NGO"
-                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
             </div>
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Job Title *</label>
               <input type="text" name="jobTitle" required placeholder="Public Health Specialist"
-                style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
+                style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;transition:border-color 0.2s;"
                 onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'" />
             </div>
           </div>
@@ -68,7 +68,7 @@ const { course, instructor } = SITE;
           <div>
             <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Country of Residence *</label>
             <select name="country" required
-              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;background:#fff;transition:border-color 0.2s;"
+              style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;background:#fff;transition:border-color 0.2s;"
               onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'">
               <option value="">Select your country...</option>
               {["Kenya","Nigeria","South Africa","Ghana","Uganda","Rwanda","Tanzania","Ethiopia","Cameroon","Zimbabwe","United Kingdom","United States","Canada","Netherlands","Germany","France","Australia","Other Africa","Other Europe","Other Americas","Other Asia/Pacific"].map(c => (
@@ -99,7 +99,7 @@ const { course, instructor } = SITE;
 
           <div>
             <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">How did you hear about GHO Academy?</label>
-            <select name="referral" style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;background:#fff;">
+            <select name="referral" style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;background:#fff;">
               <option value="">Select...</option>
               {["LinkedIn — Dr. Bain","LinkedIn — Global Health Otherwise","GHO Website","Career Café","Email from GHO","Colleague or peer referral","University or institution","Twitter / X","YouTube","WhatsApp","Other"].map(s => (
                 <option value={s}>{s}</option>
@@ -110,7 +110,7 @@ const { course, instructor } = SITE;
           <div>
             <label style="display:block;font-size:12px;font-weight:600;color:#0B1C3D;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Why do you want to join GHO Academy? <span style="color:#4A5568;font-weight:400;text-transform:none;">(Optional — 2–3 sentences)</span></label>
             <textarea name="motivation" rows="3" placeholder="Tell us briefly what you hope to gain and how it connects to your work..."
-              style="width:100%;padding:10px 12px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:14px;color:#1a1a2e;outline:none;resize:vertical;transition:border-color 0.2s;"
+              style="width:100%;padding:12px 14px;border:1.5px solid #E8E5DE;border-radius:3px;font-size:16px;color:#1a1a2e;outline:none;resize:vertical;transition:border-color 0.2s;"
               onfocus="this.style.borderColor='#00A896'" onblur="this.style.borderColor='#E8E5DE'"></textarea>
           </div>
 
@@ -259,7 +259,20 @@ const { course, instructor } = SITE;
 
 <style>
   @media (max-width: 768px) {
-    section:last-of-type > div > div { grid-template-columns: 1fr !important; }
-    div[id="tier-selector"] { grid-template-columns: 1fr !important; }
+    .apply-layout {
+      grid-template-columns: 1fr !important;
+      gap: 1.5rem !important;
+    }
+    .name-grid {
+      grid-template-columns: 1fr !important;
+    }
+    div[id="tier-selector"] {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  @media (max-width: 480px) {
+    div[id="tier-selector"] {
+      grid-template-columns: 1fr !important;
+    }
   }
 </style>

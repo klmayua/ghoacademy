@@ -44,7 +44,7 @@ const tickerItems = [
   </div>
 
   <!-- Metrics -->
-  <div style="max-width:1440px;margin:0 auto;padding:1.5rem 2.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
+  <div class="metrics-grid" style="max-width:1440px;margin:0 auto;padding:1.5rem 2.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
     {[
       { num: '70+',  label: 'Countries Represented',     icon: 'ti-globe',         color: '#B8862A' },
       { num: '500+', label: 'Leaders Trained',            icon: 'ti-users',         color: '#0E7E80' },
@@ -59,3 +59,17 @@ const tickerItems = [
     ))}
   </div>
 </div>
+
+<style>
+  @media (max-width: 768px) {
+    .metrics-grid {
+      grid-template-columns: 1fr 1fr !important;
+      padding: 1.25rem !important;
+      gap: 0.75rem !important;
+    }
+    #trust-bar > div:first-child {
+      padding: 1.25rem 1.25rem 0 !important;
+      gap: 1.5rem !important;
+    }
+  }
+</style>
