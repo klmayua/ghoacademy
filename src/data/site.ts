@@ -25,7 +25,7 @@ export const SITE = {
     cohort: "Cohort 1",
     capacity: 50,
     pricing: { earlyBird: 397, standard: 597, institutional: "Custom" },
-    stripeLink: "https://buy.stripe.com/placeholder",
+    stripeLink: "/apply",
   },
   instructor: {
     name: "Dr. Luchuo Engelbert Bain",

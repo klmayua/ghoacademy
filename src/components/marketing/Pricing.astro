@@ -28,7 +28,7 @@ const { course } = SITE;
             <span style="font-size:13px;color:rgba(248,248,248,0.72);">{f}</span>
           </div>
         ))}
-        <a href={course.stripeLink + "?priceId=early_bird"} style="display:block;margin-top:1.5rem;background:rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:13px;text-align:center;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">Apply — Early Bird</a>
+        <a href={course.stripeLink + "?tier=early_bird"} style="display:block;margin-top:1.5rem;background:rgba(255,255,255,0.08);color:#F5F0E8;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:13px;text-align:center;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.15);transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.14)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">Apply — Early Bird</a>
       </div>
 
       <!-- Standard (featured) -->
@@ -43,7 +43,7 @@ const { course } = SITE;
             <span style="font-size:13px;color:rgba(255,255,255,0.85);">{f}</span>
           </div>
         ))}
-        <a href={course.stripeLink + "?priceId=standard"} style="display:block;margin-top:1.5rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:13px;text-align:center;border-radius:8px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#c49030'" onmouseout="this.style.background='#D6A43A'">Register Now</a>
+        <a href={course.stripeLink + "?tier=standard"} style="display:block;margin-top:1.5rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:13px;text-align:center;border-radius:8px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#c49030'" onmouseout="this.style.background='#D6A43A'">Register Now</a>
       </div>
 
       <!-- Institutional -->
@@ -79,7 +79,7 @@ const { course } = SITE;
     <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(50px,7vw,80px);font-weight:800;color:#041326;text-transform:uppercase;line-height:0.95;margin-bottom:0.875rem;">Secure Your Place.</h2>
     <p style="font-size:17px;color:rgba(4,19,38,0.7);margin-bottom:2.5rem;">{course.dates} · {course.weeks} Weeks · {course.delivery} · Certificate of Completion</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.75rem;">
-      <a href={course.stripeLink + "?priceId=early_bird"} style="background:#041326;color:#D6A43A;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:16px 40px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s;" onmouseover="this.style.background='#071A35'" onmouseout="this.style.background='#041326'">Apply Now — Early Bird $397 <i class="ti ti-arrow-right" style="font-size:16px;"></i></a>
+      <a href={course.stripeLink + "?tier=early_bird"} style="background:#041326;color:#D6A43A;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:16px 40px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background 0.2s;" onmouseover="this.style.background='#071A35'" onmouseout="this.style.background='#041326'">Apply Now — Early Bird $397 <i class="ti ti-arrow-right" style="font-size:16px;"></i></a>
       <a href={`mailto:${SITE.email}?subject=GHO Academy Application — September 2026`} style="background:transparent;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:15px 28px;border:2px solid rgba(4,19,38,0.35);border-radius:8px;text-decoration:none;display:inline-block;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(4,19,38,0.7)'" onmouseout="this.style.borderColor='rgba(4,19,38,0.35)'">Request Info</a>
     </div>
     <p style="font-size:12px;text-transform:uppercase;letter-spacing:2px;color:rgba(4,19,38,0.5);font-weight:700;">Cohort 1 · Limited to {course.capacity} Participants · Closes When Full</p>
