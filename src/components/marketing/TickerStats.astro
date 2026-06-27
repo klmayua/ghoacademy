@@ -35,26 +35,26 @@ const tickerItems = [
         { name: 'University of Johannesburg',  abbr: 'UJ'     },
         { name: 'World Health Organization',   abbr: 'WHO'    },
       ].map(org => (
-        <div style="text-align:center;opacity:0.75;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#071A35;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">{org.abbr}</div>
-          <div style="font-size:9px;color:rgba(7,26,53,0.65);white-space:nowrap;letter-spacing:0.5px;">{org.name}</div>
+        <div style="text-align:center;transition:opacity 0.2s;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#071A35;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;">{org.abbr}</div>
+          <div style="font-size:10px;color:#071A35;white-space:nowrap;letter-spacing:0.5px;font-weight:500;">{org.name}</div>
         </div>
       ))}
     </div>
   </div>
 
   <!-- Metrics -->
-  <div style="max-width:1440px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:repeat(4,1fr);">
+  <div style="max-width:1440px;margin:0 auto;padding:1.5rem 2.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;">
     {[
-      { num: '70+',  label: 'Countries Represented',     icon: 'ti-globe',         color: '#D6A43A' },
-      { num: '500+', label: 'Leaders Trained',            icon: 'ti-users',         color: '#0E9B9D' },
-      { num: '100+', label: 'Peer-reviewed Publications', icon: 'ti-file-text',     color: '#F59E0B' },
-      { num: '1',    label: 'Global Impact Network',      icon: 'ti-topology-star', color: '#0E9B9D' },
+      { num: '70+',  label: 'Countries Represented',     icon: 'ti-globe',         color: '#B8862A' },
+      { num: '500+', label: 'Leaders Trained',            icon: 'ti-users',         color: '#0E7E80' },
+      { num: '100+', label: 'Peer-reviewed Publications', icon: 'ti-file-text',     color: '#C47E0A' },
+      { num: '1',    label: 'Global Impact Network',      icon: 'ti-topology-star', color: '#0E7E80' },
     ].map(s => (
-      <div style="padding:1.75rem 1rem;text-align:center;border-right:1px solid rgba(7,26,53,0.18);">
-        <i class={`ti ${s.icon}`} style={`font-size:20px;color:${s.color};display:block;margin-bottom:0.4rem;`}></i>
-        <div style={`font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px;`}>{s.num}</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(7,26,53,0.7);font-weight:600;">{s.label}</div>
+      <div style={`background:#fff;border:1px solid rgba(7,26,53,0.12);border-top:3px solid ${s.color};border-radius:10px;padding:1.5rem 1rem;text-align:center;box-shadow:0 2px 8px rgba(7,26,53,0.06);`}>
+        <i class={`ti ${s.icon}`} style={`font-size:22px;color:${s.color};display:block;margin-bottom:0.5rem;`}></i>
+        <div style={`font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:${s.color};line-height:1;margin-bottom:6px;`}>{s.num}</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#071A35;font-weight:700;">{s.label}</div>
       </div>
     ))}
   </div>
