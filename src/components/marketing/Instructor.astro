@@ -18,7 +18,7 @@ const { instructor } = SITE;
         <!-- Avatar + name card -->
         <div style="background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);border:1px solid rgba(214,164,58,0.2);border-radius:14px;padding:2rem;text-align:center;margin-bottom:1.5rem;">
           <div style="width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#D6A43A,#1CC7C9);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:800;color:#041326;margin:0 auto 1rem;">LB</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:4px;">Dr. Luchuo E. Bain</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#F5F0E8;text-transform:uppercase;margin-bottom:4px;">Dr. Luchuo E. Bain</div>
           <div style="font-size:12px;color:#D6A43A;margin-bottom:1rem;letter-spacing:0.5px;">MD · PhD · MPH · MBA · MSc · FAAS</div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;">
             {["Global Health Scientist","Bioethicist","Leadership Advocate","Science Communicator"].map(tag => (
@@ -50,12 +50,12 @@ const { instructor } = SITE;
           <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
           Course Lead &amp; Convener
         </p>
-        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,4vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:0.95;margin-bottom:0.5rem;">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,4vw,62px);font-weight:800;color:#F5F0E8;text-transform:uppercase;line-height:0.95;margin-bottom:0.5rem;">
           {instructor.name}
         </h2>
         <p style="font-size:14px;color:#D6A43A;font-weight:600;margin-bottom:1.75rem;letter-spacing:0.5px;">{instructor.credentials}</p>
 
-        <p style="font-size:15px;color:rgba(248,248,248,0.68);line-height:1.8;margin-bottom:2rem;">{instructor.bio}</p>
+        <p style="font-size:15px;color:rgba(245,240,232,0.68);line-height:1.8;margin-bottom:2rem;">{instructor.bio}</p>
 
         <!-- Stats -->
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2.5rem;">
@@ -66,7 +66,7 @@ const { instructor } = SITE;
           ].map(s => (
             <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(214,164,58,0.15);padding:1.25rem;border-radius:10px;">
               <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:800;color:#D6A43A;line-height:1;">{s.num}</div>
-              <div style="font-size:12px;font-weight:600;color:#fff;margin-top:4px;">{s.label}</div>
+              <div style="font-size:12px;font-weight:600;color:#F5F0E8;margin-top:4px;">{s.label}</div>
               <div style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;">{s.sub}</div>
             </div>
           ))}
@@ -74,7 +74,7 @@ const { instructor } = SITE;
 
         <!-- Featured quote -->
         <div style="background:rgba(214,164,58,0.07);border:1px solid rgba(214,164,58,0.2);border-left:4px solid #D6A43A;padding:1.5rem 2rem;border-radius:0 14px 14px 0;">
-          <p style="font-size:18px;color:rgba(255,255,255,0.8);line-height:1.65;font-style:italic;margin-bottom:0.75rem;">
+          <p style="font-size:18px;color:rgba(245,240,232,0.85);line-height:1.65;font-style:italic;margin-bottom:0.75rem;">
             "A new global health — doing global health otherwise — is not merely a need but an urgent imperative."
           </p>
           <p style="font-size:12px;color:#D6A43A;font-weight:700;letter-spacing:0.5px;">— Dr. Luchuo Engelbert Bain</p>
