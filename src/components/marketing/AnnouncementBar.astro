@@ -1,0 +1,23 @@
+---
+const tickerItems = [
+  { icon: 'ti-calendar-event', text: 'Applications Open — September 2026', color: '#D6A43A' },
+  { icon: 'ti-award',          text: 'Scholarships Available',              color: '#F59E0B' },
+  { icon: 'ti-school',         text: 'Oxford-Affiliated Faculty',           color: '#1CC7C9' },
+  { icon: 'ti-device-laptop',  text: 'Live Online · 8 Weeks',              color: '#1CC7C9' },
+  { icon: 'ti-robot',          text: 'AI Module Included',                  color: '#1CC7C9' },
+  { icon: 'ti-globe',          text: 'Global Impact Network',               color: 'rgba(255,255,255,0.65)' },
+  { icon: 'ti-users',          text: '500+ Leaders Trained',                color: 'rgba(255,255,255,0.65)' },
+  { icon: 'ti-clock',          text: 'Cohort 1 — Limited Seats',            color: '#D6A43A' },
+];
+---
+<div style="background:#020D1A;border-bottom:1px solid rgba(214,164,58,0.18);overflow:hidden;height:36px;display:flex;align-items:center;" aria-hidden="true">
+  <div class="ticker-track" style="display:flex;gap:0;width:max-content;align-items:center;">
+    {[...tickerItems, ...tickerItems].map(item => (
+      <span style={`font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:${item.color};padding:0 1.5rem;display:flex;align-items:center;gap:10px;white-space:nowrap;`}>
+        <i class={`ti ${item.icon}`} style={`font-size:12px;color:${item.color};flex-shrink:0;`}></i>
+        {item.text}
+        <span style={`width:3px;height:3px;background:${item.color};border-radius:50%;display:inline-block;flex-shrink:0;opacity:0.5;`}></span>
+      </span>
+    ))}
+  </div>
+</div>

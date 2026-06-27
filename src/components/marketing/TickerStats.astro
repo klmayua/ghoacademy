@@ -1,63 +1,60 @@
 ---
-import { MODULES, SITE } from '../../data/site';
+import { SITE } from '../../data/site';
+
+/**
+ * Colour signals:
+ *  gold   (#D6A43A) = urgency / deadlines / applications
+ *  teal   (#1CC7C9) = programme features / learning
+ *  amber  (#F59E0B) = achievements / credentials
+ *  white  (default) = general info / network
+ */
 const tickerItems = [
-  { icon: 'ti-calendar',     text: 'Applications Open • September 2026' },
-  { icon: 'ti-award',        text: 'Scholarships Available'              },
-  { icon: 'ti-school',       text: 'Oxford Faculty'                      },
-  { icon: 'ti-device-laptop',text: 'Live Online • 8 Weeks'               },
-  { icon: 'ti-robot',        text: 'AI Module Included'                  },
-  { icon: 'ti-globe',        text: 'Global Impact Network'               },
+  { icon: 'ti-calendar-event', text: 'Applications Open — September 2026', color: '#D6A43A', dot: '#D6A43A' },
+  { icon: 'ti-award',          text: 'Scholarships Available',              color: '#F59E0B', dot: '#F59E0B' },
+  { icon: 'ti-school',         text: 'Oxford-Affiliated Faculty',           color: '#1CC7C9', dot: '#1CC7C9' },
+  { icon: 'ti-device-laptop',  text: 'Live Online · 8 Weeks',              color: '#1CC7C9', dot: '#1CC7C9' },
+  { icon: 'ti-robot',          text: 'AI Module Included',                  color: '#1CC7C9', dot: '#1CC7C9' },
+  { icon: 'ti-globe',          text: 'Global Impact Network',               color: 'rgba(255,255,255,0.7)', dot: 'rgba(255,255,255,0.35)' },
+  { icon: 'ti-users',          text: '500+ Leaders Trained',                color: 'rgba(255,255,255,0.7)', dot: 'rgba(255,255,255,0.35)' },
+  { icon: 'ti-clock',          text: 'Cohort 1 — Limited Seats',            color: '#D6A43A', dot: '#D6A43A' },
 ];
 ---
 
-<!-- Animated ticker -->
-<div style="background:#041326;border-bottom:1px solid rgba(214,164,58,0.15);overflow:hidden;height:36px;display:flex;align-items:center;" aria-hidden="true">
-  <div class="ticker-track" style="display:flex;gap:0;width:max-content;align-items:center;">
-    {[...tickerItems, ...tickerItems].map(item => (
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.75);padding:0 1.75rem;display:flex;align-items:center;gap:1.25rem;white-space:nowrap;">
-        {item.icon && <i class={`ti ${item.icon}`} style="font-size:13px;color:#D6A43A;"></i>}
-        {item.text}
-        <span style="width:4px;height:4px;background:#D6A43A;border-radius:50%;display:inline-block;opacity:0.7;"></span>
-      </span>
-    ))}
-  </div>
-</div>
+<!-- Trust + stats bar — sits directly below hero -->
+<div id="trust-bar" style="background:#071A35;border-bottom:1px solid rgba(214,164,58,0.12);">
 
-<!-- Stats bar (Trust logos + metrics) -->
-<div style="background:#071A35;border-bottom:1px solid rgba(214,164,58,0.15);">
-
-  <!-- Trust logos strip -->
-  <div style="max-width:1440px;margin:0 auto;padding:2rem 2.5rem 0;">
-    <p style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(214,164,58,0.6);font-weight:700;text-align:center;margin-bottom:1.25rem;">Trusted by Global Leaders &amp; Institutions</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <!-- Trust logos -->
+  <div style="max-width:1440px;margin:0 auto;padding:1.75rem 2.5rem 0;">
+    <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(214,164,58,0.55);font-weight:700;text-align:center;margin-bottom:1.25rem;">Trusted by Global Leaders &amp; Institutions</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;padding-bottom:1.75rem;border-bottom:1px solid rgba(255,255,255,0.05);">
       {[
-        { name: 'University of Oxford',            abbr: 'Oxford'     },
-        { name: 'African Academy of Sciences',     abbr: 'AAS'        },
-        { name: 'EUCLID University',               abbr: 'EUCLID'     },
-        { name: 'Global Health Otherwise',         abbr: 'GHO'        },
-        { name: 'University of Johannesburg',      abbr: 'UJ'         },
-        { name: 'World Health Organization',       abbr: 'WHO'        },
+        { name: 'University of Oxford',       abbr: 'Oxford'  },
+        { name: 'African Academy of Sciences', abbr: 'AAS'    },
+        { name: 'EUCLID University',           abbr: 'EUCLID' },
+        { name: 'Global Health Otherwise',     abbr: 'GHO'    },
+        { name: 'University of Johannesburg',  abbr: 'UJ'     },
+        { name: 'World Health Organization',   abbr: 'WHO'    },
       ].map(org => (
-        <div style="text-align:center;opacity:0.55;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.55'">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;">{org.abbr}</div>
-          <div style="font-size:10px;color:rgba(255,255,255,0.35);white-space:nowrap;">{org.name}</div>
+        <div style="text-align:center;opacity:0.5;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='0.5'">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:rgba(255,255,255,0.55);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">{org.abbr}</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.3);white-space:nowrap;letter-spacing:0.5px;">{org.name}</div>
         </div>
       ))}
     </div>
   </div>
 
-  <!-- Metrics strip -->
+  <!-- Metrics -->
   <div style="max-width:1440px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:repeat(4,1fr);">
     {[
-      { num: '70+',  label: 'Countries Represented',     icon: 'ti-globe'        },
-      { num: '500+', label: 'Leaders Trained',            icon: 'ti-users'        },
-      { num: '100+', label: 'Peer-reviewed Publications', icon: 'ti-certificate'  },
-      { num: '1',    label: 'Global Impact Network',      icon: 'ti-topology-star'},
+      { num: '70+',  label: 'Countries Represented',     icon: 'ti-globe',         color: '#D6A43A' },
+      { num: '500+', label: 'Leaders Trained',            icon: 'ti-users',         color: '#1CC7C9' },
+      { num: '100+', label: 'Peer-reviewed Publications', icon: 'ti-file-text',     color: '#F59E0B' },
+      { num: '1',    label: 'Global Impact Network',      icon: 'ti-topology-star', color: '#1CC7C9' },
     ].map(s => (
-      <div style="padding:2rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.06);">
-        <i class={`ti ${s.icon}`} style="font-size:22px;color:#D6A43A;display:block;margin-bottom:0.5rem;"></i>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:48px;font-weight:800;color:#fff;line-height:1;margin-bottom:4px;">{s.num}</div>
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.4);">{s.label}</div>
+      <div style="padding:1.75rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,0.05);">
+        <i class={`ti ${s.icon}`} style={`font-size:20px;color:${s.color};display:block;margin-bottom:0.4rem;`}></i>
+        <div style={`font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px;`}>{s.num}</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.38);">{s.label}</div>
       </div>
     ))}
   </div>
