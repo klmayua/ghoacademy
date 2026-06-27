@@ -102,7 +102,16 @@ const testimonials = [
   <FAQ />
   <Footer />
 
-  <!-- Chatbot FAB (bottom right) -->
+  <style>
+    @media (max-width: 768px) {
+      /* Hide desktop chat FAB — chat lives in More menu on mobile */
+      #chat-fab { display: none !important; }
+      /* Lift scroll-to-top above bottom nav */
+      #scroll-top-btn { bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important; left: 1rem !important; }
+    }
+  </style>
+
+  <!-- Chatbot FAB (bottom right) — desktop only -->
   <div id="chat-fab" style="position:fixed;bottom:2rem;right:2rem;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
     <!-- Chat popup -->
     <div id="chat-popup" style="display:none;background:#071A35;border:1px solid rgba(214,164,58,0.3);border-radius:14px;padding:1.25rem 1.5rem;width:260px;box-shadow:0 8px 32px rgba(0,0,0,0.5);">

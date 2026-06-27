@@ -7,76 +7,310 @@ const navLinks = [
   { label: "FAQ",        href: "#faq"        },
 ];
 ---
-<nav
-  id="main-nav"
-  style="position:sticky;top:36px;z-index:50;background:#071A35;border-bottom:1px solid rgba(214,164,58,0.2);transition:background 0.3s,backdrop-filter 0.3s,box-shadow 0.3s;"
->
+<!-- ═══ TOP NAV ═══ Desktop: full | Mobile: Logo left + CTA right only ═══ -->
+<nav id="main-nav" style="position:sticky;top:36px;z-index:50;background:#071A35;border-bottom:1px solid rgba(214,164,58,0.2);transition:background 0.3s,box-shadow 0.3s;">
   <div style="max-width:1440px;margin:0 auto;padding:0 2.5rem;height:80px;display:flex;align-items:center;justify-content:space-between;">
+
     <!-- Logo -->
     <a href="/" style="text-decoration:none;display:flex;align-items:center;gap:10px;flex-shrink:0;">
-      <div style="display:flex;flex-direction:column;gap:7px;">
+      <div style="display:flex;flex-direction:column;gap:4px;">
         <span style="font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:#F5F0E8;letter-spacing:0.5px;line-height:1;">GHO Academy</span>
-        <span style="font-size:9px;color:#D6A43A;letter-spacing:4px;font-weight:700;text-transform:uppercase;line-height:1;">Global Health Otherwise</span>
+        <span class="logo-sub" style="font-size:9px;color:#D6A43A;letter-spacing:4px;font-weight:700;text-transform:uppercase;line-height:1;">Global Health Otherwise</span>
       </div>
     </a>
 
-    <!-- Desktop nav -->
+    <!-- Desktop nav links -->
     <div class="desktop-nav" style="display:flex;align-items:center;gap:2.25rem;">
       {navLinks.map(link => (
         <a href={link.href} style="font-size:14px;color:rgba(255,255,255,0.65);text-decoration:none;font-weight:500;letter-spacing:0.5px;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">{link.label}</a>
       ))}
     </div>
 
-    <!-- CTA -->
-    <div style="display:flex;align-items:center;gap:14px;">
-      <a href="/login" class="login-link" style="font-size:14px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;letter-spacing:0.3px;transition:color 0.2s;display:none;align-items:center;gap:5px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+    <!-- Desktop CTAs -->
+    <div class="desktop-cta" style="display:flex;align-items:center;gap:14px;">
+      <a href="/login" style="font-size:14px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;letter-spacing:0.3px;transition:color 0.2s;display:inline-flex;align-items:center;gap:5px;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
         <i class="ti ti-login" style="font-size:15px;"></i>Sign In
       </a>
-      <a
-        href="#register"
-        style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:11px 24px;border-radius:4px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:6px;"
-        onmouseover="this.style.background='#c49030';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''"
-      ><i class="ti ti-arrow-right" style="font-size:15px;"></i>Apply Now — Sep 2026</a>
-      <!-- Mobile hamburger -->
-      <button id="mobile-nav-btn" style="display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:4px;">
-        <i class="ti ti-menu-2"></i>
-      </button>
+      <a href="#register" style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:11px 24px;border-radius:4px;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.background='#c49030';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''">
+        <i class="ti ti-arrow-right" style="font-size:15px;"></i>Apply Now — Sep 2026
+      </a>
     </div>
-  </div>
 
-  <!-- Mobile drawer -->
-  <div id="mobile-drawer" style="display:none;background:#071A35;border-top:1px solid rgba(214,164,58,0.15);padding:1rem 1.5rem 1.5rem;">
-    {navLinks.map(link => (
-      <a href={link.href} style="display:block;padding:10px 0;color:rgba(255,255,255,0.75);text-decoration:none;font-size:15px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.05);">{link.label}</a>
-    ))}
-    <a href="/login" style="display:flex;align-items:center;gap:6px;padding:10px 0;color:rgba(255,255,255,0.75);text-decoration:none;font-size:15px;font-weight:500;border-bottom:1px solid rgba(255,255,255,0.05);">
-      <i class="ti ti-login" style="font-size:16px;"></i>Sign In
-    </a>
-    <a href="#register" style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:1rem;background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:12px;text-align:center;border-radius:4px;text-decoration:none;">
-      <i class="ti ti-arrow-right" style="font-size:16px;"></i>Apply Now — September 2026
-    </a>
+    <!-- Mobile top-bar: CTA only (no hamburger) -->
+    <div class="mobile-top-cta" style="display:none;align-items:center;">
+      <a href="#register" style="background:#D6A43A;color:#071A35;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:10px 16px;border-radius:4px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;">
+        <i class="ti ti-arrow-right" style="font-size:14px;"></i>Apply Now
+      </a>
+    </div>
+
   </div>
 </nav>
 
+<!-- ═══ MOBILE BOTTOM NAV BAR (≤768px) ═══ 5 tabs: About · Curriculum · Apply · FAQ · More ═══ -->
+<nav id="mobile-bottom-nav" aria-label="Mobile bottom navigation">
+  <a href="#about"      class="mob-tab" id="tab-about"      aria-label="About">      <i class="ti ti-info-circle"></i><span>About</span></a>
+  <a href="#curriculum" class="mob-tab" id="tab-curriculum" aria-label="Curriculum"> <i class="ti ti-books"></i><span>Curriculum</span></a>
+  <a href="#register"   class="mob-tab mob-tab-apply"        aria-label="Apply Now">
+    <span class="mob-apply-pill"><i class="ti ti-rocket"></i><span>Apply</span></span>
+  </a>
+  <a href="#faq"        class="mob-tab" id="tab-faq"        aria-label="FAQ">        <i class="ti ti-help-circle"></i><span>FAQ</span></a>
+  <button class="mob-tab mob-tab-more" id="mob-more-btn" onclick="toggleMobileMore()" aria-label="More" aria-expanded="false">
+    <i class="ti ti-dots"></i><span>More</span>
+  </button>
+</nav>
+
+<!-- ═══ MOBILE MORE: dark overlay ═══ -->
+<div id="mob-more-overlay" onclick="closeMobileMore()"></div>
+
+<!-- ═══ MOBILE MORE: slide-up panel ═══ -->
+<div id="mob-more-panel" role="dialog" aria-label="More options">
+  <div class="mob-more-handle"></div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:#F5F0E8;text-transform:uppercase;letter-spacing:1px;">More</span>
+    <button onclick="closeMobileMore()" style="background:rgba(255,255,255,0.07);border:none;border-radius:50%;width:32px;height:32px;color:rgba(255,255,255,0.6);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><i class="ti ti-x"></i></button>
+  </div>
+
+  <!-- Nav links -->
+  <div class="mob-more-list">
+    <a href="#instructor" onclick="closeMobileMore()" class="mob-more-row">
+      <span class="mob-more-icon"><i class="ti ti-user-star"></i></span><span>Instructor</span><i class="ti ti-chevron-right mob-chev"></i>
+    </a>
+    <a href="#pricing" onclick="closeMobileMore()" class="mob-more-row">
+      <span class="mob-more-icon"><i class="ti ti-tag"></i></span><span>Pricing</span><i class="ti ti-chevron-right mob-chev"></i>
+    </a>
+    <a href="/login" class="mob-more-row">
+      <span class="mob-more-icon"><i class="ti ti-login"></i></span><span>Sign In</span><i class="ti ti-chevron-right mob-chev"></i>
+    </a>
+  </div>
+
+  <div style="height:1px;background:rgba(214,164,58,0.15);margin:1rem 0;"></div>
+  <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,240,232,0.35);font-weight:700;margin-bottom:0.75rem;">Get in Touch</p>
+
+  <!-- Chat links -->
+  <div class="mob-more-list">
+    <a href="https://whatsapp.com/channel/0029Vb15K9p7tkjHbKE2L43D" target="_blank" rel="noopener" class="mob-more-row mob-row-green">
+      <span class="mob-more-icon mob-icon-green"><i class="ti ti-brand-whatsapp"></i></span><span>Chat on WhatsApp</span><i class="ti ti-arrow-up-right mob-chev"></i>
+    </a>
+    <a href="mailto:lebaiins@gmail.com?subject=GHO Academy Enquiry" class="mob-more-row mob-row-gold">
+      <span class="mob-more-icon mob-icon-gold"><i class="ti ti-mail"></i></span><span>Send an Email</span><i class="ti ti-arrow-up-right mob-chev"></i>
+    </a>
+  </div>
+
+  <!-- CTA inside panel -->
+  <a href="#register" onclick="closeMobileMore()" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:1.25rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:14px;border-radius:8px;text-decoration:none;">
+    <i class="ti ti-arrow-right" style="font-size:16px;"></i>Apply Now — Sep 2026
+  </a>
+</div>
+
 <style>
-  #main-nav { background: #071A35 !important; }
+  /* ── Desktop defaults ─────────────────────────────────── */
+  #main-nav        { background: #071A35 !important; }
+  .desktop-nav     { display: flex; }
+  .desktop-cta     { display: flex; }
+  .mobile-top-cta  { display: none !important; }
+  #mobile-bottom-nav { display: none !important; }
+  #mob-more-panel  { display: none; }
+  #mob-more-overlay{ display: none; }
+
+  /* ── Mobile (≤768px) ──────────────────────────────────── */
   @media (max-width: 768px) {
-    .desktop-nav { display: none !important; }
-    .login-link  { display: none !important; }
-    #mobile-nav-btn { display: block !important; }
-  }
-  @media (min-width: 769px) {
-    .login-link { display: block !important; }
+    /* Strip top nav to logo + CTA only */
+    .desktop-nav    { display: none !important; }
+    .desktop-cta    { display: none !important; }
+    .logo-sub       { display: none !important; }
+    .mobile-top-cta { display: flex !important; }
+    #main-nav > div { padding: 0 1.25rem !important; height: 60px !important; }
+
+    /* Bottom nav bar */
+    #mobile-bottom-nav {
+      display: flex !important;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: #071A35;
+      border-top: 1px solid rgba(214,164,58,0.22);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      height: calc(60px + env(safe-area-inset-bottom, 0px));
+      align-items: stretch;
+    }
+
+    /* Individual tab */
+    .mob-tab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-decoration: none;
+      color: rgba(245,240,232,0.4);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: none;
+      background: none;
+      cursor: pointer;
+      min-height: 48px;
+      padding: 6px 4px;
+      transition: color 0.18s;
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+    .mob-tab i       { font-size: 21px; display: block; }
+    .mob-tab:active  { color: #D6A43A; }
+    .mob-tab.active  { color: #D6A43A; }
+
+    /* Apply hero tab */
+    .mob-tab-apply   { color: transparent !important; flex: 1.2; }
+    .mob-apply-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      background: #D6A43A;
+      border-radius: 14px;
+      padding: 7px 10px;
+      color: #041326;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      min-width: 52px;
+      box-shadow: 0 -2px 12px rgba(214,164,58,0.4);
+      margin-top: -6px;
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+    .mob-apply-pill i { font-size: 19px; }
+
+    /* More button active state */
+    .mob-tab-more.open { color: #D6A43A; }
+
+    /* Overlay */
+    #mob-more-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,19,38,0.72);
+      z-index: 98;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    /* Slide-up More panel */
+    #mob-more-panel {
+      display: block;
+      position: fixed;
+      bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+      left: 0; right: 0;
+      z-index: 99;
+      background: #071A35;
+      border-top: 1px solid rgba(214,164,58,0.25);
+      border-radius: 20px 20px 0 0;
+      padding: 0.75rem 1.25rem 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+      max-height: 78vh;
+      overflow-y: auto;
+    }
+    #mob-more-panel.open { transform: translateY(0); }
+
+    .mob-more-handle {
+      width: 36px; height: 4px;
+      background: rgba(245,240,232,0.18);
+      border-radius: 2px;
+      margin: 0 auto 1.25rem;
+    }
+
+    /* More rows */
+    .mob-more-list  { display: flex; flex-direction: column; gap: 6px; }
+    .mob-more-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      text-decoration: none;
+      color: rgba(245,240,232,0.85);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mob-more-row:active { background: rgba(255,255,255,0.09); }
+    .mob-more-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(214,164,58,0.1);
+      border: 1px solid rgba(214,164,58,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: #D6A43A;
+      font-size: 18px;
+    }
+    .mob-chev { margin-left: auto; font-size: 14px; color: rgba(245,240,232,0.22); }
+
+    /* Green / Gold row variants */
+    .mob-row-green               { color: #25D366; }
+    .mob-icon-green { background: rgba(37,211,102,0.1);  border-color: rgba(37,211,102,0.2);  color: #25D366; }
+    .mob-row-gold                { color: #D6A43A; }
+    .mob-icon-gold  { background: rgba(214,164,58,0.12); border-color: rgba(214,164,58,0.25); color: #D6A43A; }
+
+    /* Push page body above fixed bottom nav */
+    body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important; }
   }
 </style>
 
 <script>
-  const btn    = document.getElementById('mobile-nav-btn');
-  const drawer = document.getElementById('mobile-drawer');
-  btn?.addEventListener('click', () => {
-    drawer!.style.display = drawer!.style.display === 'none' ? 'block' : 'none';
-  });
-  drawer?.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => { drawer.style.display = 'none'; });
-  });
+  function toggleMobileMore() {
+    const panel   = document.getElementById('mob-more-panel');
+    const overlay = document.getElementById('mob-more-overlay');
+    const btn     = document.getElementById('mob-more-btn');
+    const isOpen  = panel?.classList.contains('open');
+    if (isOpen) {
+      panel?.classList.remove('open');
+      if (overlay) overlay.style.display = 'none';
+      btn?.classList.remove('open');
+      btn?.setAttribute('aria-expanded', 'false');
+    } else {
+      panel?.classList.add('open');
+      if (overlay) overlay.style.display = 'block';
+      btn?.classList.add('open');
+      btn?.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function closeMobileMore() {
+    const panel   = document.getElementById('mob-more-panel');
+    const overlay = document.getElementById('mob-more-overlay');
+    const btn     = document.getElementById('mob-more-btn');
+    panel?.classList.remove('open');
+    if (overlay) overlay.style.display = 'none';
+    btn?.classList.remove('open');
+    btn?.setAttribute('aria-expanded', 'false');
+  }
+
+  // Active tab highlight on scroll
+  (function () {
+    const sectionIds = ['about', 'curriculum', 'instructor', 'pricing', 'faq'];
+    const tabMap = {
+      about:      document.getElementById('tab-about'),
+      curriculum: document.getElementById('tab-curriculum'),
+      faq:        document.getElementById('tab-faq'),
+    };
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 130) current = id;
+      });
+      Object.entries(tabMap).forEach(([id, tab]) => {
+        tab?.classList.toggle('active', id === current);
+      });
+    }, { passive: true });
+  })();
 </script>
