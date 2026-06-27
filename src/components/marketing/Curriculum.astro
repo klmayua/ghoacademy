@@ -18,27 +18,39 @@ import { MODULES } from '../../data/site';
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
       {MODULES.map((m, i) => (
-        <div
-          style="background:#071A35;border:1px solid rgba(7,26,53,0.0);border-radius:14px;padding:1.5rem;display:flex;align-items:flex-start;gap:1.25rem;transition:background 0.2s,box-shadow 0.2s;cursor:default;"
-          onmouseover="this.style.background='#0D2745';this.style.boxShadow='0 6px 28px rgba(7,26,53,0.2)'"
-          onmouseout="this.style.background='#071A35';this.style.boxShadow='none'"
+        <a
+          href={`/modules/${m.slug}`}
+          style="background:#071A35;border:1px solid rgba(214,164,58,0.08);border-radius:14px;padding:1.5rem;display:flex;align-items:flex-start;gap:1.25rem;transition:background 0.2s,box-shadow 0.2s,border-color 0.2s;cursor:pointer;text-decoration:none;"
+          onmouseover="this.style.background='#0D2745';this.style.boxShadow='0 6px 28px rgba(7,26,53,0.2)';this.style.borderColor='rgba(214,164,58,0.3)'"
+          onmouseout="this.style.background='#071A35';this.style.boxShadow='none';this.style.borderColor='rgba(214,164,58,0.08)'"
         >
           <span style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:800;color:rgba(214,164,58,0.5);line-height:1;min-width:40px;flex-shrink:0;">
             {m.num}
           </span>
           <div style="flex:1;">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.5px;line-height:1.2;margin-bottom:6px;">
-              {m.title}
-              {m.tag && (
-                <span style="margin-left:8px;font-size:10px;background:rgba(28,199,201,0.12);color:#1CC7C9;padding:2px 8px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;font-weight:700;vertical-align:middle;">
-                  {m.tag}
-                </span>
-              )}
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#F5F0E8;text-transform:uppercase;letter-spacing:0.5px;line-height:1.2;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <span>
+                {m.title}
+                {m.tag && (
+                  <span style="margin-left:8px;font-size:10px;background:rgba(28,199,201,0.12);color:#1CC7C9;padding:2px 8px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;font-weight:700;vertical-align:middle;">
+                    {m.tag}
+                  </span>
+                )}
+              </span>
+              <i class="ti ti-arrow-right" style="font-size:16px;color:rgba(214,164,58,0.5);flex-shrink:0;"></i>
             </div>
             <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5;">{m.desc}</div>
           </div>
-        </div>
+        </a>
       ))}
+    </div>
+
+    <!-- Section CTA -->
+    <div style="text-align:center;margin-top:2rem;margin-bottom:0.5rem;">
+      <a href="#register" style="display:inline-flex;align-items:center;gap:8px;background:#B8862A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:13px 28px;border-radius:6px;text-decoration:none;transition:background 0.2s,transform 0.15s;" onmouseover="this.style.background='#9a7023';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#B8862A';this.style.transform=''">
+        <i class="ti ti-arrow-right" style="font-size:16px;"></i>
+        Apply Now — Enrol in All 10 Modules
+      </a>
     </div>
 
     <!-- Capstone callout -->
@@ -48,6 +60,10 @@ import { MODULES } from '../../data/site';
           <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#D6A43A;font-weight:700;margin-bottom:0.75rem;">Signature Experience</div>
           <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:#fff;text-transform:uppercase;margin-bottom:0.875rem;line-height:1;">Stakeholder-Driven Capstone Project</h3>
           <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.7;">Design and pitch a practical solution to a real global health challenge — presented to a professional audience of policymakers, funders, and implementers.</p>
+          <a href="#register" style="display:inline-flex;align-items:center;gap:8px;margin-top:1.25rem;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:11px 22px;border-radius:6px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#c49030'" onmouseout="this.style.background='#D6A43A'">
+            <i class="ti ti-rocket" style="font-size:15px;"></i>
+            Secure Your Place
+          </a>
         </div>
         <div>
           {["Identify a pressing global health challenge","Develop an innovative, implementable solution","Receive structured faculty and peer feedback","Refine using systems thinking and implementation principles","Present to a professional stakeholder audience"].map(item => (

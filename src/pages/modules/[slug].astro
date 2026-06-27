@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/shared/Nav.astro';
+import Footer from '../../components/shared/Footer.astro';
+import AnnouncementBar from '../../components/marketing/AnnouncementBar.astro';
+import { MODULES, SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return MODULES.map(m => ({ params: { slug: m.slug }, props: { module: m } }));
+}
+
+const { module: m } = Astro.props;
+const { course } = SITE;
+
+const idx = MODULES.findIndex(x => x.slug === m.slug);
+const prev = idx > 0 ? MODULES[idx - 1] : null;
+const next = idx < MODULES.length - 1 ? MODULES[idx + 1] : null;
+---
+<BaseLayout
+  title={`Module ${m.num}: ${m.title} — GHO Academy`}
+  description={m.overview}
+>
+  <AnnouncementBar />
+  <Nav />
+
+  <!-- Hero -->
+  <section style="background:#041326;padding:5rem 2.5rem 4rem;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(214,164,58,0.03) 79px,rgba(214,164,58,0.03) 80px);pointer-events:none;"></div>
+    <div style="max-width:900px;margin:0 auto;position:relative;">
+      <!-- Breadcrumb -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:2rem;font-size:12px;color:rgba(245,240,232,0.4);flex-wrap:wrap;">
+        <a href="/" style="color:rgba(245,240,232,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#D6A43A'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">
+          <i class="ti ti-home" style="font-size:13px;"></i> Home
+        </a>
+        <i class="ti ti-chevron-right" style="font-size:11px;opacity:0.4;"></i>
+        <a href="/#curriculum" style="color:rgba(245,240,232,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#D6A43A'" onmouseout="this.style.color='rgba(245,240,232,0.5)'">Curriculum</a>
+        <i class="ti ti-chevron-right" style="font-size:11px;opacity:0.4;"></i>
+        <span style="color:#D6A43A;">Module {m.num}</span>
+      </div>
+
+      <!-- Module number badge -->
+      <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:1.5rem;">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:800;color:rgba(214,164,58,0.2);line-height:1;">{m.num}</span>
+        {m.tag && (
+          <span style="font-size:11px;background:rgba(28,199,201,0.15);color:#1CC7C9;border:1px solid rgba(28,199,201,0.3);padding:4px 12px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;font-weight:700;">
+            <i class="ti ti-sparkles" style="font-size:11px;margin-right:4px;"></i>{m.tag}
+          </span>
+        )}
+      </div>
+
+      <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(36px,5vw,68px);font-weight:800;color:#F5F0E8;text-transform:uppercase;line-height:0.95;margin-bottom:1.5rem;">{m.title}</h1>
+      <p style="font-size:16px;color:rgba(245,240,232,0.7);line-height:1.8;max-width:700px;margin-bottom:2.5rem;">{m.overview}</p>
+
+      <!-- CTAs -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <a
+          href={course.stripeLink + "?priceId=early_bird"}
+          style="display:inline-flex;align-items:center;gap:8px;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:14px 28px;border-radius:6px;text-decoration:none;transition:background 0.2s,transform 0.15s;"
+          onmouseover="this.style.background='#c49030';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''"
+        >
+          <i class="ti ti-arrow-right" style="font-size:16px;"></i>
+          Enrol Now — Early Bird $397
+        </a>
+        <a
+          href="/#curriculum"
+          style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);color:#F5F0E8;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 22px;border:1px solid rgba(255,255,255,0.15);border-radius:6px;text-decoration:none;transition:background 0.2s;"
+          onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'"
+        >
+          <i class="ti ti-layout-grid" style="font-size:15px;"></i>
+          All Modules
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section style="background:#071A35;padding:4rem 2.5rem;">
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+
+      <!-- Learning Outcomes -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;">
+          <div style="width:36px;height:36px;background:rgba(28,199,201,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <i class="ti ti-target" style="font-size:18px;color:#1CC7C9;"></i>
+          </div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#F5F0E8;text-transform:uppercase;letter-spacing:0.5px;">What You'll Learn</h2>
+        </div>
+        <div style="display:grid;gap:12px;">
+          {m.outcomes.map(o => (
+            <div style="display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:1rem 1.25rem;">
+              <div style="width:22px;height:22px;background:rgba(28,199,201,0.15);border:1px solid rgba(28,199,201,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <i class="ti ti-check" style="font-size:11px;color:#1CC7C9;"></i>
+              </div>
+              <span style="font-size:14px;color:rgba(245,240,232,0.8);line-height:1.6;">{o}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Tools & Frameworks -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;">
+          <div style="width:36px;height:36px;background:rgba(214,164,58,0.12);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <i class="ti ti-tools" style="font-size:18px;color:#D6A43A;"></i>
+          </div>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:#F5F0E8;text-transform:uppercase;letter-spacing:0.5px;">Tools & Frameworks</h2>
+        </div>
+        <div style="display:grid;gap:10px;">
+          {m.tools.map(t => (
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(214,164,58,0.05);border:1px solid rgba(214,164,58,0.15);border-radius:10px;padding:0.875rem 1.25rem;">
+              <i class="ti ti-puzzle" style="font-size:16px;color:#D6A43A;flex-shrink:0;"></i>
+              <span style="font-size:14px;color:rgba(245,240,232,0.85);font-weight:500;">{t}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Format info -->
+        <div style="margin-top:2rem;background:rgba(28,199,201,0.05);border:1px solid rgba(28,199,201,0.15);border-radius:12px;padding:1.5rem;">
+          <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:0.875rem;">Session Format</div>
+          {[
+            { icon:"ti-clock", text:"2-hour live session" },
+            { icon:"ti-users", text:"Cohort-based peer discussion" },
+            { icon:"ti-presentation", text:"Expert instruction by Dr. Bain" },
+            { icon:"ti-video", text:"Recording available within 24hrs" },
+          ].map(f => (
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <i class={`ti ${f.icon}`} style="font-size:14px;color:#1CC7C9;flex-shrink:0;"></i>
+              <span style="font-size:13px;color:rgba(245,240,232,0.65);">{f.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enrol CTA band -->
+  <section style="background:linear-gradient(135deg,#D6A43A,#c49030);padding:4rem 2.5rem;text-align:center;">
+    <div style="max-width:680px;margin:0 auto;">
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:800;color:#041326;text-transform:uppercase;line-height:1;margin-bottom:1rem;">
+        Ready to Lead Global Health?
+      </h2>
+      <p style="font-size:15px;color:rgba(4,19,38,0.7);margin-bottom:2rem;">{course.dates} · {course.weeks} Weeks Live · Certificate of Completion · Limited to {course.capacity} Participants</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a
+          href={course.stripeLink + "?priceId=early_bird"}
+          style="display:inline-flex;align-items:center;gap:8px;background:#041326;color:#D6A43A;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:14px 32px;border-radius:6px;text-decoration:none;transition:background 0.2s;"
+          onmouseover="this.style.background='#071A35'" onmouseout="this.style.background='#041326'"
+        >
+          <i class="ti ti-arrow-right" style="font-size:16px;"></i>
+          Enrol Now — Early Bird $397
+        </a>
+        <a
+          href="/#faq"
+          style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:13px 24px;border:2px solid rgba(4,19,38,0.4);border-radius:6px;text-decoration:none;transition:border-color 0.2s;"
+          onmouseover="this.style.borderColor='rgba(4,19,38,0.8)'" onmouseout="this.style.borderColor='rgba(4,19,38,0.4)'"
+        >
+          <i class="ti ti-help-circle" style="font-size:15px;"></i>
+          See FAQs
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prev / Next navigation -->
+  <section style="background:#041326;padding:2.5rem 2.5rem;border-top:1px solid rgba(255,255,255,0.05);">
+    <div style="max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;">
+      {prev ? (
+        <a href={`/modules/${prev.slug}`} style="display:inline-flex;align-items:center;gap:8px;color:rgba(245,240,232,0.6);text-decoration:none;font-size:13px;font-weight:600;transition:color 0.2s;" onmouseover="this.style.color='#D6A43A'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">
+          <i class="ti ti-arrow-left" style="font-size:15px;"></i>
+          <span><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:0.5;margin-bottom:2px;">Previous</div>{prev.title}</span>
+        </a>
+      ) : <div></div>}
+      <a href="/#curriculum" style="display:inline-flex;align-items:center;gap:6px;color:rgba(245,240,232,0.4);font-size:12px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#D6A43A'" onmouseout="this.style.color='rgba(245,240,232,0.4)'">
+        <i class="ti ti-layout-grid" style="font-size:14px;"></i> All Modules
+      </a>
+      {next ? (
+        <a href={`/modules/${next.slug}`} style="display:inline-flex;align-items:center;gap:8px;color:rgba(245,240,232,0.6);text-decoration:none;font-size:13px;font-weight:600;text-align:right;transition:color 0.2s;" onmouseover="this.style.color='#D6A43A'" onmouseout="this.style.color='rgba(245,240,232,0.6)'">
+          <span><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:0.5;margin-bottom:2px;">Next</div>{next.title}</span>
+          <i class="ti ti-arrow-right" style="font-size:15px;"></i>
+        </a>
+      ) : <div></div>}
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  @media (max-width: 700px) {
+    section:nth-child(3) > div { grid-template-columns: 1fr !important; }
+  }
+</style>

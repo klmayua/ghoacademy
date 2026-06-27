@@ -82,6 +82,13 @@ const testimonials = [
           </div>
         ))}
       </div>
+      <!-- Testimonials CTA -->
+      <div style="text-align:center;margin-top:3rem;">
+        <a href="#register" style="display:inline-flex;align-items:center;gap:8px;background:#D6A43A;color:#041326;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:14px 28px;border-radius:6px;text-decoration:none;transition:background 0.2s,transform 0.15s;" onmouseover="this.style.background='#c49030';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#D6A43A';this.style.transform=''">
+          <i class="ti ti-users" style="font-size:16px;"></i>
+          Join This Cohort — Sep 2026
+        </a>
+      </div>
     </div>
   </section>
 
@@ -94,4 +101,66 @@ const testimonials = [
   <!-- 7. OBJECTION HANDLING -->
   <FAQ />
   <Footer />
+
+  <!-- Chatbot FAB (bottom right) -->
+  <div id="chat-fab" style="position:fixed;bottom:2rem;right:2rem;z-index:999;display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+    <!-- Chat popup -->
+    <div id="chat-popup" style="display:none;background:#071A35;border:1px solid rgba(214,164,58,0.3);border-radius:14px;padding:1.25rem 1.5rem;width:260px;box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+      <p style="font-size:13px;font-weight:700;color:#F5F0E8;margin-bottom:0.75rem;">Hi! How can we help?</p>
+      <div style="display:grid;gap:8px;">
+        <a href="https://whatsapp.com/channel/0029Vb15K9p7tkjHbKE2L43D" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.25);color:#25D366;border-radius:8px;padding:10px 12px;text-decoration:none;font-size:13px;font-weight:600;transition:background 0.2s;" onmouseover="this.style.background='rgba(37,211,102,0.18)'" onmouseout="this.style.background='rgba(37,211,102,0.1)'">
+          <i class="ti ti-brand-whatsapp" style="font-size:18px;"></i> Chat on WhatsApp
+        </a>
+        <a href="mailto:lebaiins@gmail.com?subject=GHO Academy Enquiry" style="display:flex;align-items:center;gap:8px;background:rgba(214,164,58,0.08);border:1px solid rgba(214,164,58,0.2);color:#D6A43A;border-radius:8px;padding:10px 12px;text-decoration:none;font-size:13px;font-weight:600;transition:background 0.2s;" onmouseover="this.style.background='rgba(214,164,58,0.16)'" onmouseout="this.style.background='rgba(214,164,58,0.08)'">
+          <i class="ti ti-mail" style="font-size:18px;"></i> Send an Email
+        </a>
+        <a href="#faq" onclick="document.getElementById('chat-popup').style.display='none'" style="display:flex;align-items:center;gap:8px;background:rgba(28,199,201,0.08);border:1px solid rgba(28,199,201,0.2);color:#1CC7C9;border-radius:8px;padding:10px 12px;text-decoration:none;font-size:13px;font-weight:600;transition:background 0.2s;" onmouseover="this.style.background='rgba(28,199,201,0.16)'" onmouseout="this.style.background='rgba(28,199,201,0.08)'">
+          <i class="ti ti-help-circle" style="font-size:18px;"></i> View FAQs
+        </a>
+      </div>
+    </div>
+    <!-- FAB button -->
+    <button
+      id="chat-fab-btn"
+      onclick="var p=document.getElementById('chat-popup');p.style.display=p.style.display==='none'?'flex':'none';p.style.flexDirection='column';"
+      style="width:56px;height:56px;border-radius:50%;background:#D6A43A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(214,164,58,0.4);transition:transform 0.2s,background 0.2s;"
+      onmouseover="this.style.transform='scale(1.1)';this.style.background='#c49030'"
+      onmouseout="this.style.transform='scale(1)';this.style.background='#D6A43A'"
+      aria-label="Chat with us"
+    >
+      <i class="ti ti-message-chatbot" style="font-size:24px;color:#041326;"></i>
+    </button>
+  </div>
+
+  <!-- Scroll to top (bottom left) -->
+  <button
+    id="scroll-top-btn"
+    onclick="window.scrollTo({top:0,behavior:'smooth'})"
+    style="position:fixed;bottom:2rem;left:2rem;z-index:999;width:48px;height:48px;border-radius:50%;background:#071A35;border:1px solid rgba(214,164,58,0.3);cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:transform 0.2s,background 0.2s;"
+    onmouseover="this.style.transform='scale(1.1)';this.style.background='#0D2745'"
+    onmouseout="this.style.transform='scale(1)';this.style.background='#071A35'"
+    aria-label="Scroll to top"
+  >
+    <i class="ti ti-arrow-up" style="font-size:20px;color:#D6A43A;"></i>
+  </button>
+
+  <script>
+    // Scroll-to-top visibility
+    const scrollBtn = document.getElementById('scroll-top-btn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        scrollBtn.style.display = 'flex';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
+    });
+    // Close chat popup when clicking outside
+    document.addEventListener('click', (e) => {
+      const fab = document.getElementById('chat-fab');
+      const popup = document.getElementById('chat-popup');
+      if (fab && !fab.contains(e.target)) {
+        popup.style.display = 'none';
+      }
+    });
+  </script>
 </BaseLayout>
