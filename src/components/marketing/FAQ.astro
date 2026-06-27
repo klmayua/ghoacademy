@@ -1,32 +1,32 @@
 ---
 import { FAQS, SITE } from '../../data/site';
 ---
-<section id="faq" style="background:#091A2E;padding:7rem 2.5rem;">
+<section id="faq" style="background:#F2EBD5;padding:7rem 2.5rem;position:relative;" class="light-section">
   <div style="max-width:860px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:4rem;">
-      <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#1CC7C9;font-weight:700;margin-bottom:0.875rem;display:inline-flex;align-items:center;gap:8px;">
-        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+      <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#0E6B6B;font-weight:700;margin-bottom:0.875rem;display:inline-flex;align-items:center;gap:8px;">
+        <span style="width:20px;height:1px;background:#0E6B6B;display:inline-block;"></span>
         Got Questions?
-        <span style="width:20px;height:1px;background:#1CC7C9;display:inline-block;"></span>
+        <span style="width:20px;height:1px;background:#0E6B6B;display:inline-block;"></span>
       </p>
-      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#F8F8F8;text-transform:uppercase;line-height:1;">Frequently Asked <span style="color:#D6A43A;">Questions</span></h2>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,62px);font-weight:800;color:#071A35;text-transform:uppercase;line-height:1;">Frequently Asked <span style="color:#B8862A;">Questions</span></h2>
     </div>
     <div style="display:grid;gap:8px;">
       {FAQS.map((faq) => (
-        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;">
+        <div style="background:#071A35;border:1px solid rgba(7,26,53,0.0);border-radius:12px;overflow:hidden;">
           <button data-faq-btn style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:none;border:none;cursor:pointer;text-align:left;gap:1rem;">
-            <span style="font-size:15px;font-weight:600;color:#F8F8F8;line-height:1.4;">{faq.q}</span>
+            <span style="font-size:15px;font-weight:600;color:#fff;line-height:1.4;">{faq.q}</span>
             <i data-faq-icon class="ti ti-plus" style="font-size:18px;color:#D6A43A;flex-shrink:0;transition:transform 0.25s;"></i>
           </button>
           <div style="max-height:0;overflow:hidden;transition:max-height 0.3s ease;">
-            <p style="font-size:14px;color:rgba(255,255,255,0.58);line-height:1.75;padding:0 1.5rem 1.25rem;">{faq.a}</p>
+            <p style="font-size:14px;color:rgba(255,255,255,0.65);line-height:1.75;padding:0 1.5rem 1.25rem;border-top:1px solid rgba(255,255,255,0.07);padding-top:0.75rem;">{faq.a}</p>
           </div>
         </div>
       ))}
     </div>
     <div style="margin-top:3rem;text-align:center;">
-      <p style="font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:1rem;">Still have questions?</p>
-      <a href={`mailto:${SITE.email}?subject=GHO Academy Enquiry`} style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:#D6A43A;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;border:1.5px solid rgba(214,164,58,0.4);border-radius:8px;text-decoration:none;transition:border-color 0.2s,background 0.2s;" onmouseover="this.style.borderColor='#D6A43A';this.style.background='rgba(214,164,58,0.07)'" onmouseout="this.style.borderColor='rgba(214,164,58,0.4)';this.style.background='transparent'">
+      <p style="font-size:14px;color:rgba(7,26,53,0.5);margin-bottom:1rem;">Still have questions?</p>
+      <a href={`mailto:${SITE.email}?subject=GHO Academy Enquiry`} style="display:inline-flex;align-items:center;gap:8px;background:#071A35;color:#D6A43A;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 24px;border:1.5px solid #071A35;border-radius:8px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background='#0D2745'" onmouseout="this.style.background='#071A35'">
         <i class="ti ti-mail" style="font-size:17px;"></i>
         Email Us
       </a>
