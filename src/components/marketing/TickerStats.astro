@@ -26,7 +26,7 @@ const tickerItems = [
   <!-- Trust logos -->
   <div style="max-width:1440px;margin:0 auto;padding:1.75rem 2.5rem 0;">
     <p style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#B8862A;font-weight:700;text-align:center;margin-bottom:1.25rem;">Trusted by Global Leaders &amp; Institutions</p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;padding-bottom:1.75rem;border-bottom:1px solid rgba(7,26,53,0.1);">
+    <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;padding-bottom:1.75rem;border-bottom:1px solid rgba(7,26,53,0.18);">
       {[
         { name: 'University of Oxford',       abbr: 'Oxford'  },
         { name: 'African Academy of Sciences', abbr: 'AAS'    },
@@ -35,9 +35,9 @@ const tickerItems = [
         { name: 'University of Johannesburg',  abbr: 'UJ'     },
         { name: 'World Health Organization',   abbr: 'WHO'    },
       ].map(org => (
-        <div style="text-align:center;opacity:0.55;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.55'">
+        <div style="text-align:center;opacity:0.75;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.75'">
           <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#071A35;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;">{org.abbr}</div>
-          <div style="font-size:9px;color:rgba(7,26,53,0.5);white-space:nowrap;letter-spacing:0.5px;">{org.name}</div>
+          <div style="font-size:9px;color:rgba(7,26,53,0.65);white-space:nowrap;letter-spacing:0.5px;">{org.name}</div>
         </div>
       ))}
     </div>
@@ -47,14 +47,14 @@ const tickerItems = [
   <div style="max-width:1440px;margin:0 auto;padding:0 2.5rem;display:grid;grid-template-columns:repeat(4,1fr);">
     {[
       { num: '70+',  label: 'Countries Represented',     icon: 'ti-globe',         color: '#D6A43A' },
-      { num: '500+', label: 'Leaders Trained',            icon: 'ti-users',         color: '#1CC7C9' },
+      { num: '500+', label: 'Leaders Trained',            icon: 'ti-users',         color: '#0E9B9D' },
       { num: '100+', label: 'Peer-reviewed Publications', icon: 'ti-file-text',     color: '#F59E0B' },
-      { num: '1',    label: 'Global Impact Network',      icon: 'ti-topology-star', color: '#1CC7C9' },
+      { num: '1',    label: 'Global Impact Network',      icon: 'ti-topology-star', color: '#0E9B9D' },
     ].map(s => (
-      <div style="padding:1.75rem 1rem;text-align:center;border-right:1px solid rgba(7,26,53,0.1);">
+      <div style="padding:1.75rem 1rem;text-align:center;border-right:1px solid rgba(7,26,53,0.18);">
         <i class={`ti ${s.icon}`} style={`font-size:20px;color:${s.color};display:block;margin-bottom:0.4rem;`}></i>
         <div style={`font-family:'Barlow Condensed',sans-serif;font-size:44px;font-weight:800;color:${s.color};line-height:1;margin-bottom:3px;`}>{s.num}</div>
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(7,26,53,0.5);">{s.label}</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(7,26,53,0.7);font-weight:600;">{s.label}</div>
       </div>
     ))}
   </div>
